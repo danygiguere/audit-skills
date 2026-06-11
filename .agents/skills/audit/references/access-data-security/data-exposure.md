@@ -36,14 +36,16 @@ and third-party tooling.
 
 ## Concept glossary
 
-| Ecosystem    | Where field selection usually lives                                          |
-|--------------|--------------------------------------------------------------------------------|
-| Rails        | `as_json(only:)`, serializer classes/jbuilder vs raw `render json: model`; `filter_parameters` for logs |
-| Laravel      | API Resources vs returning the model; `$hidden`/`$visible` are denylists; `APP_DEBUG=false` |
-| Django       | DRF serializer `fields = [...]` (not `__all__`); `DEBUG=False`; `sensitive_post_parameters` |
-| Spring       | DTOs vs serialized entities; `@JsonIgnore` is a denylist; `server.error.include-stacktrace=never` |
-| Node/Express | hand-built response objects vs `res.json(model)`; error middleware hiding `err.stack`; pino/winston redaction |
+| Ecosystem    | Where field selection usually lives                                                                                             |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `as_json(only:)`, serializer classes/jbuilder vs raw `render json: model`; `filter_parameters` for logs                         |
+| Laravel      | API Resources vs returning the model; `$hidden`/`$visible` are denylists; `APP_DEBUG=false`                                     |
+| Django       | DRF serializer `fields = [...]` (not `__all__`); `DEBUG=False`; `sensitive_post_parameters`                                     |
+| Spring       | DTOs vs serialized entities; `@JsonIgnore` is a denylist; `server.error.include-stacktrace=never`                               |
+| Node/Express | hand-built response objects vs `res.json(model)`; error middleware hiding `err.stack`; pino/winston redaction                   |
 | Vapor        | return dedicated `Content` response DTOs, never Fluent models directly; `ErrorMiddleware` controls error detail per environment |
+| .NET         | return DTOs/records, never EF entities; `ProblemDetails` for errors; `UseDeveloperExceptionPage` only in Development            |
+| Go           | response structs with explicit json tags, `json:"-"` on sensitive fields; never marshal DB structs wholesale                    |
 
 ## Example
 

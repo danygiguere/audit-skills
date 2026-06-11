@@ -42,14 +42,16 @@ call site is silently open, and nothing fails loudly when one is missing.
 
 ## Concept glossary
 
-| Ecosystem    | Where the check usually lives                                                      |
-|--------------|-------------------------------------------------------------------------------------|
-| Rails        | Pundit `authorize`/`policy_scope` (+ `verify_authorized` for deny-by-default); CanCanCan |
-| Laravel      | policies and gates; `$this->authorize(...)` in controllers/FormRequests; `can:` middleware |
-| Django       | DRF `permission_classes` + `has_object_permission`; `@permission_required`          |
-| Spring       | `@PreAuthorize` method security; `SecurityFilterChain` rules (URL rules alone are route-layer only) |
-| Node/Express | per-route middleware (`requireRole(...)`) plus in-handler object checks; nothing is implicit |
-| Vapor        | `req.auth.require(User.self)` + explicit ownership checks in handlers; `GuardMiddleware` on route groups — no built-in policy layer |
+| Ecosystem    | Where the check usually lives                                                                                                                                                 |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | Pundit `authorize`/`policy_scope` (+ `verify_authorized` for deny-by-default); CanCanCan                                                                                      |
+| Laravel      | policies and gates; `$this->authorize(...)` in controllers/FormRequests; `can:` middleware                                                                                    |
+| Django       | DRF `permission_classes` + `has_object_permission`; `@permission_required`                                                                                                    |
+| Spring       | `@PreAuthorize` method security; `SecurityFilterChain` rules (URL rules alone are route-layer only)                                                                           |
+| Node/Express | per-route middleware (`requireRole(...)`) plus in-handler object checks; nothing is implicit                                                                                  |
+| Vapor        | `req.auth.require(User.self)` + explicit ownership checks in handlers; `GuardMiddleware` on route groups — no built-in policy layer                                           |
+| .NET         | `[Authorize]` + policy-based authorization; resource checks via `IAuthorizationService.AuthorizeAsync(user, resource, policy)` — route-level `[Authorize]` alone is the smell |
+| Go           | authn in middleware (chi/gin), ownership checks explicit per handler — no framework policy layer; casbin where central policies are needed                                    |
 
 ## Example
 

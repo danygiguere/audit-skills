@@ -40,14 +40,16 @@ incident.
 
 ## Concept glossary
 
-| Ecosystem    | Where the controls usually live                                              |
-|--------------|-------------------------------------------------------------------------------|
-| Rails        | `reset_session` before sign-in; Devise `:lockable`/`:recoverable` (hashed, expiring tokens) |
-| Laravel      | `$request->session()->regenerate()` on login, `invalidate()` on logout; `throttle` middleware; Password broker |
-| Django       | `auth.login()` rotates the session key; `PasswordResetTokenGenerator`; django-axes for lockout |
-| Spring       | Spring Security session-fixation protection (migrate/new session); logout handlers; custom token services |
-| Node/Express | `req.session.regenerate()` / `req.session.destroy()` are manual; `crypto.randomBytes` tokens; express-rate-limit |
+| Ecosystem    | Where the controls usually live                                                                                                                                       |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `reset_session` before sign-in; Devise `:lockable`/`:recoverable` (hashed, expiring tokens)                                                                           |
+| Laravel      | `$request->session()->regenerate()` on login, `invalidate()` on logout; `throttle` middleware; Password broker                                                        |
+| Django       | `auth.login()` rotates the session key; `PasswordResetTokenGenerator`; django-axes for lockout                                                                        |
+| Spring       | Spring Security session-fixation protection (migrate/new session); logout handlers; custom token services                                                             |
+| Node/Express | `req.session.regenerate()` / `req.session.destroy()` are manual; `crypto.randomBytes` tokens; express-rate-limit                                                      |
 | Vapor        | `SessionsMiddleware` + `ModelSessionAuthenticatable`; `req.auth.login`/`logout` + `req.session.destroy()`; reset tokens are hand-rolled — check expiry and single-use |
+| .NET         | ASP.NET Core Identity (lockout, single-use reset tokens built in); `SignInAsync`/`SignOutAsync`; cookie auth options for expiry                                       |
+| Go           | gorilla/sessions or SCS — `RenewToken` on login; server-side destroy on logout; bcrypt; uniform login/reset errors against enumeration                                |
 
 ## Example
 

@@ -44,14 +44,16 @@ bypasses it.
 
 ## Concept glossary
 
-| Ecosystem    | Where protection usually lives                                               |
-|--------------|--------------------------------------------------------------------------------|
-| Rails        | `protect_from_forgery` (default); risk: `skip_before_action :verify_authenticity_token` |
-| Laravel      | `VerifyCsrfToken` middleware + `@csrf` directive; risk: routes in the `$except` array |
-| Django       | `CsrfViewMiddleware` + `{% csrf_token %}`; risk: `@csrf_exempt`               |
-| Spring       | Spring Security CSRF on by default for sessions; risk: `csrf().disable()` left over from stateless-API setup |
-| Node/Express | nothing built-in — csurf/csrf-csrf middleware or an explicit Origin check must be wired |
+| Ecosystem    | Where protection usually lives                                                                                                                 |
+|--------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `protect_from_forgery` (default); risk: `skip_before_action :verify_authenticity_token`                                                        |
+| Laravel      | `VerifyCsrfToken` middleware + `@csrf` directive; risk: routes in the `$except` array                                                          |
+| Django       | `CsrfViewMiddleware` + `{% csrf_token %}`; risk: `@csrf_exempt`                                                                                |
+| Spring       | Spring Security CSRF on by default for sessions; risk: `csrf().disable()` left over from stateless-API setup                                   |
+| Node/Express | nothing built-in — csurf/csrf-csrf middleware or an explicit Origin check must be wired                                                        |
 | Vapor        | no built-in CSRF middleware — session-cookie apps need a form token (community middleware); cookie `SameSite` via `app.sessions.configuration` |
+| .NET         | antiforgery built in — form tag helpers inject tokens, `AutoValidateAntiforgeryToken`; `[IgnoreAntiforgeryToken]` is the smell                 |
+| Go           | gorilla/csrf or nosurf middleware; `SameSite` via `http.Cookie` — nothing is on by default                                                     |
 
 ## Example
 

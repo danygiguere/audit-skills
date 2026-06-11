@@ -95,6 +95,8 @@ endpoints cannot ship unchecked.
 | Spring       | `findByIdAndOwner(id, principal)` repository methods; `@PreAuthorize`; deny-all default in security config |
 | Node/Express | `WHERE owner_id = ?` in the query layer; CASL/policy modules; a router-level auth middleware applied before all routes |
 | Vapor        | ownership-scoped Fluent queries; `req.auth.require` + guard middleware; policies live in the service layer (no framework construct) |
+| .NET         | resource-based authorization handlers via `IAuthorizationService`; EF global query filters for ownership/tenant scoping; `FallbackPolicy` for deny-by-default |
+| Go           | ownership in the WHERE clause; central authorize helpers or casbin; deny-by-default routing middleware |
 
 ## Applying fixes
 

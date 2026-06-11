@@ -41,14 +41,16 @@ someone crafts a request by hand.
 
 ## Concept glossary
 
-| Ecosystem    | Where the allowlist usually lives                                              |
-|--------------|----------------------------------------------------------------------------------|
-| Rails        | strong parameters: `params.require(:user).permit(:name, :email)`; `permit!` is the smell |
-| Laravel      | `$fillable` (allowlist) vs `$guarded` (denylist — weaker); `$request->validated()` into `update()` |
-| Django       | `ModelForm`/DRF serializer with explicit `fields = [...]`; `fields = "__all__"` is the smell |
-| Spring       | dedicated request DTOs mapped to entities; binding `@ModelAttribute` straight onto an entity is the smell |
-| Node/Express | `Object.assign(model, req.body)` / spread into create is the smell; pick explicit fields; Mongoose `strict`, Sequelize `fields:` |
-| Vapor        | decode into a dedicated `Content` DTO (the type is the allowlist); `req.content.decode(User.self)` straight into the Fluent model is the smell |
+| Ecosystem    | Where the allowlist usually lives                                                                                                                  |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | strong parameters: `params.require(:user).permit(:name, :email)`; `permit!` is the smell                                                           |
+| Laravel      | `$fillable` (allowlist) vs `$guarded` (denylist — weaker); `$request->validated()` into `update()`                                                 |
+| Django       | `ModelForm`/DRF serializer with explicit `fields = [...]`; `fields = "__all__"` is the smell                                                       |
+| Spring       | dedicated request DTOs mapped to entities; binding `@ModelAttribute` straight onto an entity is the smell                                          |
+| Node/Express | `Object.assign(model, req.body)` / spread into create is the smell; pick explicit fields; Mongoose `strict`, Sequelize `fields:`                   |
+| Vapor        | decode into a dedicated `Content` DTO (the type is the allowlist); `req.content.decode(User.self)` straight into the Fluent model is the smell     |
+| .NET         | known as **overposting**: bind to DTOs/records or `TryUpdateModelAsync` with included properties; binding EF entities directly is the smell        |
+| Go           | mostly N/A (see guard) — request structs are the allowlist; the smell is binding into the DB model struct itself (`c.Bind(&user)` on a GORM model) |
 
 ## Example
 

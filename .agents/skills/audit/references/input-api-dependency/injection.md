@@ -52,6 +52,8 @@ and dynamic requirements (sorting, filtering, search) push code through it.
 | Spring       | `PreparedStatement` / JPA named params vs string-built JPQL; `ProcessBuilder`    |
 | Node/Express | placeholder queries (`?`/`$1`) vs template-literal SQL; `execFile` vs `exec`     |
 | Vapor        | Fluent parameterizes; raw SQL via SQLKit `\(bind:)` interpolation — assembling `SQLQueryString` from raw input is the smell |
+| .NET         | EF parameterizes; `FromSqlInterpolated` is safe — `FromSqlRaw` with string concatenation is the smell; Dapper named parameters |
+| Go           | `database/sql` placeholders (`$1`/`?`); `fmt.Sprintf` into a query or `exec.Command("sh", "-c", s)` is the smell |
 
 ## Example
 

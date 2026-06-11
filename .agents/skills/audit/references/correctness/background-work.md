@@ -49,6 +49,8 @@ retry delay.
 | Spring       | `@Retryable`/listener retry config; DLQ on RabbitMQ/Kafka error topics     |
 | Node/Express | BullMQ `attempts`/`backoff`, failed queue; SQS redrive policy + DLQ        |
 | Vapor        | Queues package: `maxRetryCount`, delayed retries; failure hooks via `JobEventDelegate` — no built-in dead-letter queue |
+| .NET         | `BackgroundService` has no built-in retries — an unhandled exception in `ExecuteAsync` silently stops the worker; Hangfire/Quartz for retries and poison handling |
+| Go           | worker goroutines + a queue lib (asynq has retries and DLQ); `context.WithTimeout` on every external call; errgroup for propagation |
 
 ## Example
 

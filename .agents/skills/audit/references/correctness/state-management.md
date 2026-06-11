@@ -50,6 +50,8 @@ or lock is never added.
 | Spring       | unique constraint; `@Version` optimistic locking; `@Lock(PESSIMISTIC_WRITE)` |
 | Node/Express | unique index + `ON CONFLICT`; `UPDATE ... SET x = x + 1 WHERE ...`; `SELECT ... FOR UPDATE`; Redis `INCR`/`SETNX` |
 | Vapor        | unique constraints in migrations as the backstop; atomic updates via SQLKit; version-field optimistic locking is manual; actors for in-process state |
+| .NET         | `[Timestamp]` rowversion + `DbUpdateConcurrencyException` for optimistic locking; `Interlocked` for counters; unique constraints in migrations |
+| Go           | `sync.Mutex`/`atomic` in-process; cross-goroutine check-then-act found by `go test -race`; DB constraints as the backstop |
 
 ## Example
 

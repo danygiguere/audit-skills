@@ -53,6 +53,8 @@ saw. URL parsers and the fetcher can disagree about what the host even is.
 | Spring       | `RestTemplate`/`WebClient` with user URLs; checks in a `ClientHttpRequestInterceptor` |
 | Node/Express | `fetch`/axios/got on user URLs; resolved-address checks in a custom agent/lookup     |
 | Vapor        | `req.client.get(URI(...))` — validate/allowlist the URI first; configure AsyncHTTPClient's redirect policy |
+| .NET         | validate URI before `HttpClient`; `IHttpClientFactory` named clients with fixed base addresses; `AllowAutoRedirect` policy |
+| Go           | parse + allowlist before `http.Get`; custom `http.Client` with `CheckRedirect`; block private ranges via custom `DialContext` |
 
 ## Example
 

@@ -43,14 +43,16 @@ normalizes unscoped queries, which then get copied into tenant-facing paths.
 
 ## Concept glossary
 
-| Ecosystem    | Where scoping usually lives                                                    |
-|--------------|----------------------------------------------------------------------------------|
-| Rails        | `acts_as_tenant`/`default_scope` + `Current.tenant`; escape hatch: `unscoped`   |
-| Laravel      | global scopes (tenant trait), stancl/tenancy; escape hatch: `withoutGlobalScopes` |
-| Django       | custom managers filtering by tenant, django-tenants (schema-per-tenant); escape hatch: base manager `objects` |
-| Spring       | Hibernate `@TenantId`/filters, tenant-routed datasources; escape hatch: native queries |
-| Node/Express | middleware puts tenant on request context; every query needs `WHERE tenant_id = ?` — nothing is automatic |
-| Vapor        | tenant filter on every Fluent query (`filter(\.$tenant.$id == ...)`); tenant resolved in middleware; `req.cache` keys include the tenant |
+| Ecosystem    | Where scoping usually lives                                                                                                                       |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `acts_as_tenant`/`default_scope` + `Current.tenant`; escape hatch: `unscoped`                                                                     |
+| Laravel      | global scopes (tenant trait), stancl/tenancy; escape hatch: `withoutGlobalScopes`                                                                 |
+| Django       | custom managers filtering by tenant, django-tenants (schema-per-tenant); escape hatch: base manager `objects`                                     |
+| Spring       | Hibernate `@TenantId`/filters, tenant-routed datasources; escape hatch: native queries                                                            |
+| Node/Express | middleware puts tenant on request context; every query needs `WHERE tenant_id = ?` — nothing is automatic                                         |
+| Vapor        | tenant filter on every Fluent query (`filter(\.$tenant.$id == ...)`); tenant resolved in middleware; `req.cache` keys include the tenant          |
+| .NET         | EF Core global query filters (`HasQueryFilter(e => e.TenantId == tenant)`); `IgnoreQueryFilters()` is the bypass smell; cache keys include tenant |
+| Go           | tenant ID carried in `context.Context` into every query; tenant-scoped repository constructors; GORM scopes                                       |
 
 ## Example
 

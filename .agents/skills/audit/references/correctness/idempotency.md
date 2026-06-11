@@ -50,6 +50,8 @@ least once.
 | Spring       | unique constraints + `DataIntegrityViolationException` catch; idempotent consumer table |
 | Node/Express | `INSERT ... ON CONFLICT DO NOTHING`; idempotency-key header checked against a store |
 | Vapor        | `.unique(on:)` in Fluent migrations + catching the constraint violation; idempotency-key stores and webhook event tables are hand-rolled |
+| .NET         | unique indexes + catching `DbUpdateException`; idempotency keys hand-rolled or middleware; Polly retries make duplicates likely |
+| Go           | unique index + `ON CONFLICT DO NOTHING`, check rows affected; idempotency-key tables hand-rolled |
 
 ## Example
 

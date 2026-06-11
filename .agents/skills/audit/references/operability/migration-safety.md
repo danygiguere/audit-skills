@@ -58,6 +58,8 @@ new code and old schema, run together.
 | Spring       | Flyway/Liquibase versioned migrations; out-of-order and undo scripts; batched backfills outside DDL |
 | Node/Express | Knex/TypeORM/Prisma migrate; raw `CREATE INDEX CONCURRENTLY`; `down` functions often unimplemented — check |
 | Vapor        | Fluent `AsyncMigration` with a real `revert`; drop to SQLKit for online operations (e.g. concurrent indexes); batch backfills manually |
+| .NET         | EF Core migrations — review the generated SQL (`migrations script`); never `EnsureCreated` in prod; batch backfills manually |
+| Go           | golang-migrate/goose with down migrations; raw SQL so locks are explicit — review them; batch backfills |
 
 ## Example
 

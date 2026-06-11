@@ -167,6 +167,15 @@ fix.** Fixes follow the same rules everywhere: the smallest change that
 restores the invariant, matching the surrounding code style, with a test
 demonstrating the fix — and never mixed with unrelated refactoring.
 
+## Contributing
+
+Each checklist's concept glossary covers eight ecosystems inline: Rails,
+Laravel, Django, Spring, Node/Express, Vapor, .NET, and Go. The inline
+tables are capped there to stay readable. To add support for another
+framework (FastAPI, Phoenix, Ktor, …), contribute a single per-ecosystem
+glossary file at `.agents/skills/audit/references/glossaries/<ecosystem>.md`
+mapping each audit topic to that framework's idioms — one file, one PR.
+
 ## License
 
 [MIT](LICENSE)

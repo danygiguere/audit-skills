@@ -39,14 +39,16 @@ only way to obtain one.
 
 ## Concept glossary
 
-| Ecosystem    | Where the check usually lives                                                 |
-|--------------|-------------------------------------------------------------------------------|
-| Rails        | `current_user.posts.find(id)` vs `Post.find(id)`; Pundit/CanCanCan policies   |
-| Laravel      | scoped route-model binding; policies (`$this->authorize('update', $post)`)    |
-| Django       | `get_object_or_404(Post, pk=pk, owner=request.user)`; queryset scoping in DRF |
-| Spring       | `findByIdAndOwner(id, principal)`; `@PreAuthorize` with object checks         |
-| Node/Express | a `WHERE owner_id = ?` clause or explicit `if (post.ownerId !== req.user.id)` |
-| Vapor        | `Todo.query(on: req.db).filter(\.$owner.$id == user.id)` vs bare `Todo.find(id, on: req.db)` |
+| Ecosystem    | Where the check usually lives                                                                                               |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `current_user.posts.find(id)` vs `Post.find(id)`; Pundit/CanCanCan policies                                                 |
+| Laravel      | scoped route-model binding; policies (`$this->authorize('update', $post)`)                                                  |
+| Django       | `get_object_or_404(Post, pk=pk, owner=request.user)`; queryset scoping in DRF                                               |
+| Spring       | `findByIdAndOwner(id, principal)`; `@PreAuthorize` with object checks                                                       |
+| Node/Express | a `WHERE owner_id = ?` clause or explicit `if (post.ownerId !== req.user.id)`                                               |
+| Vapor        | `Todo.query(on: req.db).filter(\.$owner.$id == user.id)` vs bare `Todo.find(id, on: req.db)`                                |
+| .NET         | EF Core `Where(x => x.OwnerId == userId && x.Id == id)` vs bare `FindAsync(id)`; resource-based authorization handlers      |
+| Go           | ownership in the query itself: `WHERE id = $1 AND owner_id = $2`; GORM `Where("owner_id = ?", uid)` vs bare `First(&t, id)` |
 
 ## Example
 

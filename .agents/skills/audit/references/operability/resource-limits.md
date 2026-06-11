@@ -54,6 +54,8 @@ single client can exhaust a shared resource.
 | Spring       | `Pageable` with capped size; `spring.servlet.multipart.max-file-size`; Bucket4j/resilience4j rate limiting |
 | Node/Express | `express.json({ limit })`; multer file size limits; express-rate-limit; RE2 for untrusted regex input |
 | Vapor        | `app.routes.defaultMaxBodySize` / `.on(..., body: .collect(maxSize:))`; Fluent `.paginate(for: req)`; rate limiting via middleware |
+| .NET         | `[RequestSizeLimit]` / Kestrel `MaxRequestBodySize`; built-in rate limiter middleware (`AddRateLimiter`); `Skip`/`Take` pagination |
+| Go           | `http.MaxBytesReader`; server timeouts; `x/time/rate` limiter; paginate queries explicitly |
 
 ## Example
 

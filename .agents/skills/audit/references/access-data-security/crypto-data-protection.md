@@ -35,14 +35,16 @@ then never move; comparison timing leaks are invisible without measuring.
 
 ## Concept glossary
 
-| Ecosystem    | Standard tools                                                                  |
-|--------------|----------------------------------------------------------------------------------|
-| Rails        | `has_secure_password` (bcrypt); `SecureRandom`; `ActiveSupport::SecurityUtils.secure_compare`; `ActiveRecord::Encryption` |
-| Laravel      | `Hash::make` (bcrypt/argon2); `Str::random`/`random_bytes`; `hash_equals`; `Crypt` and `encrypted` casts |
-| Django       | `PASSWORD_HASHERS` (argon2/pbkdf2); `secrets` module; `constant_time_compare`; `cryptography` Fernet |
-| Spring       | `BCryptPasswordEncoder`/`Argon2PasswordEncoder`; `SecureRandom`; `MessageDigest.isEqual`; JCA AES-GCM |
-| Node/Express | `bcrypt`/`argon2` packages; `crypto.randomBytes`; `crypto.timingSafeEqual`; `createCipheriv` with GCM |
-| Vapor        | `app.password`/`Bcrypt` for passwords; swift-crypto (`AES.GCM`, `SHA256`, `HMAC`); `[UInt8].random(count:)` (CSPRNG) for tokens |
+| Ecosystem    | Standard tools                                                                                                                                  |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `has_secure_password` (bcrypt); `SecureRandom`; `ActiveSupport::SecurityUtils.secure_compare`; `ActiveRecord::Encryption`                       |
+| Laravel      | `Hash::make` (bcrypt/argon2); `Str::random`/`random_bytes`; `hash_equals`; `Crypt` and `encrypted` casts                                        |
+| Django       | `PASSWORD_HASHERS` (argon2/pbkdf2); `secrets` module; `constant_time_compare`; `cryptography` Fernet                                            |
+| Spring       | `BCryptPasswordEncoder`/`Argon2PasswordEncoder`; `SecureRandom`; `MessageDigest.isEqual`; JCA AES-GCM                                           |
+| Node/Express | `bcrypt`/`argon2` packages; `crypto.randomBytes`; `crypto.timingSafeEqual`; `createCipheriv` with GCM                                           |
+| Vapor        | `app.password`/`Bcrypt` for passwords; swift-crypto (`AES.GCM`, `SHA256`, `HMAC`); `[UInt8].random(count:)` (CSPRNG) for tokens                 |
+| .NET         | Identity `PasswordHasher` (PBKDF2); `RandomNumberGenerator` for tokens; `CryptographicOperations.FixedTimeEquals`; Data Protection API for keys |
+| Go           | x/crypto bcrypt/argon2; `crypto/rand` — never `math/rand` for tokens; `subtle.ConstantTimeCompare`                                              |
 
 ## Example
 

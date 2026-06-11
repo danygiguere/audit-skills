@@ -47,6 +47,8 @@ the handler issues one query, but the rendering of each item triggers more.
 | Spring       | JPA fetch joins / `@EntityGraph`; beware default `LAZY` access in loops       |
 | Node/Express | DataLoader batching; ORM `include`/`populate`; `WHERE id IN (...)` then map   |
 | Vapor        | eager-load with `.with(\.$relation)` on the query; a `find` or child query inside a `for` over models is the smell |
+| .NET         | lazy-loading proxies are the trap; `Include()`/`ThenInclude()` or projections; a query inside `foreach` over entities |
+| Go           | a query inside `for range` over rows; GORM `Preload`; batch with `IN` (sqlx.In) |
 
 ## Example
 

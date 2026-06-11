@@ -106,6 +106,8 @@ work when patterns 1–3 exist to answer the why.
 | Spring       | SLF4J + MDC (`MDC.put("requestId", ...)`), Micrometer Tracing for propagation; Micrometer + Actuator `http.server.requests`; Sentry/ELK appenders |
 | Node/Express | pino/winston child loggers with bound fields; AsyncLocalStorage for request-ID context; prom-client histograms in middleware; Sentry SDK with scopes |
 | Vapor        | SwiftLog structured metadata; request-ID middleware for correlation; SwiftMetrics RED metrics with the Prometheus exporter |
+| .NET         | `ILogger` scopes for stable context fields; W3C trace context via Activity/OpenTelemetry; ProblemDetails for consistent error shape |
+| Go           | slog with context-derived fields; otel trace propagation; prometheus RED metrics per handler |
 
 ## Applying fixes
 

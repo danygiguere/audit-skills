@@ -48,6 +48,8 @@ work.
 | Spring       | `application-prod.yml` profiles; Spring Security headers and CORS configurers       |
 | Node/Express | `NODE_ENV`; helmet for headers; `cors()` options; `cookie` flags on `res.cookie`    |
 | Vapor        | `app.environment` gates debug behavior; `CORSMiddleware.Configuration` with explicit origins; cookie flags via `app.sessions.configuration.cookieFactory` |
+| .NET         | `appsettings.{Environment}.json` + `ASPNETCORE_ENVIRONMENT`; CORS policy builder with explicit origins; dev pages gated by `IsDevelopment()` |
+| Go           | env-driven config (envconfig/viper); explicit CORS middleware; `http.Server` Read/Write timeouts are config too |
 
 ## Example
 

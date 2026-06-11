@@ -50,6 +50,8 @@ only under adversarial input.
 | Spring       | Bean Validation (`@Valid`, constraint annotations); dedicated request DTOs           |
 | Node/Express | schema validation middleware (zod/Joi-style) with strict/strip-unknown enabled       |
 | Vapor        | `Validatable` (`try User.Create.validate(content: req)`); Codable DTOs give types/bounds — note Codable ignores unknown fields silently |
+| .NET         | model binding + DataAnnotations/FluentValidation; `[ApiController]` auto-400s on invalid `ModelState`; records as DTOs |
+| Go           | decode into request structs + go-playground/validator tags; `DisallowUnknownFields()` on the json.Decoder |
 
 ## Example
 

@@ -42,14 +42,16 @@ loosens — encoding must not depend on input cleanliness.
 
 ## Concept glossary
 
-| Ecosystem    | Escaping defaults and raw sinks                                              |
-|--------------|--------------------------------------------------------------------------------|
-| Rails        | ERB escapes by default; `raw`, `.html_safe`, `<%==` bypass; `sanitize` for rich text |
-| Laravel      | Blade `{{ }}` escapes; `{!! !!}` bypasses; `e()` helper                       |
-| Django       | templates autoescape; `|safe`, `mark_safe`, `{% autoescape off %}` bypass    |
-| Spring       | Thymeleaf `th:text` escapes, `th:utext` bypasses; JSP `${}` is raw, `<c:out>` escapes |
-| Node/Express | engine-dependent — EJS `<%= %>` escapes, `<%- %>` raw; Handlebars `{{ }}` vs `{{{ }}}`; concatenated `res.send` has none |
+| Ecosystem    | Escaping defaults and raw sinks                                                                                                |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | ERB escapes by default; `raw`, `.html_safe`, `<%==` bypass; `sanitize` for rich text                                           |
+| Laravel      | Blade `{{ }}` escapes; `{!! !!}` bypasses; `e()` helper                                                                        |
+| Django       | templates autoescape; `                                                                                                        |safe`, `mark_safe`, `{% autoescape off %}` bypass    |
+| Spring       | Thymeleaf `th:text` escapes, `th:utext` bypasses; JSP `${}` is raw, `<c:out>` escapes                                          |
+| Node/Express | engine-dependent — EJS `<%= %>` escapes, `<%- %>` raw; Handlebars `{{ }}` vs `{{{ }}}`; concatenated `res.send` has none       |
 | Vapor        | Leaf escapes `#(...)` by default; `#unsafeHTML(...)` is the raw sink; JSON via `Content` is safe unless later rendered as HTML |
+| .NET         | Razor encodes `@Model.Name` by default; `Html.Raw(...)` is the raw sink; tag helpers are safe                                  |
+| Go           | `html/template` auto-escapes per context; using `text/template` for HTML is the smell; `template.HTML(...)` is the raw sink    |
 
 ## Example
 

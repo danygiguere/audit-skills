@@ -49,6 +49,8 @@ concerns nobody owns in application code.
 | Spring       | `MultipartFile` size limits; `Path.resolve(...).normalize()` + `startsWith(base)`     |
 | Node/Express | multer with generated filenames and limits; `path.resolve` + prefix check on base     |
 | Vapor        | `req.fileio` for reads/writes — never path-join request input; `FileMiddleware` serves only `Public/`; body caps via `.collect(maxSize:)` |
+| .NET         | `IFormFile` + `[RequestSizeLimit]`; `Path.GetFileName` to strip client paths; serve via `PhysicalFile` from storage outside wwwroot |
+| Go           | `filepath.Base`/`Clean` + root containment check; `http.MaxBytesReader`; `http.ServeFile` with user-built paths is the smell |
 
 ## Example
 

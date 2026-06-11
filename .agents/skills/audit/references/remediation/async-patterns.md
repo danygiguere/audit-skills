@@ -121,6 +121,8 @@ becomes a silent data graveyard.
 | Spring       | `@Transactional`; `TransactionSynchronization.afterCommit` / outbox libs; `ON CONFLICT` via JDBC/JPA; `@Version` optimistic locking; Spring Retry + AMQP DLQ |
 | Node/Express | `knex.transaction()`/Prisma `$transaction`; outbox table + relay; `ON CONFLICT DO UPDATE`; `UPDATE ... WHERE version = ?`; BullMQ `attempts`/`backoff` + failed queue |
 | Vapor        | `req.db.transaction`; `.unique(on:)` + constraint-violation catch; Queues `maxRetryCount`/delays; the outbox is hand-rolled |
+| .NET         | `Database.BeginTransaction`; unique index + `DbUpdateException` catch; rowversion concurrency tokens; Hangfire retries; outbox via CAP or hand-rolled |
+| Go           | `BeginTx` + deferred rollback; unique index + `ON CONFLICT`; `SELECT ... FOR UPDATE` or atomic UPDATE; asynq retries/DLQ |
 
 ## Applying fixes
 
