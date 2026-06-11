@@ -20,6 +20,65 @@ or an Express API — the agent supplies the framework-specific translation.
   `/audit-fix-authz`, …). Everything this package installs starts with
   `audit`, so it stays grouped among your other skills.
 
+## The audits
+
+`/audit` runs the full audit — it identifies what the code does and applies
+every matching checklist below. Each topic is also individually invocable
+(click through to read the checklist itself).
+
+### Access & data security
+
+| Audit                                                                                                 | Checks for                                                                                                                    |
+|-------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| [`/audit-authorization`](.agents/skills/audit/references/access-data-security/authorization.md)       | Server-side permission checks at the point of action — privilege escalation, UI-only gating, checks on read but not on mutate |
+| [`/audit-authn-session`](.agents/skills/audit/references/access-data-security/authn-session.md)       | Login, logout, and reset flows — session fixation, account enumeration, token expiry and single-use, remember-me storage      |
+| [`/audit-idor`](.agents/skills/audit/references/access-data-security/idor.md)                         | Resources fetched or mutated by a request-supplied ID without verifying the requester may touch them                          |
+| [`/audit-data-exposure`](.agents/skills/audit/references/access-data-security/data-exposure.md)       | Over-exposed responses, errors, and logs — whole-model serialization, stack traces, PII                                       |
+| [`/audit-crypto`](.agents/skills/audit/references/access-data-security/crypto-data-protection.md)     | Password hashing, token randomness, constant-time comparison, homemade crypto, key handling                                   |
+| [`/audit-output-encoding`](.agents/skills/audit/references/access-data-security/output-encoding.md)   | XSS — user data rendered into HTML, JS, CSS, URLs, headers, or emails without context-appropriate encoding                    |
+| [`/audit-tenant-isolation`](.agents/skills/audit/references/access-data-security/tenant-isolation.md) | Cross-tenant leakage — unscoped queries, tenant-less cache keys, background jobs crossing tenants                             |
+| [`/audit-csrf`](.agents/skills/audit/references/access-data-security/csrf.md)                         | State-changing endpoints on cookie/session auth without CSRF token or origin verification                                     |
+| [`/audit-mass-assignment`](.agents/skills/audit/references/access-data-security/mass-assignment.md)   | Request payloads bound wholesale onto models — writable role/owner/balance fields, denylists instead of allowlists            |
+
+### Input & API
+
+| Audit                                                                                                      | Checks for                                                                                                                    |
+|------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| [`/audit-injection`](.agents/skills/audit/references/input-api-dependency/injection.md)                    | SQL/NoSQL, command, template, and path injection — input concatenated into queries, shells, or templates                      |
+| [`/audit-config`](.agents/skills/audit/references/input-api-dependency/config.md)                          | Insecure configuration — debug in production, permissive CORS, missing security headers, cookie flags                         |
+| [`/audit-secrets`](.agents/skills/audit/references/input-api-dependency/secrets.md)                        | Hardcoded credentials, secrets in logs or version control, overly broad keys, no rotation path                                |
+| [`/audit-api-validation`](.agents/skills/audit/references/input-api-dependency/api-contract-validation.md) | Boundary validation — types, bounds, allowed fields, trusting client-computed values like prices or roles                     |
+| [`/audit-file-handling`](.agents/skills/audit/references/input-api-dependency/file-handling.md)            | Path traversal, unvalidated uploads, missing size limits, files served from the web root, zip-slip                            |
+| [`/audit-ssrf`](.agents/skills/audit/references/input-api-dependency/ssrf.md)                              | Server-side requests to user-influenced URLs — allowlists, private IP ranges, redirect re-validation; includes open redirects |
+
+### Correctness
+
+| Audit                                                                                            | Checks for                                                                                                           |
+|--------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| [`/audit-atomicity`](.agents/skills/audit/references/correctness/atomicity.md)                   | Multi-store writes without a transaction — partial state surviving failures                                          |
+| [`/audit-idempotency`](.agents/skills/audit/references/correctness/idempotency.md)               | Handlers that misbehave when run twice — webhooks, payments, queue redelivery, double submits                        |
+| [`/audit-background-work`](.agents/skills/audit/references/correctness/background-work.md)       | Jobs and consumers — unbounded retries, poison messages, missing timeouts, duplicate or out-of-order delivery        |
+| [`/audit-state-management`](.agents/skills/audit/references/correctness/state-management.md)     | Race conditions — check-then-act on shared state without locks, atomic primitives, or constraints                    |
+| [`/audit-exception-handling`](.agents/skills/audit/references/correctness/exception-handling.md) | Swallowed errors, blanket catches, lost causes, missing cleanup, and wrong HTTP statuses (404 vs 403, 401, 422, 409) |
+
+### Operability
+
+| Audit                                                                                          | Checks for                                                                                                |
+|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| [`/audit-nplus1`](.agents/skills/audit/references/operability/nplus1.md)                       | Queries — or HTTP/cache calls — made inside loops over collections                                        |
+| [`/audit-observability`](.agents/skills/audit/references/operability/observability.md)         | Silent failures — swallowed errors, logs without identifiers, no metric or alert path                     |
+| [`/audit-migration-safety`](.agents/skills/audit/references/operability/migration-safety.md)   | Schema changes that lock tables, destructive changes without expand-contract, unbatched backfills         |
+| [`/audit-resource-limits`](.agents/skills/audit/references/operability/resource-limits.md)     | Unbounded work from input — missing pagination, size caps, rate limits, catastrophic regex                |
+| [`/audit-blocking-io-async`](.agents/skills/audit/references/operability/blocking-io-async.md) | Blocking calls on event loops or coroutines, CPU work on the scheduler, sync-over-async, missing timeouts |
+
+### Fixes
+
+| Skill                                                                                               | Applies                                                                                                                       |
+|-----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| [`/audit-fix-authz`](.agents/skills/audit/references/remediation/authz-patterns.md)                 | Remediation patterns for authorization, IDOR, and tenant-isolation findings — scoped queries, policy objects, deny-by-default |
+| [`/audit-fix-async`](.agents/skills/audit/references/remediation/async-patterns.md)                 | Remediation patterns for correctness findings — transactions, outbox, idempotency keys, locking, bounded retries              |
+| [`/audit-fix-observability`](.agents/skills/audit/references/remediation/observability-patterns.md) | Remediation patterns for observability gaps — structured logging, correlation IDs, RED metrics, symptom-based alerts          |
+
 ## Install
 
 **Option 1 — add-skill CLI (any Agent Skills tool):**

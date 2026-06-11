@@ -29,31 +29,31 @@ token-authenticated API, tenant isolation in a single-tenant app).
 Paths relative to this skill's directory. Load every row that matches; skip
 the rest.
 
-| The code… | Read |
-|---|---|
-| Gates actions by role, permission, or ownership | `references/access-data-security/authorization.md` |
-| Handles login, logout, reset, tokens, sessions | `references/access-data-security/authn-session.md` |
-| Fetches/mutates a resource by an ID from the request | `references/access-data-security/idor.md` + `references/access-data-security/authorization.md` |
-| Serializes models, formats errors, writes logs | `references/access-data-security/data-exposure.md` |
-| Hashes, encrypts, generates or compares secrets | `references/access-data-security/crypto-data-protection.md` |
-| Renders user data into HTML/JS/URLs/headers/emails | `references/access-data-security/output-encoding.md` |
-| Touches data or caches in a multi-tenant app | `references/access-data-security/tenant-isolation.md` |
-| Changes state with cookie/session-based auth | `references/access-data-security/csrf.md` |
-| Binds request payloads onto models/entities | `references/access-data-security/mass-assignment.md` |
-| Builds queries/commands/templates/paths from input | `references/input-api-dependency/injection.md` |
-| Configures CORS, headers, cookies, debug, env | `references/input-api-dependency/config.md` |
-| Touches API keys, credentials, tokens | `references/input-api-dependency/secrets.md` |
-| Validates (or should validate) request input | `references/input-api-dependency/api-contract-validation.md` |
-| Accepts, stores, processes, or serves files | `references/input-api-dependency/file-handling.md` |
-| Makes network requests to user-influenced URLs | `references/input-api-dependency/ssrf.md` |
-| Writes to multiple tables/stores/systems at once | `references/correctness/atomicity.md` |
-| Handles payments, webhooks, retries, emails | `references/correctness/idempotency.md` |
-| Runs jobs, scheduled tasks, or queue consumers | `references/correctness/background-work.md` |
-| Shares mutable state, caches, counters | `references/correctness/state-management.md` |
-| Catches/throws errors, maps errors to HTTP statuses | `references/correctness/exception-handling.md` |
-| Loads related data inside a loop over a collection | `references/operability/nplus1.md` |
-| Adds endpoints/jobs, handles errors | `references/operability/observability.md` |
-| Changes database schema | `references/operability/migration-safety.md` |
-| Does work proportional to input size | `references/operability/resource-limits.md` |
-| Runs async/await, event-loop, or coroutine code | `references/operability/blocking-io-async.md` |
-| — Fixing confirmed findings | `references/remediation/authz-patterns.md`, `references/remediation/async-patterns.md`, `references/remediation/observability-patterns.md` |
+| The code…                                            | Read                                                                                                                                       |
+|------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| Gates actions by role, permission, or ownership      | `references/access-data-security/authorization.md`                                                                                         |
+| Handles login, logout, reset, tokens, sessions       | `references/access-data-security/authn-session.md`                                                                                         |
+| Fetches/mutates a resource by an ID from the request | `references/access-data-security/idor.md` + `references/access-data-security/authorization.md`                                             |
+| Serializes models, formats errors, writes logs       | `references/access-data-security/data-exposure.md`                                                                                         |
+| Hashes, encrypts, generates or compares secrets      | `references/access-data-security/crypto-data-protection.md`                                                                                |
+| Renders user data into HTML/JS/URLs/headers/emails   | `references/access-data-security/output-encoding.md`                                                                                       |
+| Touches data or caches in a multi-tenant app         | `references/access-data-security/tenant-isolation.md`                                                                                      |
+| Changes state with cookie/session-based auth         | `references/access-data-security/csrf.md`                                                                                                  |
+| Binds request payloads onto models/entities          | `references/access-data-security/mass-assignment.md`                                                                                       |
+| Builds queries/commands/templates/paths from input   | `references/input-api-dependency/injection.md`                                                                                             |
+| Configures CORS, headers, cookies, debug, env        | `references/input-api-dependency/config.md`                                                                                                |
+| Touches API keys, credentials, tokens                | `references/input-api-dependency/secrets.md`                                                                                               |
+| Validates (or should validate) request input         | `references/input-api-dependency/api-contract-validation.md`                                                                               |
+| Accepts, stores, processes, or serves files          | `references/input-api-dependency/file-handling.md`                                                                                         |
+| Makes network requests to user-influenced URLs       | `references/input-api-dependency/ssrf.md`                                                                                                  |
+| Writes to multiple tables/stores/systems at once     | `references/correctness/atomicity.md`                                                                                                      |
+| Handles payments, webhooks, retries, emails          | `references/correctness/idempotency.md`                                                                                                    |
+| Runs jobs, scheduled tasks, or queue consumers       | `references/correctness/background-work.md`                                                                                                |
+| Shares mutable state, caches, counters               | `references/correctness/state-management.md`                                                                                               |
+| Catches/throws errors, maps errors to HTTP statuses  | `references/correctness/exception-handling.md`                                                                                             |
+| Loads related data inside a loop over a collection   | `references/operability/nplus1.md`                                                                                                         |
+| Adds endpoints/jobs, handles errors                  | `references/operability/observability.md`                                                                                                  |
+| Changes database schema                              | `references/operability/migration-safety.md`                                                                                               |
+| Does work proportional to input size                 | `references/operability/resource-limits.md`                                                                                                |
+| Runs async/await, event-loop, or coroutine code      | `references/operability/blocking-io-async.md`                                                                                              |
+| — Fixing confirmed findings                          | `references/remediation/authz-patterns.md`, `references/remediation/async-patterns.md`, `references/remediation/observability-patterns.md` |
