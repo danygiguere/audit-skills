@@ -127,8 +127,6 @@ echo '@AGENTS.md' > CLAUDE.md          # if you don't already have a CLAUDE.md
 - **By command** — `/audit` for a full audit, or per topic:
   `/audit-idor`, `/audit-injection`, `/audit-atomicity`, …
 - **By name** — "run the idempotency checklist on this webhook handler".
-- **By path** — works in any tool: "review this against
-  `.agents/skills/audit/references/correctness/atomicity.md`".
 - **Fixes** — after findings are confirmed: `/audit-fix-authz`,
   `/audit-fix-async`, `/audit-fix-observability` (see "How fixes work").
 
