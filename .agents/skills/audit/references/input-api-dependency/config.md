@@ -47,6 +47,7 @@ work.
 | Django       | `DEBUG`, `ALLOWED_HOSTS`, `SECURE_*`/`SESSION_COOKIE_*` settings; corsheaders config |
 | Spring       | `application-prod.yml` profiles; Spring Security headers and CORS configurers       |
 | Node/Express | `NODE_ENV`; helmet for headers; `cors()` options; `cookie` flags on `res.cookie`    |
+| Vapor        | `app.environment` gates debug behavior; `CORSMiddleware.Configuration` with explicit origins; cookie flags via `app.sessions.configuration.cookieFactory` |
 
 ## Example
 

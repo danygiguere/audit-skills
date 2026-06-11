@@ -51,6 +51,7 @@ user staring at a spinner, so their failures have no natural witness.
 | Django       | `logging` with request ID middleware; Sentry SDK; Celery task failure signals |
 | Spring       | SLF4J + MDC for correlation IDs; Micrometer metrics; `@ControllerAdvice` handlers |
 | Node/Express | pino/winston child loggers with request ID; error-handling middleware; queue `failed` event handlers |
+| Vapor        | `req.logger` (SwiftLog) with metadata; SwiftMetrics + Prometheus exporter; request-ID middleware adds correlation metadata |
 
 ## Example
 

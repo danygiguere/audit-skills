@@ -46,6 +46,7 @@ only way to obtain one.
 | Django       | `get_object_or_404(Post, pk=pk, owner=request.user)`; queryset scoping in DRF |
 | Spring       | `findByIdAndOwner(id, principal)`; `@PreAuthorize` with object checks         |
 | Node/Express | a `WHERE owner_id = ?` clause or explicit `if (post.ownerId !== req.user.id)` |
+| Vapor        | `Todo.query(on: req.db).filter(\.$owner.$id == user.id)` vs bare `Todo.find(id, on: req.db)` |
 
 ## Example
 

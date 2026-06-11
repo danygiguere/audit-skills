@@ -49,6 +49,7 @@ call site is silently open, and nothing fails loudly when one is missing.
 | Django       | DRF `permission_classes` + `has_object_permission`; `@permission_required`          |
 | Spring       | `@PreAuthorize` method security; `SecurityFilterChain` rules (URL rules alone are route-layer only) |
 | Node/Express | per-route middleware (`requireRole(...)`) plus in-handler object checks; nothing is implicit |
+| Vapor        | `req.auth.require(User.self)` + explicit ownership checks in handlers; `GuardMiddleware` on route groups — no built-in policy layer |
 
 ## Example
 

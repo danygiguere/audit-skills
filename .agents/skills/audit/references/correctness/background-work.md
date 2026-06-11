@@ -48,6 +48,7 @@ retry delay.
 | Django       | Celery `max_retries`, `retry_backoff`, `acks_late`, dead-letter queues     |
 | Spring       | `@Retryable`/listener retry config; DLQ on RabbitMQ/Kafka error topics     |
 | Node/Express | BullMQ `attempts`/`backoff`, failed queue; SQS redrive policy + DLQ        |
+| Vapor        | Queues package: `maxRetryCount`, delayed retries; failure hooks via `JobEventDelegate` — no built-in dead-letter queue |
 
 ## Example
 

@@ -49,6 +49,7 @@ least once.
 | Django       | `get_or_create`/`update_or_create`; `unique` constraints; idempotency-key middleware |
 | Spring       | unique constraints + `DataIntegrityViolationException` catch; idempotent consumer table |
 | Node/Express | `INSERT ... ON CONFLICT DO NOTHING`; idempotency-key header checked against a store |
+| Vapor        | `.unique(on:)` in Fluent migrations + catching the constraint violation; idempotency-key stores and webhook event tables are hand-rolled |
 
 ## Example
 

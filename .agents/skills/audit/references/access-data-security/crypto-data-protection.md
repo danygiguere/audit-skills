@@ -42,6 +42,7 @@ then never move; comparison timing leaks are invisible without measuring.
 | Django       | `PASSWORD_HASHERS` (argon2/pbkdf2); `secrets` module; `constant_time_compare`; `cryptography` Fernet |
 | Spring       | `BCryptPasswordEncoder`/`Argon2PasswordEncoder`; `SecureRandom`; `MessageDigest.isEqual`; JCA AES-GCM |
 | Node/Express | `bcrypt`/`argon2` packages; `crypto.randomBytes`; `crypto.timingSafeEqual`; `createCipheriv` with GCM |
+| Vapor        | `app.password`/`Bcrypt` for passwords; swift-crypto (`AES.GCM`, `SHA256`, `HMAC`); `[UInt8].random(count:)` (CSPRNG) for tokens |
 
 ## Example
 

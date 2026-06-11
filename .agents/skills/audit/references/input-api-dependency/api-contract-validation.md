@@ -49,6 +49,7 @@ only under adversarial input.
 | Django       | DRF serializers with explicit `fields`; `serializer.validated_data`                 |
 | Spring       | Bean Validation (`@Valid`, constraint annotations); dedicated request DTOs           |
 | Node/Express | schema validation middleware (zod/Joi-style) with strict/strip-unknown enabled       |
+| Vapor        | `Validatable` (`try User.Create.validate(content: req)`); Codable DTOs give types/bounds — note Codable ignores unknown fields silently |
 
 ## Example
 

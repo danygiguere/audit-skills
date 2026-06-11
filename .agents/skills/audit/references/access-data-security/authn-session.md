@@ -47,6 +47,7 @@ incident.
 | Django       | `auth.login()` rotates the session key; `PasswordResetTokenGenerator`; django-axes for lockout |
 | Spring       | Spring Security session-fixation protection (migrate/new session); logout handlers; custom token services |
 | Node/Express | `req.session.regenerate()` / `req.session.destroy()` are manual; `crypto.randomBytes` tokens; express-rate-limit |
+| Vapor        | `SessionsMiddleware` + `ModelSessionAuthenticatable`; `req.auth.login`/`logout` + `req.session.destroy()`; reset tokens are hand-rolled — check expiry and single-use |
 
 ## Example
 

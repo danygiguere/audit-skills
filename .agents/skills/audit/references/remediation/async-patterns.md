@@ -120,6 +120,7 @@ becomes a silent data graveyard.
 | Django       | `transaction.atomic()`; `transaction.on_commit()`; `update_or_create`/`bulk_create(ignore_conflicts)`; `F()` expressions + `select_for_update()`; Celery `max_retries` + dead-letter routing |
 | Spring       | `@Transactional`; `TransactionSynchronization.afterCommit` / outbox libs; `ON CONFLICT` via JDBC/JPA; `@Version` optimistic locking; Spring Retry + AMQP DLQ |
 | Node/Express | `knex.transaction()`/Prisma `$transaction`; outbox table + relay; `ON CONFLICT DO UPDATE`; `UPDATE ... WHERE version = ?`; BullMQ `attempts`/`backoff` + failed queue |
+| Vapor        | `req.db.transaction`; `.unique(on:)` + constraint-violation catch; Queues `maxRetryCount`/delays; the outbox is hand-rolled |
 
 ## Applying fixes
 

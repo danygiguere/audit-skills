@@ -51,6 +51,7 @@ blocked loop — the stall only appears under concurrency.
 | Django       | sync views run on threads; `async def` views must not call sync ORM/HTTP directly — wrap in `sync_to_async` |
 | Spring       | WebFlux/Reactor: no blocking on event-loop threads — offload to `boundedElastic`; detected by BlockHound |
 | Node/Express | single event loop: no `*Sync` fs/crypto APIs in handlers; CPU work to `worker_threads`; beware long JSON.parse |
+| Vapor        | SwiftNIO event loops: never block — async/await throughout; offload blocking or CPU work with `app.threadPool.runIfActive` |
 
 ## Example
 

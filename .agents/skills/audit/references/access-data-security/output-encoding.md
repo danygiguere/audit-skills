@@ -49,6 +49,7 @@ loosens — encoding must not depend on input cleanliness.
 | Django       | templates autoescape; `|safe`, `mark_safe`, `{% autoescape off %}` bypass    |
 | Spring       | Thymeleaf `th:text` escapes, `th:utext` bypasses; JSP `${}` is raw, `<c:out>` escapes |
 | Node/Express | engine-dependent — EJS `<%= %>` escapes, `<%- %>` raw; Handlebars `{{ }}` vs `{{{ }}}`; concatenated `res.send` has none |
+| Vapor        | Leaf escapes `#(...)` by default; `#unsafeHTML(...)` is the raw sink; JSON via `Content` is safe unless later rendered as HTML |
 
 ## Example
 

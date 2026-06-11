@@ -105,6 +105,7 @@ work when patterns 1–3 exist to answer the why.
 | Django       | `logging` dict config with JSON formatter + request-ID middleware (django-log-request-id); django-prometheus; sentry-sdk with `set_tag`/`set_user` |
 | Spring       | SLF4J + MDC (`MDC.put("requestId", ...)`), Micrometer Tracing for propagation; Micrometer + Actuator `http.server.requests`; Sentry/ELK appenders |
 | Node/Express | pino/winston child loggers with bound fields; AsyncLocalStorage for request-ID context; prom-client histograms in middleware; Sentry SDK with scopes |
+| Vapor        | SwiftLog structured metadata; request-ID middleware for correlation; SwiftMetrics RED metrics with the Prometheus exporter |
 
 ## Applying fixes
 

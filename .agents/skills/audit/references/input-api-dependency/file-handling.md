@@ -48,6 +48,7 @@ concerns nobody owns in application code.
 | Django       | `FileField` `upload_to` + storage backend; `get_valid_filename`; MEDIA outside static |
 | Spring       | `MultipartFile` size limits; `Path.resolve(...).normalize()` + `startsWith(base)`     |
 | Node/Express | multer with generated filenames and limits; `path.resolve` + prefix check on base     |
+| Vapor        | `req.fileio` for reads/writes — never path-join request input; `FileMiddleware` serves only `Public/`; body caps via `.collect(maxSize:)` |
 
 ## Example
 

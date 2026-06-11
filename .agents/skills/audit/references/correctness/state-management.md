@@ -49,6 +49,7 @@ or lock is never added.
 | Django       | unique constraint + `IntegrityError`; `F()` expressions; `select_for_update()` |
 | Spring       | unique constraint; `@Version` optimistic locking; `@Lock(PESSIMISTIC_WRITE)` |
 | Node/Express | unique index + `ON CONFLICT`; `UPDATE ... SET x = x + 1 WHERE ...`; `SELECT ... FOR UPDATE`; Redis `INCR`/`SETNX` |
+| Vapor        | unique constraints in migrations as the backstop; atomic updates via SQLKit; version-field optimistic locking is manual; actors for in-process state |
 
 ## Example
 

@@ -57,6 +57,7 @@ new code and old schema, run together.
 | Django       | `makemigrations`/`migrate`; `RunPython` with `reverse_code`; `AddIndexConcurrently`; separate schema and data migrations |
 | Spring       | Flyway/Liquibase versioned migrations; out-of-order and undo scripts; batched backfills outside DDL |
 | Node/Express | Knex/TypeORM/Prisma migrate; raw `CREATE INDEX CONCURRENTLY`; `down` functions often unimplemented — check |
+| Vapor        | Fluent `AsyncMigration` with a real `revert`; drop to SQLKit for online operations (e.g. concurrent indexes); batch backfills manually |
 
 ## Example
 

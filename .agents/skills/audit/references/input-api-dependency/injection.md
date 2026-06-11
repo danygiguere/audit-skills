@@ -51,6 +51,7 @@ and dynamic requirements (sorting, filtering, search) push code through it.
 | Django       | queryset params / `cursor.execute(sql, [v])` vs f-string SQL; `subprocess` lists |
 | Spring       | `PreparedStatement` / JPA named params vs string-built JPQL; `ProcessBuilder`    |
 | Node/Express | placeholder queries (`?`/`$1`) vs template-literal SQL; `execFile` vs `exec`     |
+| Vapor        | Fluent parameterizes; raw SQL via SQLKit `\(bind:)` interpolation — assembling `SQLQueryString` from raw input is the smell |
 
 ## Example
 

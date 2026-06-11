@@ -54,6 +54,7 @@ original stack trace is gone.
 | Django       | `except Specific` not bare `except`; `finally` / context managers; DRF exception handlers |
 | Spring       | `@ControllerAdvice` / `@ExceptionHandler` boundary; try-with-resources; constructor cause chaining |
 | Node/Express | `try/await/catch` + error middleware via `next(err)`; `finally`; `unhandledRejection` hooks |
+| Vapor        | narrow `do/catch`; `try?` is the silent swallow; `Abort(.notFound)`/`AbortError` map errors to statuses; `ErrorMiddleware` is the boundary |
 
 ## Example
 

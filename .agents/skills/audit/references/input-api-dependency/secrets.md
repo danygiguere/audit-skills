@@ -47,6 +47,7 @@ every consumer.
 | Django       | `os.environ` / django-environ in `settings.py`; never literals in settings          |
 | Spring       | externalized config, Vault/Cloud Config; `${...}` placeholders, not literals        |
 | Node/Express | `process.env` via dotenv or platform secrets; beware front-end build-var prefixes   |
+| Vapor        | `Environment.get("API_KEY")`; `.env` loaded by Vapor's dotenv support — never committed |
 
 ## Example
 

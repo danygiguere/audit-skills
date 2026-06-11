@@ -49,6 +49,7 @@ that something must still reconcile the halves.
 | Django       | `transaction.atomic()`; `transaction.on_commit(callback)`                  |
 | Spring       | `@Transactional`; `TransactionSynchronization.afterCommit`                 |
 | Node/Express | client/ORM transaction APIs (`sequelize.transaction`, knex `trx`); manual after-commit hooks |
+| Vapor        | `req.db.transaction { db in ... }` (all writes through the inner `db`); side effects after the closure returns — no built-in after-commit hook |
 
 ## Example
 

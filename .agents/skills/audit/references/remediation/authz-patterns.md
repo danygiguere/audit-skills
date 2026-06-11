@@ -94,6 +94,7 @@ endpoints cannot ship unchecked.
 | Django       | `get_object_or_404(Model, pk=pk, owner=request.user)`; DRF `get_queryset` scoping + permission classes |
 | Spring       | `findByIdAndOwner(id, principal)` repository methods; `@PreAuthorize`; deny-all default in security config |
 | Node/Express | `WHERE owner_id = ?` in the query layer; CASL/policy modules; a router-level auth middleware applied before all routes |
+| Vapor        | ownership-scoped Fluent queries; `req.auth.require` + guard middleware; policies live in the service layer (no framework construct) |
 
 ## Applying fixes
 

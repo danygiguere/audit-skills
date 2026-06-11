@@ -48,6 +48,7 @@ someone crafts a request by hand.
 | Django       | `ModelForm`/DRF serializer with explicit `fields = [...]`; `fields = "__all__"` is the smell |
 | Spring       | dedicated request DTOs mapped to entities; binding `@ModelAttribute` straight onto an entity is the smell |
 | Node/Express | `Object.assign(model, req.body)` / spread into create is the smell; pick explicit fields; Mongoose `strict`, Sequelize `fields:` |
+| Vapor        | decode into a dedicated `Content` DTO (the type is the allowlist); `req.content.decode(User.self)` straight into the Fluent model is the smell |
 
 ## Example
 

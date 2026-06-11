@@ -51,6 +51,7 @@ bypasses it.
 | Django       | `CsrfViewMiddleware` + `{% csrf_token %}`; risk: `@csrf_exempt`               |
 | Spring       | Spring Security CSRF on by default for sessions; risk: `csrf().disable()` left over from stateless-API setup |
 | Node/Express | nothing built-in — csurf/csrf-csrf middleware or an explicit Origin check must be wired |
+| Vapor        | no built-in CSRF middleware — session-cookie apps need a form token (community middleware); cookie `SameSite` via `app.sessions.configuration` |
 
 ## Example
 

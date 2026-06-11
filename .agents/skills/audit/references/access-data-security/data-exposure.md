@@ -43,6 +43,7 @@ and third-party tooling.
 | Django       | DRF serializer `fields = [...]` (not `__all__`); `DEBUG=False`; `sensitive_post_parameters` |
 | Spring       | DTOs vs serialized entities; `@JsonIgnore` is a denylist; `server.error.include-stacktrace=never` |
 | Node/Express | hand-built response objects vs `res.json(model)`; error middleware hiding `err.stack`; pino/winston redaction |
+| Vapor        | return dedicated `Content` response DTOs, never Fluent models directly; `ErrorMiddleware` controls error detail per environment |
 
 ## Example
 

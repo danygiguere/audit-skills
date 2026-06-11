@@ -46,6 +46,7 @@ the handler issues one query, but the rendering of each item triggers more.
 | Django       | `select_related` (FK joins), `prefetch_related` (reverse/M2M), `annotate`     |
 | Spring       | JPA fetch joins / `@EntityGraph`; beware default `LAZY` access in loops       |
 | Node/Express | DataLoader batching; ORM `include`/`populate`; `WHERE id IN (...)` then map   |
+| Vapor        | eager-load with `.with(\.$relation)` on the query; a `find` or child query inside a `for` over models is the smell |
 
 ## Example
 
