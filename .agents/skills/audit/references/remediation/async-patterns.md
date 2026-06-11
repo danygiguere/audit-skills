@@ -113,16 +113,16 @@ becomes a silent data graveyard.
 
 ## Ecosystem glossary
 
-| Ecosystem    | Native form of these patterns                                                                  |
-|--------------|-------------------------------------------------------------------------------------------------|
-| Rails        | `ActiveRecord::Base.transaction`; `after_commit`; `upsert`/`create_or_find_by`; `lock_version` optimistic locking; Sidekiq retries + dead set |
-| Laravel      | `DB::transaction()`; `DB::afterCommit` / `dispatch()->afterCommit()`; `upsert()`; `lockForUpdate()`; queue `tries`/`backoff` + `failed_jobs` |
+| Ecosystem    | Native form of these patterns                                                                                                                                                                |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `ActiveRecord::Base.transaction`; `after_commit`; `upsert`/`create_or_find_by`; `lock_version` optimistic locking; Sidekiq retries + dead set                                                |
+| Laravel      | `DB::transaction()`; `DB::afterCommit` / `dispatch()->afterCommit()`; `upsert()`; `lockForUpdate()`; queue `tries`/`backoff` + `failed_jobs`                                                 |
 | Django       | `transaction.atomic()`; `transaction.on_commit()`; `update_or_create`/`bulk_create(ignore_conflicts)`; `F()` expressions + `select_for_update()`; Celery `max_retries` + dead-letter routing |
-| Spring       | `@Transactional`; `TransactionSynchronization.afterCommit` / outbox libs; `ON CONFLICT` via JDBC/JPA; `@Version` optimistic locking; Spring Retry + AMQP DLQ |
-| Node/Express | `knex.transaction()`/Prisma `$transaction`; outbox table + relay; `ON CONFLICT DO UPDATE`; `UPDATE ... WHERE version = ?`; BullMQ `attempts`/`backoff` + failed queue |
-| Vapor        | `req.db.transaction`; `.unique(on:)` + constraint-violation catch; Queues `maxRetryCount`/delays; the outbox is hand-rolled |
-| .NET         | `Database.BeginTransaction`; unique index + `DbUpdateException` catch; rowversion concurrency tokens; Hangfire retries; outbox via CAP or hand-rolled |
-| Go           | `BeginTx` + deferred rollback; unique index + `ON CONFLICT`; `SELECT ... FOR UPDATE` or atomic UPDATE; asynq retries/DLQ |
+| Spring       | `@Transactional`; `TransactionSynchronization.afterCommit` / outbox libs; `ON CONFLICT` via JDBC/JPA; `@Version` optimistic locking; Spring Retry + AMQP DLQ                                 |
+| Node/Express | `knex.transaction()`/Prisma `$transaction`; outbox table + relay; `ON CONFLICT DO UPDATE`; `UPDATE ... WHERE version = ?`; BullMQ `attempts`/`backoff` + failed queue                        |
+| Vapor        | `req.db.transaction`; `.unique(on:)` + constraint-violation catch; Queues `maxRetryCount`/delays; the outbox is hand-rolled                                                                  |
+| .NET         | `Database.BeginTransaction`; unique index + `DbUpdateException` catch; rowversion concurrency tokens; Hangfire retries; outbox via CAP or hand-rolled                                        |
+| Go           | `BeginTx` + deferred rollback; unique index + `ON CONFLICT`; `SELECT ... FOR UPDATE` or atomic UPDATE; asynq retries/DLQ                                                                     |
 
 ## Applying fixes
 

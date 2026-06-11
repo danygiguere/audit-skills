@@ -42,16 +42,16 @@ that something must still reconcile the halves.
 
 ## Concept glossary
 
-| Ecosystem    | Where the boundary usually lives                                          |
-|--------------|----------------------------------------------------------------------------|
-| Rails        | `ActiveRecord::Base.transaction do ... end`; `after_commit` callbacks      |
-| Laravel      | `DB::transaction(fn () => ...)`; `afterCommit` on jobs/mail/notifications  |
-| Django       | `transaction.atomic()`; `transaction.on_commit(callback)`                  |
-| Spring       | `@Transactional`; `TransactionSynchronization.afterCommit`                 |
-| Node/Express | client/ORM transaction APIs (`sequelize.transaction`, knex `trx`); manual after-commit hooks |
+| Ecosystem    | Where the boundary usually lives                                                                                                               |
+|--------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `ActiveRecord::Base.transaction do ... end`; `after_commit` callbacks                                                                          |
+| Laravel      | `DB::transaction(fn () => ...)`; `afterCommit` on jobs/mail/notifications                                                                      |
+| Django       | `transaction.atomic()`; `transaction.on_commit(callback)`                                                                                      |
+| Spring       | `@Transactional`; `TransactionSynchronization.afterCommit`                                                                                     |
+| Node/Express | client/ORM transaction APIs (`sequelize.transaction`, knex `trx`); manual after-commit hooks                                                   |
 | Vapor        | `req.db.transaction { db in ... }` (all writes through the inner `db`); side effects after the closure returns — no built-in after-commit hook |
-| .NET         | one `SaveChanges` call is atomic; multi-step via `Database.BeginTransaction()`/`TransactionScope`; side effects after commit |
-| Go           | `db.BeginTx` + `defer tx.Rollback()`, commit last; sqlx/GORM `Transaction(func(tx) {...})`; side effects after commit |
+| .NET         | one `SaveChanges` call is atomic; multi-step via `Database.BeginTransaction()`/`TransactionScope`; side effects after commit                   |
+| Go           | `db.BeginTx` + `defer tx.Rollback()`, commit last; sqlx/GORM `Transaction(func(tx) {...})`; side effects after commit                          |
 
 ## Example
 

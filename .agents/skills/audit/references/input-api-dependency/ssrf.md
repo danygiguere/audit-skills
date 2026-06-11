@@ -45,15 +45,15 @@ saw. URL parsers and the fetcher can disagree about what the host even is.
 
 ## Concept glossary
 
-| Ecosystem    | Where fetches and guards usually live                                              |
-|--------------|--------------------------------------------------------------------------------------|
-| Rails        | `Net::HTTP`/Faraday calls on user URLs; ssrf_filter-style resolved-IP guards         |
-| Laravel      | `Http::get($userUrl)`; guards as macros/middleware around the HTTP client            |
-| Django       | `requests.get(user_url)`; advocate-style validation or a guarded session wrapper     |
-| Spring       | `RestTemplate`/`WebClient` with user URLs; checks in a `ClientHttpRequestInterceptor` |
-| Node/Express | `fetch`/axios/got on user URLs; resolved-address checks in a custom agent/lookup     |
-| Vapor        | `req.client.get(URI(...))` — validate/allowlist the URI first; configure AsyncHTTPClient's redirect policy |
-| .NET         | validate URI before `HttpClient`; `IHttpClientFactory` named clients with fixed base addresses; `AllowAutoRedirect` policy |
+| Ecosystem    | Where fetches and guards usually live                                                                                         |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `Net::HTTP`/Faraday calls on user URLs; ssrf_filter-style resolved-IP guards                                                  |
+| Laravel      | `Http::get($userUrl)`; guards as macros/middleware around the HTTP client                                                     |
+| Django       | `requests.get(user_url)`; advocate-style validation or a guarded session wrapper                                              |
+| Spring       | `RestTemplate`/`WebClient` with user URLs; checks in a `ClientHttpRequestInterceptor`                                         |
+| Node/Express | `fetch`/axios/got on user URLs; resolved-address checks in a custom agent/lookup                                              |
+| Vapor        | `req.client.get(URI(...))` — validate/allowlist the URI first; configure AsyncHTTPClient's redirect policy                    |
+| .NET         | validate URI before `HttpClient`; `IHttpClientFactory` named clients with fixed base addresses; `AllowAutoRedirect` policy    |
 | Go           | parse + allowlist before `http.Get`; custom `http.Client` with `CheckRedirect`; block private ranges via custom `DialContext` |
 
 ## Example

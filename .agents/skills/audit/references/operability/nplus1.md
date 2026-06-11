@@ -39,16 +39,16 @@ the handler issues one query, but the rendering of each item triggers more.
 
 ## Concept glossary
 
-| Ecosystem    | Bulk-loading mechanism                                                       |
-|--------------|-------------------------------------------------------------------------------|
-| Rails        | `includes`/`preload`/`eager_load`; `strict_loading` to surface lazy access    |
-| Laravel      | `with()` eager loading; `withCount()`; `Model::preventLazyLoading()`          |
-| Django       | `select_related` (FK joins), `prefetch_related` (reverse/M2M), `annotate`     |
-| Spring       | JPA fetch joins / `@EntityGraph`; beware default `LAZY` access in loops       |
-| Node/Express | DataLoader batching; ORM `include`/`populate`; `WHERE id IN (...)` then map   |
-| Vapor        | eager-load with `.with(\.$relation)` on the query; a `find` or child query inside a `for` over models is the smell |
+| Ecosystem    | Bulk-loading mechanism                                                                                                |
+|--------------|-----------------------------------------------------------------------------------------------------------------------|
+| Rails        | `includes`/`preload`/`eager_load`; `strict_loading` to surface lazy access                                            |
+| Laravel      | `with()` eager loading; `withCount()`; `Model::preventLazyLoading()`                                                  |
+| Django       | `select_related` (FK joins), `prefetch_related` (reverse/M2M), `annotate`                                             |
+| Spring       | JPA fetch joins / `@EntityGraph`; beware default `LAZY` access in loops                                               |
+| Node/Express | DataLoader batching; ORM `include`/`populate`; `WHERE id IN (...)` then map                                           |
+| Vapor        | eager-load with `.with(\.$relation)` on the query; a `find` or child query inside a `for` over models is the smell    |
 | .NET         | lazy-loading proxies are the trap; `Include()`/`ThenInclude()` or projections; a query inside `foreach` over entities |
-| Go           | a query inside `for range` over rows; GORM `Preload`; batch with `IN` (sqlx.In) |
+| Go           | a query inside `for range` over rows; GORM `Preload`; batch with `IN` (sqlx.In)                                       |
 
 ## Example
 

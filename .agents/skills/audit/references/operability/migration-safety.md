@@ -50,16 +50,16 @@ new code and old schema, run together.
 
 ## Concept glossary
 
-| Ecosystem    | Migration tooling and safety levers                                          |
-|--------------|-------------------------------------------------------------------------------|
-| Rails        | ActiveRecord migrations; `strong_migrations` gem flags unsafe ops; `disable_ddl_transaction!` + `algorithm: :concurrently` |
-| Laravel      | artisan migrations; `->change()` rewrites; chunked backfills via `chunkById` in a command, not the migration |
-| Django       | `makemigrations`/`migrate`; `RunPython` with `reverse_code`; `AddIndexConcurrently`; separate schema and data migrations |
-| Spring       | Flyway/Liquibase versioned migrations; out-of-order and undo scripts; batched backfills outside DDL |
-| Node/Express | Knex/TypeORM/Prisma migrate; raw `CREATE INDEX CONCURRENTLY`; `down` functions often unimplemented — check |
+| Ecosystem    | Migration tooling and safety levers                                                                                                    |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | ActiveRecord migrations; `strong_migrations` gem flags unsafe ops; `disable_ddl_transaction!` + `algorithm: :concurrently`             |
+| Laravel      | artisan migrations; `->change()` rewrites; chunked backfills via `chunkById` in a command, not the migration                           |
+| Django       | `makemigrations`/`migrate`; `RunPython` with `reverse_code`; `AddIndexConcurrently`; separate schema and data migrations               |
+| Spring       | Flyway/Liquibase versioned migrations; out-of-order and undo scripts; batched backfills outside DDL                                    |
+| Node/Express | Knex/TypeORM/Prisma migrate; raw `CREATE INDEX CONCURRENTLY`; `down` functions often unimplemented — check                             |
 | Vapor        | Fluent `AsyncMigration` with a real `revert`; drop to SQLKit for online operations (e.g. concurrent indexes); batch backfills manually |
-| .NET         | EF Core migrations — review the generated SQL (`migrations script`); never `EnsureCreated` in prod; batch backfills manually |
-| Go           | golang-migrate/goose with down migrations; raw SQL so locks are explicit — review them; batch backfills |
+| .NET         | EF Core migrations — review the generated SQL (`migrations script`); never `EnsureCreated` in prod; batch backfills manually           |
+| Go           | golang-migrate/goose with down migrations; raw SQL so locks are explicit — review them; batch backfills                                |
 
 ## Example
 

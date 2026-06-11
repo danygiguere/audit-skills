@@ -46,16 +46,16 @@ single client can exhaust a shared resource.
 
 ## Concept glossary
 
-| Ecosystem    | Where the bounds usually live                                                |
-|--------------|-------------------------------------------------------------------------------|
-| Rails        | `page`/`per_page` via Pagy/Kaminari with a max; Rack::Attack for rate limits; `Rack::Utils` body limits often left to nginx |
-| Laravel      | `paginate()` with clamped `per_page`; `throttle` middleware; `max:` upload validation rules |
-| Django       | DRF pagination classes with `max_page_size`; `DATA_UPLOAD_MAX_MEMORY_SIZE`; django-ratelimit |
-| Spring       | `Pageable` with capped size; `spring.servlet.multipart.max-file-size`; Bucket4j/resilience4j rate limiting |
-| Node/Express | `express.json({ limit })`; multer file size limits; express-rate-limit; RE2 for untrusted regex input |
+| Ecosystem    | Where the bounds usually live                                                                                                      |
+|--------------|------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `page`/`per_page` via Pagy/Kaminari with a max; Rack::Attack for rate limits; `Rack::Utils` body limits often left to nginx        |
+| Laravel      | `paginate()` with clamped `per_page`; `throttle` middleware; `max:` upload validation rules                                        |
+| Django       | DRF pagination classes with `max_page_size`; `DATA_UPLOAD_MAX_MEMORY_SIZE`; django-ratelimit                                       |
+| Spring       | `Pageable` with capped size; `spring.servlet.multipart.max-file-size`; Bucket4j/resilience4j rate limiting                         |
+| Node/Express | `express.json({ limit })`; multer file size limits; express-rate-limit; RE2 for untrusted regex input                              |
 | Vapor        | `app.routes.defaultMaxBodySize` / `.on(..., body: .collect(maxSize:))`; Fluent `.paginate(for: req)`; rate limiting via middleware |
 | .NET         | `[RequestSizeLimit]` / Kestrel `MaxRequestBodySize`; built-in rate limiter middleware (`AddRateLimiter`); `Skip`/`Take` pagination |
-| Go           | `http.MaxBytesReader`; server timeouts; `x/time/rate` limiter; paginate queries explicitly |
+| Go           | `http.MaxBytesReader`; server timeouts; `x/time/rate` limiter; paginate queries explicitly                                         |
 
 ## Example
 

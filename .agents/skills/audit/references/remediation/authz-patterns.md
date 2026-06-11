@@ -87,16 +87,16 @@ endpoints cannot ship unchecked.
 
 ## Ecosystem glossary
 
-| Ecosystem    | Native form of these patterns                                                                  |
-|--------------|-------------------------------------------------------------------------------------------------|
-| Rails        | `current_user.resources.find(id)`; Pundit policies + `verify_authorized` for deny-by-default    |
-| Laravel      | scoped route-model binding (`->scopeBindings()`); policies + `authorize()`; global query scopes |
-| Django       | `get_object_or_404(Model, pk=pk, owner=request.user)`; DRF `get_queryset` scoping + permission classes |
-| Spring       | `findByIdAndOwner(id, principal)` repository methods; `@PreAuthorize`; deny-all default in security config |
-| Node/Express | `WHERE owner_id = ?` in the query layer; CASL/policy modules; a router-level auth middleware applied before all routes |
-| Vapor        | ownership-scoped Fluent queries; `req.auth.require` + guard middleware; policies live in the service layer (no framework construct) |
+| Ecosystem    | Native form of these patterns                                                                                                                                 |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `current_user.resources.find(id)`; Pundit policies + `verify_authorized` for deny-by-default                                                                  |
+| Laravel      | scoped route-model binding (`->scopeBindings()`); policies + `authorize()`; global query scopes                                                               |
+| Django       | `get_object_or_404(Model, pk=pk, owner=request.user)`; DRF `get_queryset` scoping + permission classes                                                        |
+| Spring       | `findByIdAndOwner(id, principal)` repository methods; `@PreAuthorize`; deny-all default in security config                                                    |
+| Node/Express | `WHERE owner_id = ?` in the query layer; CASL/policy modules; a router-level auth middleware applied before all routes                                        |
+| Vapor        | ownership-scoped Fluent queries; `req.auth.require` + guard middleware; policies live in the service layer (no framework construct)                           |
 | .NET         | resource-based authorization handlers via `IAuthorizationService`; EF global query filters for ownership/tenant scoping; `FallbackPolicy` for deny-by-default |
-| Go           | ownership in the WHERE clause; central authorize helpers or casbin; deny-by-default routing middleware |
+| Go           | ownership in the WHERE clause; central authorize helpers or casbin; deny-by-default routing middleware                                                        |
 
 ## Applying fixes
 

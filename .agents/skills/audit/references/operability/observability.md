@@ -44,16 +44,16 @@ user staring at a spinner, so their failures have no natural witness.
 
 ## Concept glossary
 
-| Ecosystem    | Where the signal usually comes from                                          |
-|--------------|-------------------------------------------------------------------------------|
-| Rails        | `Rails.logger` with tagged logging (request ID); Sentry/Honeybadger; ActiveJob `retry_on`/`discard_on` hooks |
-| Laravel      | `Log::error()` with context array; `report()`; Horizon failed-jobs table; Telescope |
-| Django       | `logging` with request ID middleware; Sentry SDK; Celery task failure signals |
-| Spring       | SLF4J + MDC for correlation IDs; Micrometer metrics; `@ControllerAdvice` handlers |
-| Node/Express | pino/winston child loggers with request ID; error-handling middleware; queue `failed` event handlers |
-| Vapor        | `req.logger` (SwiftLog) with metadata; SwiftMetrics + Prometheus exporter; request-ID middleware adds correlation metadata |
+| Ecosystem    | Where the signal usually comes from                                                                                           |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `Rails.logger` with tagged logging (request ID); Sentry/Honeybadger; ActiveJob `retry_on`/`discard_on` hooks                  |
+| Laravel      | `Log::error()` with context array; `report()`; Horizon failed-jobs table; Telescope                                           |
+| Django       | `logging` with request ID middleware; Sentry SDK; Celery task failure signals                                                 |
+| Spring       | SLF4J + MDC for correlation IDs; Micrometer metrics; `@ControllerAdvice` handlers                                             |
+| Node/Express | pino/winston child loggers with request ID; error-handling middleware; queue `failed` event handlers                          |
+| Vapor        | `req.logger` (SwiftLog) with metadata; SwiftMetrics + Prometheus exporter; request-ID middleware adds correlation metadata    |
 | .NET         | `ILogger<T>` structured logging with scopes; `LogError(ex, ...)` not just `ex.Message`; OpenTelemetry/Activity; health checks |
-| Go           | `log/slog` with context fields (request ID); OpenTelemetry propagation via context; prometheus client |
+| Go           | `log/slog` with context fields (request ID); OpenTelemetry propagation via context; prometheus client                         |
 
 ## Example
 

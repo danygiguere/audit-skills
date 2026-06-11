@@ -98,16 +98,16 @@ work when patterns 1–3 exist to answer the why.
 
 ## Ecosystem glossary
 
-| Ecosystem    | Native form of these patterns                                                                  |
-|--------------|-------------------------------------------------------------------------------------------------|
+| Ecosystem    | Native form of these patterns                                                                                                                                        |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `Rails.logger` with `tagged`/semantic logger, `config.log_tags = [:request_id]`; ActiveSupport::Notifications + StatsD/Prometheus exporters; Sentry/Honeybadger gems |
-| Laravel      | `Log::withContext()` and Monolog processors; request ID middleware; Telescope/Horizon metrics, Prometheus exporters; Sentry/Flare SDK |
-| Django       | `logging` dict config with JSON formatter + request-ID middleware (django-log-request-id); django-prometheus; sentry-sdk with `set_tag`/`set_user` |
-| Spring       | SLF4J + MDC (`MDC.put("requestId", ...)`), Micrometer Tracing for propagation; Micrometer + Actuator `http.server.requests`; Sentry/ELK appenders |
-| Node/Express | pino/winston child loggers with bound fields; AsyncLocalStorage for request-ID context; prom-client histograms in middleware; Sentry SDK with scopes |
-| Vapor        | SwiftLog structured metadata; request-ID middleware for correlation; SwiftMetrics RED metrics with the Prometheus exporter |
-| .NET         | `ILogger` scopes for stable context fields; W3C trace context via Activity/OpenTelemetry; ProblemDetails for consistent error shape |
-| Go           | slog with context-derived fields; otel trace propagation; prometheus RED metrics per handler |
+| Laravel      | `Log::withContext()` and Monolog processors; request ID middleware; Telescope/Horizon metrics, Prometheus exporters; Sentry/Flare SDK                                |
+| Django       | `logging` dict config with JSON formatter + request-ID middleware (django-log-request-id); django-prometheus; sentry-sdk with `set_tag`/`set_user`                   |
+| Spring       | SLF4J + MDC (`MDC.put("requestId", ...)`), Micrometer Tracing for propagation; Micrometer + Actuator `http.server.requests`; Sentry/ELK appenders                    |
+| Node/Express | pino/winston child loggers with bound fields; AsyncLocalStorage for request-ID context; prom-client histograms in middleware; Sentry SDK with scopes                 |
+| Vapor        | SwiftLog structured metadata; request-ID middleware for correlation; SwiftMetrics RED metrics with the Prometheus exporter                                           |
+| .NET         | `ILogger` scopes for stable context fields; W3C trace context via Activity/OpenTelemetry; ProblemDetails for consistent error shape                                  |
+| Go           | slog with context-derived fields; otel trace propagation; prometheus RED metrics per handler                                                                         |
 
 ## Applying fixes
 

@@ -47,15 +47,15 @@ original stack trace is gone.
 
 ## Concept glossary
 
-| Ecosystem    | Where the discipline usually lives                                              |
-|--------------|----------------------------------------------------------------------------------|
-| Rails        | `rescue StandardError` not `rescue Exception`; `ensure`; `rescue_from` at controller boundary |
-| Laravel      | narrow `catch` types; `finally`; the exception `Handler` / `report()` as the boundary |
-| Django       | `except Specific` not bare `except`; `finally` / context managers; DRF exception handlers |
-| Spring       | `@ControllerAdvice` / `@ExceptionHandler` boundary; try-with-resources; constructor cause chaining |
-| Node/Express | `try/await/catch` + error middleware via `next(err)`; `finally`; `unhandledRejection` hooks |
-| Vapor        | narrow `do/catch`; `try?` is the silent swallow; `Abort(.notFound)`/`AbortError` map errors to statuses; `ErrorMiddleware` is the boundary |
-| .NET         | `UseExceptionHandler` + `ProblemDetails` boundary; `throw;` not `throw ex;` (keeps the stack); broad `catch (Exception)` mid-stack is the smell |
+| Ecosystem    | Where the discipline usually lives                                                                                                                |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `rescue StandardError` not `rescue Exception`; `ensure`; `rescue_from` at controller boundary                                                     |
+| Laravel      | narrow `catch` types; `finally`; the exception `Handler` / `report()` as the boundary                                                             |
+| Django       | `except Specific` not bare `except`; `finally` / context managers; DRF exception handlers                                                         |
+| Spring       | `@ControllerAdvice` / `@ExceptionHandler` boundary; try-with-resources; constructor cause chaining                                                |
+| Node/Express | `try/await/catch` + error middleware via `next(err)`; `finally`; `unhandledRejection` hooks                                                       |
+| Vapor        | narrow `do/catch`; `try?` is the silent swallow; `Abort(.notFound)`/`AbortError` map errors to statuses; `ErrorMiddleware` is the boundary        |
+| .NET         | `UseExceptionHandler` + `ProblemDetails` boundary; `throw;` not `throw ex;` (keeps the stack); broad `catch (Exception)` mid-stack is the smell   |
 | Go           | errors are values: empty `if err != nil {}` or `_ =` discard is the swallow; wrap with `fmt.Errorf("...: %w", err)`; map to status at the handler |
 
 ## Example

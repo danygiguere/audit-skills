@@ -44,16 +44,16 @@ and dynamic requirements (sorting, filtering, search) push code through it.
 
 ## Concept glossary
 
-| Ecosystem    | Safe primitive vs the trap                                                       |
-|--------------|----------------------------------------------------------------------------------|
-| Rails        | `where("x = ?", v)` vs `where("x = #{v}")`; `system("cmd", arg)` vs backticks    |
-| Laravel      | bindings in `whereRaw('x = ?', [v])` vs interpolated `DB::raw`; `Process` arrays |
-| Django       | queryset params / `cursor.execute(sql, [v])` vs f-string SQL; `subprocess` lists |
-| Spring       | `PreparedStatement` / JPA named params vs string-built JPQL; `ProcessBuilder`    |
-| Node/Express | placeholder queries (`?`/`$1`) vs template-literal SQL; `execFile` vs `exec`     |
-| Vapor        | Fluent parameterizes; raw SQL via SQLKit `\(bind:)` interpolation — assembling `SQLQueryString` from raw input is the smell |
+| Ecosystem    | Safe primitive vs the trap                                                                                                     |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `where("x = ?", v)` vs `where("x = #{v}")`; `system("cmd", arg)` vs backticks                                                  |
+| Laravel      | bindings in `whereRaw('x = ?', [v])` vs interpolated `DB::raw`; `Process` arrays                                               |
+| Django       | queryset params / `cursor.execute(sql, [v])` vs f-string SQL; `subprocess` lists                                               |
+| Spring       | `PreparedStatement` / JPA named params vs string-built JPQL; `ProcessBuilder`                                                  |
+| Node/Express | placeholder queries (`?`/`$1`) vs template-literal SQL; `execFile` vs `exec`                                                   |
+| Vapor        | Fluent parameterizes; raw SQL via SQLKit `\(bind:)` interpolation — assembling `SQLQueryString` from raw input is the smell    |
 | .NET         | EF parameterizes; `FromSqlInterpolated` is safe — `FromSqlRaw` with string concatenation is the smell; Dapper named parameters |
-| Go           | `database/sql` placeholders (`$1`/`?`); `fmt.Sprintf` into a query or `exec.Command("sh", "-c", s)` is the smell |
+| Go           | `database/sql` placeholders (`$1`/`?`); `fmt.Sprintf` into a query or `exec.Command("sh", "-c", s)` is the smell               |
 
 ## Example
 

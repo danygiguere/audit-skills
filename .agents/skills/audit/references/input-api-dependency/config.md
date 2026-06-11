@@ -40,16 +40,16 @@ work.
 
 ## Concept glossary
 
-| Ecosystem    | Where production config lives                                                      |
-|--------------|-------------------------------------------------------------------------------------|
-| Rails        | `config/environments/production.rb`; `force_ssl`; `consider_all_requests_local`     |
-| Laravel      | `APP_DEBUG`/`APP_ENV` in `.env`; `config/cors.php`, `config/session.php`            |
-| Django       | `DEBUG`, `ALLOWED_HOSTS`, `SECURE_*`/`SESSION_COOKIE_*` settings; corsheaders config |
-| Spring       | `application-prod.yml` profiles; Spring Security headers and CORS configurers       |
-| Node/Express | `NODE_ENV`; helmet for headers; `cors()` options; `cookie` flags on `res.cookie`    |
+| Ecosystem    | Where production config lives                                                                                                                             |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `config/environments/production.rb`; `force_ssl`; `consider_all_requests_local`                                                                           |
+| Laravel      | `APP_DEBUG`/`APP_ENV` in `.env`; `config/cors.php`, `config/session.php`                                                                                  |
+| Django       | `DEBUG`, `ALLOWED_HOSTS`, `SECURE_*`/`SESSION_COOKIE_*` settings; corsheaders config                                                                      |
+| Spring       | `application-prod.yml` profiles; Spring Security headers and CORS configurers                                                                             |
+| Node/Express | `NODE_ENV`; helmet for headers; `cors()` options; `cookie` flags on `res.cookie`                                                                          |
 | Vapor        | `app.environment` gates debug behavior; `CORSMiddleware.Configuration` with explicit origins; cookie flags via `app.sessions.configuration.cookieFactory` |
-| .NET         | `appsettings.{Environment}.json` + `ASPNETCORE_ENVIRONMENT`; CORS policy builder with explicit origins; dev pages gated by `IsDevelopment()` |
-| Go           | env-driven config (envconfig/viper); explicit CORS middleware; `http.Server` Read/Write timeouts are config too |
+| .NET         | `appsettings.{Environment}.json` + `ASPNETCORE_ENVIRONMENT`; CORS policy builder with explicit origins; dev pages gated by `IsDevelopment()`              |
+| Go           | env-driven config (envconfig/viper); explicit CORS middleware; `http.Server` Read/Write timeouts are config too                                           |
 
 ## Example
 

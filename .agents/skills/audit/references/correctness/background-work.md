@@ -41,16 +41,16 @@ retry delay.
 
 ## Concept glossary
 
-| Ecosystem    | Where the policy usually lives                                            |
-|--------------|----------------------------------------------------------------------------|
-| Rails        | `retry_on`/`discard_on` in ActiveJob; Sidekiq `sidekiq_options retry:`, dead set |
-| Laravel      | `$tries`, `$backoff`, `retryUntil()`, `failed()` method; `failed_jobs` table |
-| Django       | Celery `max_retries`, `retry_backoff`, `acks_late`, dead-letter queues     |
-| Spring       | `@Retryable`/listener retry config; DLQ on RabbitMQ/Kafka error topics     |
-| Node/Express | BullMQ `attempts`/`backoff`, failed queue; SQS redrive policy + DLQ        |
-| Vapor        | Queues package: `maxRetryCount`, delayed retries; failure hooks via `JobEventDelegate` — no built-in dead-letter queue |
+| Ecosystem    | Where the policy usually lives                                                                                                                                    |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | `retry_on`/`discard_on` in ActiveJob; Sidekiq `sidekiq_options retry:`, dead set                                                                                  |
+| Laravel      | `$tries`, `$backoff`, `retryUntil()`, `failed()` method; `failed_jobs` table                                                                                      |
+| Django       | Celery `max_retries`, `retry_backoff`, `acks_late`, dead-letter queues                                                                                            |
+| Spring       | `@Retryable`/listener retry config; DLQ on RabbitMQ/Kafka error topics                                                                                            |
+| Node/Express | BullMQ `attempts`/`backoff`, failed queue; SQS redrive policy + DLQ                                                                                               |
+| Vapor        | Queues package: `maxRetryCount`, delayed retries; failure hooks via `JobEventDelegate` — no built-in dead-letter queue                                            |
 | .NET         | `BackgroundService` has no built-in retries — an unhandled exception in `ExecuteAsync` silently stops the worker; Hangfire/Quartz for retries and poison handling |
-| Go           | worker goroutines + a queue lib (asynq has retries and DLQ); `context.WithTimeout` on every external call; errgroup for propagation |
+| Go           | worker goroutines + a queue lib (asynq has retries and DLQ); `context.WithTimeout` on every external call; errgroup for propagation                               |
 
 ## Example
 

@@ -44,16 +44,16 @@ blocked loop — the stall only appears under concurrency.
 
 ## Concept glossary
 
-| Ecosystem    | Where the rule shows up                                                        |
-|--------------|----------------------------------------------------------------------------------|
-| Rails        | threaded (Puma): blocking allowed but pool-bounded — timeouts matter; never block inside Async/Fiber schedulers |
-| Laravel      | PHP-FPM is sync per-process (rule mostly N/A); under Octane/Swoole/RoadRunner the event-loop rules apply |
-| Django       | sync views run on threads; `async def` views must not call sync ORM/HTTP directly — wrap in `sync_to_async` |
-| Spring       | WebFlux/Reactor: no blocking on event-loop threads — offload to `boundedElastic`; detected by BlockHound |
-| Node/Express | single event loop: no `*Sync` fs/crypto APIs in handlers; CPU work to `worker_threads`; beware long JSON.parse |
-| Vapor        | SwiftNIO event loops: never block — async/await throughout; offload blocking or CPU work with `app.threadPool.runIfActive` |
+| Ecosystem    | Where the rule shows up                                                                                                                                          |
+|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rails        | threaded (Puma): blocking allowed but pool-bounded — timeouts matter; never block inside Async/Fiber schedulers                                                  |
+| Laravel      | PHP-FPM is sync per-process (rule mostly N/A); under Octane/Swoole/RoadRunner the event-loop rules apply                                                         |
+| Django       | sync views run on threads; `async def` views must not call sync ORM/HTTP directly — wrap in `sync_to_async`                                                      |
+| Spring       | WebFlux/Reactor: no blocking on event-loop threads — offload to `boundedElastic`; detected by BlockHound                                                         |
+| Node/Express | single event loop: no `*Sync` fs/crypto APIs in handlers; CPU work to `worker_threads`; beware long JSON.parse                                                   |
+| Vapor        | SwiftNIO event loops: never block — async/await throughout; offload blocking or CPU work with `app.threadPool.runIfActive`                                       |
 | .NET         | `.Result`/`.Wait()`/`GetAwaiter().GetResult()` is the classic sync-over-async deadlock; async all the way; `Task.Run` for CPU work; watch thread-pool starvation |
-| Go           | goroutines are preemptive, so blocking is cheap — the rule becomes `context.WithTimeout` on every call and bounded worker pools instead |
+| Go           | goroutines are preemptive, so blocking is cheap — the rule becomes `context.WithTimeout` on every call and bounded worker pools instead                          |
 
 ## Example
 
