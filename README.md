@@ -1,5 +1,10 @@
 # audit-skills
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
+![Audits: 25](https://img.shields.io/badge/audits-25-success)
+![Works with: Claude Code · Copilot · Cursor · Codex](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Copilot%20·%20Cursor%20·%20Codex-informational)
+
 Language- and framework-agnostic audit checklists for AI coding agents —
 security, correctness, and operability. Works with Claude Code, GitHub
 Copilot, Cursor, Codex CLI, OpenCode, and any agent that can read files.
@@ -161,3 +166,7 @@ Either way, the flow is the same: **audit → confirmed findings → ask for the
 fix.** Fixes follow the same rules everywhere: the smallest change that
 restores the invariant, matching the surrounding code style, with a test
 demonstrating the fix — and never mixed with unrelated refactoring.
+
+## License
+
+[MIT](LICENSE)
