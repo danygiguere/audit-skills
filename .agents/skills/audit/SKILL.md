@@ -53,7 +53,7 @@ the rest.
 | Catches/throws errors, maps errors to HTTP statuses  | `references/correctness/exception-handling.md`                                                                                             |
 | Loads related data inside a loop over a collection   | `references/operability/nplus1.md`                                                                                                         |
 | Adds endpoints/jobs, handles errors                  | `references/operability/observability.md`                                                                                                  |
-| Changes database schema                              | `references/operability/migration-safety.md`                                                                                               |
+| Changes database schema                              | `references/operability/migration-safety.md` + `references/operability/schema-design.md`                                                                                               |
 | Does work proportional to input size                 | `references/operability/resource-limits.md`                                                                                                |
 | Runs async/await, event-loop, or coroutine code      | `references/operability/blocking-io-async.md`                                                                                              |
 | — Fixing confirmed findings                          | `references/remediation/authz-patterns.md`, `references/remediation/async-patterns.md`, `references/remediation/observability-patterns.md` |

@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
-![Audits: 25](https://img.shields.io/badge/audits-25-success)
+![Audits: 26](https://img.shields.io/badge/audits-26-success)
 ![Works with: Claude Code · Copilot · Cursor · Codex](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Copilot%20·%20Cursor%20·%20Codex-informational)
 
 Language- and framework-agnostic audit checklists for AI coding agents —
@@ -15,9 +15,9 @@ or an Express API — the agent supplies the framework-specific translation.
 
 ## What's inside
 
-- `.agents/skills/audit/DIGEST.md` — a one-page digest of all 25 invariants,
+- `.agents/skills/audit/DIGEST.md` — a one-page digest of all 26 invariants,
   designed to be merged into (or referenced from) your project's `AGENTS.md`.
-- `.agents/skills/audit/` — the router skill, with all 25 checklists and
+- `.agents/skills/audit/` — the router skill, with all 26 checklists and
   remediation patterns bundled under `references/` (four categories: access
   & data security, input/API, correctness, operability).
 - `.agents/skills/audit-*` — thin per-topic wrapper skills so each checklist
@@ -75,6 +75,7 @@ every matching checklist below. Each topic is also individually invocable
 | [`/audit-migration-safety`](.agents/skills/audit/references/operability/migration-safety.md)   | Schema changes that lock tables, destructive changes without expand-contract, unbatched backfills         |
 | [`/audit-resource-limits`](.agents/skills/audit/references/operability/resource-limits.md)     | Unbounded work from input — missing pagination, size caps, rate limits, catastrophic regex                |
 | [`/audit-blocking-io-async`](.agents/skills/audit/references/operability/blocking-io-async.md) | Blocking calls on event loops or coroutines, CPU work on the scheduler, sync-over-async, missing timeouts |
+| [`/audit-schema-design`](.agents/skills/audit/references/operability/schema-design.md) | Missing indexes on FK columns and hot paths, ORM-only relationships without real foreign keys, defaulted ON DELETE, integrity rules only in app code, float money |
 
 ### Fixes
 
