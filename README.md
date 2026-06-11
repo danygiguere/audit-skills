@@ -10,9 +10,9 @@ or an Express API — the agent supplies the framework-specific translation.
 
 ## What's inside
 
-- `.agents/skills/audit/DIGEST.md` — a one-page digest of all 23 invariants,
+- `.agents/skills/audit/DIGEST.md` — a one-page digest of all 24 invariants,
   designed to be merged into (or referenced from) your project's `AGENTS.md`.
-- `.agents/skills/audit/` — the router skill, with all 23 checklists and
+- `.agents/skills/audit/` — the router skill, with all 24 checklists and
   remediation patterns bundled under `references/` (four categories: access
   & data security, input/API, correctness, operability).
 - `.agents/skills/audit-*` — thin per-topic wrapper skills so each checklist

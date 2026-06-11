@@ -54,4 +54,5 @@ the rest.
 | Adds endpoints/jobs, handles errors | `references/operability/observability.md` |
 | Changes database schema | `references/operability/migration-safety.md` |
 | Does work proportional to input size | `references/operability/resource-limits.md` |
+| Runs async/await, event-loop, or coroutine code | `references/operability/blocking-io-async.md` |
 | — Fixing confirmed findings | `references/remediation/authz-patterns.md`, `references/remediation/async-patterns.md`, `references/remediation/observability-patterns.md` |
