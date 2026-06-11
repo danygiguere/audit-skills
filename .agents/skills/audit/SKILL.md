@@ -49,6 +49,7 @@ the rest.
 | Handles payments, webhooks, retries, emails | `references/correctness/idempotency.md` |
 | Runs jobs, scheduled tasks, or queue consumers | `references/correctness/background-work.md` |
 | Shares mutable state, caches, counters | `references/correctness/state-management.md` |
+| Catches/throws errors, maps errors to HTTP statuses | `references/correctness/exception-handling.md` |
 | Loads related data inside a loop over a collection | `references/operability/nplus1.md` |
 | Adds endpoints/jobs, handles errors | `references/operability/observability.md` |
 | Changes database schema | `references/operability/migration-safety.md` |

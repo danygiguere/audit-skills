@@ -50,6 +50,8 @@ read the matching file (map at the bottom) before doing an in-depth audit.
   out-of-order delivery.
 - **State management** — no check-then-act on shared state without a lock, atomic primitive, or database constraint
   backing it.
+- **Exception handling** — errors are handled or propagated, never swallowed; catches are narrow, causes preserved,
+  resources released; HTTP boundaries return the status the condition means (404/401/403/422/409, never 200-with-error).
 
 ### Operability
 
@@ -86,6 +88,7 @@ Read only the files matching what the code under audit does
 | Handles payments, webhooks, retries, emails          | `correctness/idempotency.md`                                                                              |
 | Runs jobs, scheduled tasks, or queue consumers       | `correctness/background-work.md`                                                                          |
 | Shares mutable state, caches, counters               | `correctness/state-management.md`                                                                         |
+| Catches/throws errors, maps errors to HTTP statuses  | `correctness/exception-handling.md`                                                                       |
 | Loads related data inside a loop over a collection   | `operability/nplus1.md`                                                                                   |
 | Adds endpoints/jobs, handles errors                  | `operability/observability.md`                                                                            |
 | Changes database schema                              | `operability/migration-safety.md`                                                                         |
