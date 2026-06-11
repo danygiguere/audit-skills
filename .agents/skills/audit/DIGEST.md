@@ -24,6 +24,8 @@ read the matching file (map at the bottom) before doing an in-depth audit.
   implicit global reads.
 - **CSRF** — state-changing endpoints authenticated by cookies verify a CSRF token or origin (not applicable to pure
   token-based APIs).
+- **Mass assignment** — request data is never bound wholesale onto models; every binding site has an explicit,
+  per-context allowlist of writable fields (allowlists, never denylists).
 
 ### Input, API & dependencies
 
@@ -80,6 +82,7 @@ Read only the files matching what the code under audit does
 | Renders user data into HTML/JS/URLs/headers/emails   | `access-data-security/output-encoding.md`                                                                 |
 | Touches data or caches in a multi-tenant app         | `access-data-security/tenant-isolation.md`                                                                |
 | Changes state with cookie/session-based auth         | `access-data-security/csrf.md`                                                                            |
+| Binds request payloads onto models/entities          | `access-data-security/mass-assignment.md`                                                                 |
 | Builds queries/commands/templates/paths from input   | `input-api-dependency/injection.md`                                                                       |
 | Configures CORS, headers, cookies, debug, env        | `input-api-dependency/config.md`                                                                          |
 | Touches API keys, credentials, tokens                | `input-api-dependency/secrets.md`                                                                         |

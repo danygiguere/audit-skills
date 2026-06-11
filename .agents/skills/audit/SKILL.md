@@ -39,6 +39,7 @@ the rest.
 | Renders user data into HTML/JS/URLs/headers/emails | `references/access-data-security/output-encoding.md` |
 | Touches data or caches in a multi-tenant app | `references/access-data-security/tenant-isolation.md` |
 | Changes state with cookie/session-based auth | `references/access-data-security/csrf.md` |
+| Binds request payloads onto models/entities | `references/access-data-security/mass-assignment.md` |
 | Builds queries/commands/templates/paths from input | `references/input-api-dependency/injection.md` |
 | Configures CORS, headers, cookies, debug, env | `references/input-api-dependency/config.md` |
 | Touches API keys, credentials, tokens | `references/input-api-dependency/secrets.md` |
