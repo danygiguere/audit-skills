@@ -6,6 +6,11 @@ description: Full security, correctness, and operability audit of code. Use when
 
 # Audit procedure
 
+The audit target is whatever the user specified; if nothing was specified,
+default to the current diff (uncommitted changes, or the branch's changes
+against the default branch). If there is no diff either, ask what to audit
+rather than picking a scope yourself.
+
 1. **Identify** what the code under audit does. Trace the data flow: what
    inputs arrive, what is looked up, what is written, what is rendered or
    returned, what runs async.

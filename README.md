@@ -134,7 +134,9 @@ echo '@AGENTS.md' > CLAUDE.md          # if you don't already have a CLAUDE.md
 - **Automatic** — ask your agent to "review this endpoint" / "audit this
   diff"; the skills trigger on their descriptions.
 - **By command** — `/audit` for a full audit, or per topic:
-  `/audit-idor`, `/audit-injection`, `/audit-atomicity`, …
+  `/audit-idor`, `/audit-injection`, `/audit-atomicity`, … All of them
+  audit your current diff by default; name a file, folder, or branch to
+  audit something else.
 - **By name** — "run the idempotency checklist on this webhook handler".
 - **Fixes** — after findings are confirmed: `/audit-fix-authz`,
   `/audit-fix-async`, `/audit-fix-observability` (see "How fixes work").
