@@ -178,7 +178,8 @@ two artifacts that travel into your project: the `audit` skill (a `version:`
 field in its frontmatter plus a source footer) and the `AGENTS.md` digest
 (footer). Installed copies therefore always say what version they are and
 where they come from — compare your stamp against this repo's `VERSION` to
-know whether you're outdated. Your agent can do it for you: "check whether
+know whether you're outdated. (No need to copy `VERSION` into your
+project — the stamps travel with the artifacts.) Your agent can do it for you: "check whether
 my audit-skills are up to date" gives it everything it needs.
 
 ## License
