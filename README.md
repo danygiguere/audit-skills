@@ -115,9 +115,8 @@ This repo's [`AGENTS.md`](AGENTS.md) is the one-page digest of all 29
 invariants. Copy its content into your project's `AGENTS.md` (append it if
 you already have one — never replace yours): merged there, it gives every
 agent ambient awareness of the invariants on every prompt; without it, the
-skills only activate when triggered. Its routing table points at
-`.agents/skills/audit/references/` — the standard install location — so
-there are no links to edit.
+skills only activate when triggered. Its routing table points at the
+installed skills folder.
 
 **Claude Code note:** Claude Code does not yet read `.agents/skills/`
 ([anthropics/claude-code#31005](https://github.com/anthropics/claude-code/issues/31005)).
