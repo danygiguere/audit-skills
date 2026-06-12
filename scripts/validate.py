@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """Package validator for audit-skills.
 
+Maintainer tooling only — NOT part of what users install. Consumers of this
+package copy the `.agents/` folder (pure markdown; nothing executes); this
+script exists so maintainers and CI can verify the package before a release.
+Requires only the Python standard library.
+
 Checks, from the repo root:
   1. Every SKILL.md has valid frontmatter (name matches folder, spec limits).
   2. Every relative markdown link in the skills tree resolves.
