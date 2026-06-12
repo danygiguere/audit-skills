@@ -57,4 +57,5 @@ the rest.
 | Changes database schema                              | `references/operability/migration-safety.md` + `references/operability/schema-design.md`                                                                                               |
 | Does work proportional to input size                 | `references/operability/resource-limits.md`                                                                                                |
 | Runs async/await, event-loop, or coroutine code      | `references/operability/blocking-io-async.md`                                                                                              |
+| Is meant to scale out / run as multiple replicas | `references/operability/statelessness.md` |
 | — Fixing confirmed findings                          | `references/remediation/authz-patterns.md`, `references/remediation/async-patterns.md`, `references/remediation/observability-patterns.md` |

@@ -70,6 +70,8 @@ read the matching file (map at the bottom) before doing an in-depth audit.
   sync I/O, sleeps, or CPU-heavy work on the loop; blocking work is offloaded and outbound calls have timeouts.
 - **Schema design** — relationships enforced by real foreign keys with deliberate ON DELETE; hot query paths backed
   by indexes; integrity rules (NOT NULL, unique, checks) live in the schema, not only in app validation.
+- **Statelessness** — in replicated apps, state lives in process memory or local disk only if losing it is harmless
+  and no peer replica needs it; sessions, counters, locks, uploads, and schedules live in shared stores.
 
 ## Deep checklists — what to read when
 
@@ -104,6 +106,7 @@ Read only the files matching what the code under audit does
 | Changes database schema                              | `operability/migration-safety.md` + `operability/schema-design.md`                                        |
 | Does work proportional to input size                 | `operability/resource-limits.md`                                                                          |
 | Runs async/await, event-loop, or coroutine code      | `operability/blocking-io-async.md`                                                                        |
+| Is meant to scale out / run as multiple replicas    | `operability/statelessness.md`                                                                            |
 | — Fixing confirmed findings                          | `remediation/authz-patterns.md`, `remediation/async-patterns.md`, `remediation/observability-patterns.md` |
 
 Do not manufacture findings for topics that do not apply (e.g., CSRF on a
