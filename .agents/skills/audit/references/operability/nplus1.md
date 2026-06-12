@@ -74,6 +74,21 @@ for order in orders:
     render(order, order.customer.name, totals[order.id])
 ```
 
+With no eager-loader available (raw SQL, micro-ORMs, query builders), the
+same result comes from the **two-query + in-memory grouping** pattern —
+fetch the parents, collect their IDs, fetch all children in one `IN` query,
+and group by foreign key in memory:
+
+```text
+users = db.query("SELECT * FROM users LIMIT 25")            # 1 query
+posts = db.query("SELECT * FROM posts
+                  WHERE user_id IN (?)", ids(users))        # 1 query
+posts_by_user = group_by(posts, post -> post.user_id)       # in memory,
+for user in users:                                          # no queries
+    user.posts = posts_by_user[user.id] or []
+# 2 queries total, regardless of how many users
+```
+
 The same fix shape applies to remote calls: collect the IDs, issue one batch
 request, then iterate over the in-memory result.
 
