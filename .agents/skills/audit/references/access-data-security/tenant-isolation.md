@@ -40,6 +40,9 @@ normalizes unscoped queries, which then get copied into tenant-facing paths.
 - Tenant identity taken from a request-controlled value (header, body,
   arbitrary subdomain) without verifying the principal belongs to that
   tenant.
+- Tenant scoping added to one query or handler but absent from sibling
+  paths touching the same table or cache — scope parity across peers is
+  part of the invariant.
 
 ## Concept glossary
 

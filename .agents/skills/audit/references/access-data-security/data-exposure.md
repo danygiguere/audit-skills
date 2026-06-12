@@ -33,6 +33,10 @@ and third-party tooling.
   return the same shape.
 - Validation or not-found errors echo internal identifiers, table or column
   names, or absolute filesystem paths.
+- A new field, enum value, or data class added without updating the
+  registries keyed on its kind — redaction sets, sanitizer field lists,
+  serializer allowlists; a new sensitive entity silently misses every
+  protection enumerated before it existed.
 
 ## Concept glossary
 

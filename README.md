@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
-![Audits: 28](https://img.shields.io/badge/audits-28-success)
+![Audits: 29](https://img.shields.io/badge/audits-29-success)
 ![Works with: Claude Code · Copilot · Cursor · Codex](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Copilot%20·%20Cursor%20·%20Codex-informational)
 
 Language- and framework-agnostic audit checklists for AI coding agents —
@@ -15,9 +15,9 @@ or an Express API — the agent supplies the framework-specific translation.
 
 ## What's inside
 
-- `.agents/skills/audit/DIGEST.md` — a one-page digest of all 28 invariants,
+- `.agents/skills/audit/DIGEST.md` — a one-page digest of all 29 invariants,
   designed to be merged into (or referenced from) your project's `AGENTS.md`.
-- `.agents/skills/audit/` — the router skill, with all 28 checklists and
+- `.agents/skills/audit/` — the router skill, with all 29 checklists and
   remediation patterns bundled under `references/` (four categories: access
   & data security, input/API, correctness, operability).
 - `.agents/skills/audit-*` — thin per-topic wrapper skills so each checklist
@@ -62,6 +62,7 @@ every matching checklist below. Each topic is also individually invocable
 | [`/audit-api-validation`](.agents/skills/audit/references/input-api-dependency/api-contract-validation.md) | Boundary validation — types, bounds, allowed fields, trusting client-computed values like prices or roles                     |
 | [`/audit-file-handling`](.agents/skills/audit/references/input-api-dependency/file-handling.md)            | Path traversal, unvalidated uploads, missing size limits, files served from the web root, zip-slip                            |
 | [`/audit-ssrf`](.agents/skills/audit/references/input-api-dependency/ssrf.md)                              | Server-side requests to user-influenced URLs — allowlists, private IP ranges, redirect re-validation; includes open redirects |
+| [`/audit-parser-differentials`](.agents/skills/audit/references/input-api-dependency/parser-differentials.md) | Inputs a validator accepts but the consumer reads differently — unanchored regexes, startswith allowlists, two URL parsers, validate-then-reparse |
 
 ### Correctness
 

@@ -11,10 +11,12 @@ description: Full security, correctness, and operability audit of code. Use when
 2. **Load** only the checklist files matching that behavior, from the map
    below.
 3. **Check** each invariant in the loaded files against the code.
-4. **Verify before reporting**: for every candidate finding, read the
-   surrounding code — middleware, base classes, decorators, callers — to
-   confirm the protection isn't applied elsewhere. Discard anything you
-   cannot confirm.
+4. **Verify before reporting**: load `references/methodology/verify.md`
+   and run every candidate through it — name the attacker and the victim,
+   hunt for existing mitigations in the surrounding code (middleware, base
+   classes, decorators, callers), and when auditing a diff, anchor each
+   finding to the lines that introduce or enable it. A candidate survives
+   only if you cannot refute it with cited evidence.
 5. **Report** each finding with: severity, `file:line`, the violated
    invariant, and a one-line fix direction. Say explicitly which checklists
    were applied and came back clean.
@@ -46,6 +48,7 @@ the rest.
 | Validates (or should validate) request input         | `references/input-api-dependency/api-contract-validation.md`                                                                               |
 | Accepts, stores, processes, or serves files          | `references/input-api-dependency/file-handling.md`                                                                                         |
 | Makes network requests to user-influenced URLs       | `references/input-api-dependency/ssrf.md`                                                                                                  |
+| Adds validators, regexes, allowlists, or parsing | `references/input-api-dependency/parser-differentials.md` |
 | Writes to multiple tables/stores/systems at once     | `references/correctness/atomicity.md`                                                                                                      |
 | Handles payments, webhooks, retries, emails          | `references/correctness/idempotency.md`                                                                                                    |
 | Runs jobs, scheduled tasks, or queue consumers       | `references/correctness/background-work.md`                                                                                                |
@@ -58,4 +61,5 @@ the rest.
 | Does work proportional to input size                 | `references/operability/resource-limits.md`                                                                                                |
 | Runs async/await, event-loop, or coroutine code      | `references/operability/blocking-io-async.md`                                                                                              |
 | Is meant to scale out / run as multiple replicas | `references/operability/statelessness.md` |
+| — Verifying candidate findings (step 4, always) | `references/methodology/verify.md` |
 | — Fixing confirmed findings                          | `references/remediation/authz-patterns.md`, `references/remediation/async-patterns.md`, `references/remediation/observability-patterns.md` |

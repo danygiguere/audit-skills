@@ -4,6 +4,6 @@ description: Insecure direct object reference checklist. Use when code fetches o
 ---
 
 Read `../audit/references/access-data-security/idor.md` and apply its checklist to the code the
-user specified (or the current diff if none was given). Verify each finding
-against surrounding code before reporting. Report findings with severity and
+user specified (or the current diff if none was given). Verify each candidate
+with `../audit/references/methodology/verify.md` before reporting. Report findings with severity and
 file:line references.

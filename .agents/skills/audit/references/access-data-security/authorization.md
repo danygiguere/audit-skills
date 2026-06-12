@@ -39,6 +39,14 @@ call site is silently open, and nothing fails loudly when one is missing.
   `owner_id` reachable through a generic update (mass assignment).
 - Horizontal checks missing while vertical ones exist: the role is verified
   but not that the target resource belongs to the caller.
+- A guard added to one branch, handler, or layer but not its siblings —
+  enumerate every peer path that touches the same resource (other branches,
+  early returns, error paths, sibling handlers); any without an equivalent
+  check is the finding.
+- The gate and the action disagree on the target: the check reads one
+  request field (the parent ID, the URL segment) while the operation picks
+  its target from another (a name or ID in the body) — the gate is
+  bypassable.
 
 ## Concept glossary
 

@@ -37,6 +37,9 @@ every consumer.
 - Secrets compiled or bundled into client-delivered code — mobile binaries,
   browser bundles, public build-time variables — where "private" key types
   are extractable by anyone.
+- A new credential or token type introduced without wiring it into the
+  existing rotation, revocation, and log-redaction lists — it silently
+  misses every protection keyed on the old set.
 
 ## Concept glossary
 

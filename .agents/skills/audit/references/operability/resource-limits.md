@@ -43,6 +43,10 @@ single client can exhaust a shared resource.
 - Expensive or authentication endpoints — login, password reset, report
   generation, exports, anything that fans out — with no rate limit, letting
   one client repeat the expensive thing arbitrarily fast.
+- A cap guarding the wrong point: size checked after the payload is fully
+  buffered, a per-iteration timeout where the total is unbounded, or limit
+  arithmetic that can underflow or overflow — the cap exists, the peak
+  allocation is unguarded.
 
 ## Concept glossary
 

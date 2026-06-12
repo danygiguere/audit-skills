@@ -41,6 +41,9 @@ and dynamic requirements (sorting, filtering, search) push code through it.
   sanitization.
 - NoSQL queries whose filter objects are built directly from request bodies,
   letting callers smuggle operators (`{"$ne": null}`-shaped values).
+- A function that builds a query, command, or path from input and returns
+  it instead of executing it — the sink lives in a caller; find the call
+  sites before concluding it is safe.
 
 ## Concept glossary
 

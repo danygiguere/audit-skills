@@ -41,6 +41,8 @@ read the matching file (map at the bottom) before doing an in-depth audit.
   location; served files cannot escape their root.
 - **SSRF** — server-side requests to user-influenced URLs validate the destination against an allowlist; redirect
   targets count as destinations.
+- **Parser differentials** — a gate must interpret input exactly as its consumer does: anchored matches, exact-host
+  allowlists, validate the parsed object and pass that object on — never validate raw input and re-parse it.
 
 ### Correctness
 
@@ -95,6 +97,7 @@ Read only the files matching what the code under audit does
 | Validates (or should validate) request input         | `input-api-dependency/api-contract-validation.md`                                                         |
 | Accepts, stores, processes, or serves files          | `input-api-dependency/file-handling.md`                                                                   |
 | Makes network requests to user-influenced URLs       | `input-api-dependency/ssrf.md`                                                                            |
+| Adds validators, regexes, allowlists, or parsing    | `input-api-dependency/parser-differentials.md`                                                            |
 | Writes to multiple tables/stores/systems at once     | `correctness/atomicity.md`                                                                                |
 | Handles payments, webhooks, retries, emails          | `correctness/idempotency.md`                                                                              |
 | Runs jobs, scheduled tasks, or queue consumers       | `correctness/background-work.md`                                                                          |
@@ -107,6 +110,7 @@ Read only the files matching what the code under audit does
 | Does work proportional to input size                 | `operability/resource-limits.md`                                                                          |
 | Runs async/await, event-loop, or coroutine code      | `operability/blocking-io-async.md`                                                                        |
 | Is meant to scale out / run as multiple replicas    | `operability/statelessness.md`                                                                            |
+| — Verifying candidate findings before reporting     | `methodology/verify.md`                                                                                   |
 | — Fixing confirmed findings                          | `remediation/authz-patterns.md`, `remediation/async-patterns.md`, `remediation/observability-patterns.md` |
 
 Do not manufacture findings for topics that do not apply (e.g., CSRF on a

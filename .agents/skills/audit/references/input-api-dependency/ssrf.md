@@ -42,6 +42,9 @@ saw. URL parsers and the fetcher can disagree about what the host even is.
   never pins the scheme to http/https.
 - The fetch response (body, status, timing) returned to the caller —
   turning blind SSRF into a full read primitive against internal services.
+- A function that constructs a URL from user input and returns it for a
+  caller to fetch — follow the returned value to the actual request site
+  before judging it safe.
 
 ## Concept glossary
 

@@ -4,6 +4,6 @@ description: Authentication and session audit checklist. Use when reviewing logi
 ---
 
 Read `../audit/references/access-data-security/authn-session.md` and apply its checklist to the code the
-user specified (or the current diff if none was given). Verify each finding
-against surrounding code before reporting. Report findings with severity and
+user specified (or the current diff if none was given). Verify each candidate
+with `../audit/references/methodology/verify.md` before reporting. Report findings with severity and
 file:line references.
