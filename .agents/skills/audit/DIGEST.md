@@ -54,6 +54,8 @@ read the matching file (map at the bottom) before doing an in-depth audit.
   backing it.
 - **Exception handling** — errors are handled or propagated, never swallowed; catches are narrow, causes preserved,
   resources released; HTTP boundaries return the status the condition means (404/401/403/422/409, never 200-with-error).
+- **Discarded async work** — every promise, future, task, or publisher is awaited, returned, composed, or
+  deliberately detached with error handling; a cold producer that is never subscribed silently never runs.
 
 ### Operability
 
@@ -96,6 +98,7 @@ Read only the files matching what the code under audit does
 | Runs jobs, scheduled tasks, or queue consumers       | `correctness/background-work.md`                                                                          |
 | Shares mutable state, caches, counters               | `correctness/state-management.md`                                                                         |
 | Catches/throws errors, maps errors to HTTP statuses  | `correctness/exception-handling.md`                                                                       |
+| Creates promises, futures, tasks, or publishers     | `correctness/discarded-async.md`                                                                          |
 | Loads related data inside a loop over a collection   | `operability/nplus1.md`                                                                                   |
 | Adds endpoints/jobs, handles errors                  | `operability/observability.md`                                                                            |
 | Changes database schema                              | `operability/migration-safety.md` + `operability/schema-design.md`                                        |

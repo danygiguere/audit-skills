@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
-![Audits: 26](https://img.shields.io/badge/audits-26-success)
+![Audits: 27](https://img.shields.io/badge/audits-27-success)
 ![Works with: Claude Code · Copilot · Cursor · Codex](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Copilot%20·%20Cursor%20·%20Codex-informational)
 
 Language- and framework-agnostic audit checklists for AI coding agents —
@@ -15,9 +15,9 @@ or an Express API — the agent supplies the framework-specific translation.
 
 ## What's inside
 
-- `.agents/skills/audit/DIGEST.md` — a one-page digest of all 26 invariants,
+- `.agents/skills/audit/DIGEST.md` — a one-page digest of all 27 invariants,
   designed to be merged into (or referenced from) your project's `AGENTS.md`.
-- `.agents/skills/audit/` — the router skill, with all 26 checklists and
+- `.agents/skills/audit/` — the router skill, with all 27 checklists and
   remediation patterns bundled under `references/` (four categories: access
   & data security, input/API, correctness, operability).
 - `.agents/skills/audit-*` — thin per-topic wrapper skills so each checklist
@@ -72,6 +72,7 @@ every matching checklist below. Each topic is also individually invocable
 | [`/audit-background-work`](.agents/skills/audit/references/correctness/background-work.md)       | Jobs and consumers — unbounded retries, poison messages, missing timeouts, duplicate or out-of-order delivery        |
 | [`/audit-state-management`](.agents/skills/audit/references/correctness/state-management.md)     | Race conditions — check-then-act on shared state without locks, atomic primitives, or constraints                    |
 | [`/audit-exception-handling`](.agents/skills/audit/references/correctness/exception-handling.md) | Swallowed errors, blanket catches, lost causes, missing cleanup, and wrong HTTP statuses (404 vs 403, 401, 422, 409) |
+| [`/audit-discarded-async`](.agents/skills/audit/references/correctness/discarded-async.md) | Fire-and-forget bugs — promises, futures, or reactive publishers created but never awaited, returned, or composed; bare subscribe; cold writes that silently never run |
 
 ### Operability
 
@@ -94,11 +95,15 @@ every matching checklist below. Each topic is also individually invocable
 
 ## Install
 
-**Option 1 — add-skill CLI (any Agent Skills tool):**
+**Option 1 — the [skills CLI](https://github.com/vercel-labs/skills) (any Agent Skills tool):**
 
 ```bash
-npx add-skill <this-repo-url>
+npx skills add danygiguere/audit-skills --all
 ```
+
+Run it in your project root; it installs into the right skills directory for
+your agent (Copilot, Claude Code, Cursor, Codex, and many more). Use
+`--list` to browse, or `--skill audit-idor` to cherry-pick.
 
 **Option 2 — Cursor:** install directly from the repo link
 (Cursor reads `.agents/skills/` natively).
