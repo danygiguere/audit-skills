@@ -40,6 +40,8 @@ work.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where production config lives                                                                                                                             |
 |--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `config/environments/production.rb`; `force_ssl`; `consider_all_requests_local`                                                                           |

@@ -45,6 +45,8 @@ saw. URL parsers and the fetcher can disagree about what the host even is.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where fetches and guards usually live                                                                                         |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `Net::HTTP`/Faraday calls on user URLs; ssrf_filter-style resolved-IP guards                                                  |

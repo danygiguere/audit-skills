@@ -50,6 +50,8 @@ new code and old schema, run together.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Migration tooling and safety levers                                                                                                    |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | ActiveRecord migrations; `strong_migrations` gem flags unsafe ops; `disable_ddl_transaction!` + `algorithm: :concurrently`             |

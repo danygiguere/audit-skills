@@ -47,6 +47,8 @@ original stack trace is gone.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where the discipline usually lives                                                                                                                |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `rescue StandardError` not `rescue Exception`; `ensure`; `rescue_from` at controller boundary                                                     |

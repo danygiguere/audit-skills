@@ -44,6 +44,8 @@ user staring at a spinner, so their failures have no natural witness.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where the signal usually comes from                                                                                           |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `Rails.logger` with tagged logging (request ID); Sentry/Honeybadger; ActiveJob `retry_on`/`discard_on` hooks                  |

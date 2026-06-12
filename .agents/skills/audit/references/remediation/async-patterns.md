@@ -113,6 +113,8 @@ becomes a silent data graveyard.
 
 ## Ecosystem glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Native form of these patterns                                                                                                                                                                |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `ActiveRecord::Base.transaction`; `after_commit`; `upsert`/`create_or_find_by`; `lock_version` optimistic locking; Sidekiq retries + dead set                                                |

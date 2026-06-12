@@ -42,6 +42,8 @@ loosens — encoding must not depend on input cleanliness.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Escaping defaults and raw sinks                                                                                                |
 |--------------|--------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | ERB escapes by default; `raw`, `.html_safe`, `<%==` bypass; `sanitize` for rich text                                           |

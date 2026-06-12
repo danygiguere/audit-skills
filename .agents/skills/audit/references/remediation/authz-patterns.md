@@ -87,6 +87,8 @@ endpoints cannot ship unchecked.
 
 ## Ecosystem glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Native form of these patterns                                                                                                                                 |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `current_user.resources.find(id)`; Pundit policies + `verify_authorized` for deny-by-default                                                                  |

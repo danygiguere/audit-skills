@@ -46,6 +46,8 @@ single client can exhaust a shared resource.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where the bounds usually live                                                                                                      |
 |--------------|------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `page`/`per_page` via Pagy/Kaminari with a max; Rack::Attack for rate limits; `Rack::Utils` body limits often left to nginx        |

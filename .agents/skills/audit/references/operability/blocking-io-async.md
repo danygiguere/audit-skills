@@ -44,6 +44,8 @@ blocked loop — the stall only appears under concurrency.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where the rule shows up                                                                                                                                          |
 |--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | threaded (Puma): blocking allowed but pool-bounded — timeouts matter; never block inside Async/Fiber schedulers                                                  |

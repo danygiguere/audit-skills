@@ -40,6 +40,8 @@ every consumer.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Idiomatic secret source                                                                                                         |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `Rails.application.credentials` (encrypted) or `ENV.fetch`; `filter_parameters`                                                 |

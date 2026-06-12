@@ -41,6 +41,8 @@ retry delay.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where the policy usually lives                                                                                                                                    |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `retry_on`/`discard_on` in ActiveJob; Sidekiq `sidekiq_options retry:`, dead set                                                                                  |

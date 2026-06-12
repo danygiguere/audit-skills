@@ -41,6 +41,8 @@ someone crafts a request by hand.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where the allowlist usually lives                                                                                                                  |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | strong parameters: `params.require(:user).permit(:name, :email)`; `permit!` is the smell                                                           |

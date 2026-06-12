@@ -43,6 +43,8 @@ normalizes unscoped queries, which then get copied into tenant-facing paths.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where scoping usually lives                                                                                                                       |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `acts_as_tenant`/`default_scope` + `Current.tenant`; escape hatch: `unscoped`                                                                     |

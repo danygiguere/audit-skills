@@ -98,6 +98,8 @@ work when patterns 1–3 exist to answer the why.
 
 ## Ecosystem glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Native form of these patterns                                                                                                                                        |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `Rails.logger` with `tagged`/semantic logger, `config.log_tags = [:request_id]`; ActiveSupport::Notifications + StatsD/Prometheus exporters; Sentry/Honeybadger gems |

@@ -40,6 +40,8 @@ incident.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where the controls usually live                                                                                                                                       |
 |--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `reset_session` before sign-in; Devise `:lockable`/`:recoverable` (hashed, expiring tokens)                                                                           |

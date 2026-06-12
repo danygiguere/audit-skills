@@ -39,6 +39,8 @@ only way to obtain one.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where the check usually lives                                                                                               |
 |--------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `current_user.posts.find(id)` vs `Post.find(id)`; Pundit/CanCanCan policies                                                 |

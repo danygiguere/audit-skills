@@ -58,6 +58,8 @@ confirmed finding. Fixes on large live tables must follow
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where the discipline usually lives                                                                                                                        |
 |--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `t.references :user, foreign_key: true` (index is default, FK is opt-in); `validates_uniqueness_of` without a unique index is the smell                   |

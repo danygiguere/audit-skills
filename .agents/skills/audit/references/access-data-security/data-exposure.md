@@ -36,6 +36,8 @@ and third-party tooling.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where field selection usually lives                                                                                             |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `as_json(only:)`, serializer classes/jbuilder vs raw `render json: model`; `filter_parameters` for logs                         |

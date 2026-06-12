@@ -41,6 +41,8 @@ concerns nobody owns in application code.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Safe-handling idiom                                                                                                                       |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | Active Storage (generated keys, off-root storage); `send_file` from fixed dirs                                                            |

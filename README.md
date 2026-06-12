@@ -31,6 +31,13 @@ or an Express API — the agent supplies the framework-specific translation.
 every matching checklist below. Each topic is also individually invocable
 (click through to read the checklist itself).
 
+> **Works with any language or framework.** Each checklist names eight
+> common ecosystems in its concept glossary (Rails, Laravel, Django, Spring,
+> Node, Vapor, .NET, Go) — those are recognition shortcuts, **not** a
+> support list. The invariants and detection smells are framework-free, so
+> the audits apply equally to Phoenix, FastAPI, Ktor, or your in-house
+> stack: the agent supplies the translation.
+
 ### Access & data security
 
 | Audit                                                                                                 | Checks for                                                                                                                    |
@@ -167,15 +174,6 @@ Either way, the flow is the same: **audit → confirmed findings → ask for the
 fix.** Fixes follow the same rules everywhere: the smallest change that
 restores the invariant, matching the surrounding code style, with a test
 demonstrating the fix — and never mixed with unrelated refactoring.
-
-## Contributing
-
-Each checklist's concept glossary covers eight ecosystems inline: Rails,
-Laravel, Django, Spring, Node/Express, Vapor, .NET, and Go. The inline
-tables are capped there to stay readable. To add support for another
-framework (FastAPI, Phoenix, Ktor, …), contribute a single per-ecosystem
-glossary file at `.agents/skills/audit/references/glossaries/<ecosystem>.md`
-mapping each audit topic to that framework's idioms — one file, one PR.
 
 ## License
 

@@ -39,6 +39,8 @@ the handler issues one query, but the rendering of each item triggers more.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Bulk-loading mechanism                                                                                                |
 |--------------|-----------------------------------------------------------------------------------------------------------------------|
 | Rails        | `includes`/`preload`/`eager_load`; `strict_loading` to surface lazy access                                            |

@@ -44,6 +44,8 @@ bypasses it.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where protection usually lives                                                                                                                 |
 |--------------|------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `protect_from_forgery` (default); risk: `skip_before_action :verify_authenticity_token`                                                        |

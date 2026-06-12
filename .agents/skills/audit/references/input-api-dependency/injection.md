@@ -44,6 +44,8 @@ and dynamic requirements (sorting, filtering, search) push code through it.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Safe primitive vs the trap                                                                                                     |
 |--------------|--------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `where("x = ?", v)` vs `where("x = #{v}")`; `system("cmd", arg)` vs backticks                                                  |

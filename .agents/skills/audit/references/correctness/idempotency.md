@@ -42,6 +42,8 @@ least once.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where dedupe usually lives                                                                                                               |
 |--------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `create_or_find_by` on a unique index; `Stripe-Idempotency-Key`; processed-event table                                                   |

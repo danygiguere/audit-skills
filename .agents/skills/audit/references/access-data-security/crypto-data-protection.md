@@ -35,6 +35,8 @@ then never move; comparison timing leaks are invisible without measuring.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Standard tools                                                                                                                                  |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | `has_secure_password` (bcrypt); `SecureRandom`; `ActiveSupport::SecurityUtils.secure_compare`; `ActiveRecord::Encryption`                       |

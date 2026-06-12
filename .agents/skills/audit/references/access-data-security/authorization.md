@@ -42,6 +42,8 @@ call site is silently open, and nothing fails loudly when one is missing.
 
 ## Concept glossary
 
+*Recognition vocabulary, not a support list — this checklist applies to any language or framework; these rows just name the concept in common ecosystems.*
+
 | Ecosystem    | Where the check usually lives                                                                                                                                                 |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rails        | Pundit `authorize`/`policy_scope` (+ `verify_authorized` for deny-by-default); CanCanCan                                                                                      |
