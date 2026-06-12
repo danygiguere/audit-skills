@@ -119,3 +119,9 @@ relative to the `audit` skill's `references/` directory (by default
 Do not manufacture findings for topics that do not apply (e.g., CSRF on a
 token-authenticated API). Verify every finding against surrounding code
 (middleware, base classes, callers) before reporting it.
+
+---
+
+*From [audit-skills](https://github.com/danygiguere/audit-skills) v0.1.0 —
+the digest and the audit skills are maintained there; compare with the
+repo's `VERSION` file to check whether your copy is outdated.*

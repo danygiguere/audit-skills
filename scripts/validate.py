@@ -115,12 +115,27 @@ def check_glossary_note() -> int:
     return count
 
 
+def check_version() -> str:
+    """VERSION is canonical; the stamps in the traveling artifacts must match."""
+    v = open("VERSION").read().strip()
+    router = open(os.path.join(BASE, "audit", "SKILL.md")).read()
+    m = re.search(r"^version: (.+)$", router, re.M)
+    if not m or m.group(1).strip() != v:
+        problems.append(f"version: audit/SKILL.md frontmatter does not match VERSION ({v})")
+    if f"v{v}" not in router:
+        problems.append(f"version: audit/SKILL.md footer missing v{v}")
+    if f"v{v}" not in open("AGENTS.md").read():
+        problems.append(f"version: AGENTS.md footer missing v{v}")
+    return v
+
+
 def main() -> int:
     skills = check_frontmatter()
     links = check_links()
     table_sets()
     noted = check_glossary_note()
-    print(f"skills: {skills}, links checked: {links}, "
+    version = check_version()
+    print(f"version: {version}, skills: {skills}, links checked: {links}, "
           f"checklist files with glossary note: {noted}")
     if problems:
         for p in problems:

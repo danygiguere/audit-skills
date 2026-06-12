@@ -1,5 +1,6 @@
 ---
 name: audit
+version: 0.1.0
 description: Full security, correctness, and operability audit of code. Use when reviewing a diff, endpoint, or feature for vulnerabilities or bugs without a specific topic in mind — security review, audit, code review for safety, "check this for issues".
 ---
 
@@ -63,3 +64,8 @@ the rest.
 | Is meant to scale out / run as multiple replicas | `references/operability/statelessness.md` |
 | — Verifying candidate findings (step 4, always) | `references/methodology/verify.md` |
 | — Fixing confirmed findings                          | `references/remediation/authz-patterns.md`, `references/remediation/async-patterns.md`, `references/remediation/observability-patterns.md` |
+
+---
+
+Source: [audit-skills](https://github.com/danygiguere/audit-skills) v0.1.0 —
+compare with the repo's `VERSION` file to check for updates.
