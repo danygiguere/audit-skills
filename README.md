@@ -15,8 +15,8 @@ or an Express API — the agent supplies the framework-specific translation.
 
 ## What's inside
 
-- `.agents/skills/audit/DIGEST.md` — a one-page digest of all 29 invariants,
-  designed to be merged into (or referenced from) your project's `AGENTS.md`.
+- `AGENTS.md` — a one-page digest of all 29 invariants; copy its content
+  into your project's `AGENTS.md` so every agent has it in context.
 - `.agents/skills/audit/` — the router skill, with all 29 checklists and
   remediation patterns bundled under `references/` (four categories: access
   & data security, input/API, correctness, operability).
@@ -111,18 +111,13 @@ cp -R /tmp/audit-skills/.agents your-project/
 
 ## Add to your AGENTS.md
 
-The digest gives every agent ambient awareness of the invariants on every
-prompt — without it, the skills only activate when triggered. Two levels:
-
-**Strongest — paste it in:** copy the contents of
-`.agents/skills/audit/DIGEST.md` into your project's `AGENTS.md`. The
-invariants are then literally in context on every prompt.
-
-**Leaner — point at it:** add one line to your `AGENTS.md`:
-
-```markdown
-Before reviewing, auditing, or writing code, apply the invariants in `.agents/skills/audit/DIGEST.md`.
-```
+This repo's [`AGENTS.md`](AGENTS.md) is the one-page digest of all 29
+invariants. Copy its content into your project's `AGENTS.md` (append it if
+you already have one — never replace yours): merged there, it gives every
+agent ambient awareness of the invariants on every prompt; without it, the
+skills only activate when triggered. Its routing table points at
+`.agents/skills/audit/references/`, so it works as-is once the `.agents`
+folder is installed.
 
 **Claude Code note:** Claude Code does not yet read `.agents/skills/`
 ([anthropics/claude-code#31005](https://github.com/anthropics/claude-code/issues/31005)).
