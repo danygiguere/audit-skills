@@ -1,8 +1,9 @@
 # Engineering audit digest
 
 Apply the invariants below to all code you review, audit, or generate.
-Detailed per-topic checklists live in `.agents/skills/audit/references/` —
-read the matching file (map at the bottom) before doing an in-depth audit.
+Detailed per-topic checklists live in the installed `audit` skill under
+`references/` — by default `.agents/skills/audit/references/`. Read the
+matching file (map at the bottom) before doing an in-depth audit.
 
 ## Invariants (always apply)
 
@@ -77,8 +78,10 @@ read the matching file (map at the bottom) before doing an in-depth audit.
 
 ## Deep checklists — what to read when
 
-Read only the files matching what the code under audit does
-(paths relative to repo root, under `.agents/skills/audit/references/`):
+Read only the files matching what the code under audit does. Paths are
+relative to the `audit` skill's `references/` directory (by default
+`.agents/skills/audit/references/`); if a path does not resolve, locate the
+`audit` skill folder in your skills directory and resolve from there:
 
 | The code…                                            | Read                                                                                                      |
 |------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
