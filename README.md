@@ -96,24 +96,17 @@ every matching checklist below. Each topic is also individually invocable
 
 ## Install
 
-**Option 1 — the [skills CLI](https://github.com/vercel-labs/skills) (any Agent Skills tool):**
+Copy the `.agents` folder into your project — that's the whole install
+(it's just markdown; nothing executes):
 
 ```bash
-npx skills add danygiguere/audit-skills --all
+git clone --depth 1 https://github.com/danygiguere/audit-skills /tmp/audit-skills
+cp -R /tmp/audit-skills/.agents your-project/
 ```
 
-Run it in your project root; it installs into the right skills directory for
-your agent (Copilot, Claude Code, Cursor, Codex, and many more). Use
-`--list` to browse, or `--skill audit-idor` to cherry-pick.
-
-**Option 2 — Cursor:** install directly from the repo link
-(Cursor reads `.agents/skills/` natively).
-
-**Option 3 — manual copy:**
-
-```bash
-cp -R .agents <your-project>/
-```
+**Cursor** can also install directly from the repo link, and if you use the
+[skills CLI](https://github.com/vercel-labs/skills):
+`npx skills add danygiguere/audit-skills --all`.
 
 ## Add to your AGENTS.md
 
