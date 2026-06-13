@@ -22,6 +22,9 @@ Checks, from the repo root:
      and the AGENTS.md digest has one invariant bullet per topic.
   8. VERSION is semver and every version stamp anywhere in the repo
      (vX.Y.Z mentions, `version:` frontmatter fields) matches it.
+  9. Remediation pointers are bidirectional: every checklist that cites a
+     remediation playbook is named in that playbook's Scope, and every topic
+     named in a Scope cites that playbook back.
 
 Run: python3 scripts/validate.py
 """
@@ -192,6 +195,54 @@ def check_counts() -> int:
     return topics
 
 
+def _section(text: str, header: str) -> str:
+    """Return the body of a '## Header' section, up to the next '## ' heading."""
+    m = re.search(rf"^{re.escape(header)}\s*$", text, re.M)
+    if not m:
+        return ""
+    rest = text[m.end():]
+    nxt = re.search(r"^## ", rest, re.M)
+    return rest[:nxt.start()] if nxt else rest
+
+
+def check_remediation_scope() -> None:
+    """Topic<->playbook pointers must be bidirectional: every checklist that
+    cites a remediation playbook is named in that playbook's Scope, and every
+    topic named in a Scope cites that playbook back. Convention until now —
+    the link resolving (check 2) does not prove the Scope lists it."""
+    all_topics = topic_files()
+    playbooks = {t for t in all_topics if t.startswith("remediation/")}
+    checklists = all_topics - playbooks
+
+    # checklist -> the playbooks it cites (any `../remediation/X.md` link)
+    cites: dict[str, set[str]] = {}
+    for rel in checklists:
+        text = open(os.path.join(REFS, rel)).read()
+        named = {f"remediation/{m}"
+                 for m in re.findall(r"`\.\./remediation/([\w.-]+\.md)`", text)}
+        for ghost in named - playbooks:
+            problems.append(f"remediation scope: {rel} cites missing playbook {ghost}")
+        cites[rel] = named & playbooks
+
+    # playbook -> the checklists named in its Scope section
+    scope: dict[str, set[str]] = {}
+    for pb in playbooks:
+        body = _section(open(os.path.join(REFS, pb)).read(), "## Scope")
+        scope[pb] = {m for m in re.findall(r"`\.\./([\w./-]+\.md)`", body)
+                     if m in checklists}
+
+    for rel, pbs in cites.items():
+        for pb in pbs:
+            if rel not in scope.get(pb, set()):
+                problems.append(f"remediation scope: {rel} cites {pb} but is "
+                                f"not named in its Scope section")
+    for pb, named in scope.items():
+        for rel in named:
+            if pb not in cites.get(rel, set()):
+                problems.append(f"remediation scope: {pb} Scope names {rel} but "
+                                f"{rel} does not cite {pb}")
+
+
 def check_version() -> str:
     """VERSION is canonical; every stamp anywhere in the repo must match it."""
     v = open("VERSION").read().strip()
@@ -225,6 +276,7 @@ def main() -> int:
     check_table_sync()
     noted = check_glossary_note()
     check_templates()
+    check_remediation_scope()
     wrappers = check_wrapper_coverage()
     topics = check_counts()
     version = check_version()
