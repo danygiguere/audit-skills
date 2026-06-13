@@ -97,11 +97,3 @@ handler rename_account(request):
   nothing in the schema enforces it — latent until a duplicate first appears.
 - A mutation reachable by unauthenticated or high-volume input rates one
   level higher: the fan-out is triggerable on demand, not just by accident.
-
-## Remediation
-
-Key writes on the primary key, or back the chosen column with a UNIQUE
-constraint so a single-row operation cannot fan out; assert the
-affected-row count when a write must touch exactly one row. See
-`../remediation/async-patterns.md` for transactional and conditional-update
-patterns.
