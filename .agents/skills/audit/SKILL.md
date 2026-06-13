@@ -1,6 +1,6 @@
 ---
 name: audit
-version: 0.1.0
+version: 0.2.0
 description: Full security, correctness, and operability audit of code. Use when reviewing a diff, endpoint, or feature for vulnerabilities or bugs without a specific topic in mind — security review, audit, code review for safety, "check this for issues".
 ---
 
@@ -59,6 +59,7 @@ the rest.
 | Handles payments, webhooks, retries, emails          | `references/correctness/idempotency.md`                                                                                                    |
 | Runs jobs, scheduled tasks, or queue consumers       | `references/correctness/background-work.md`                                                                                                |
 | Shares mutable state, caches, counters               | `references/correctness/state-management.md`                                                                                               |
+| Reads or writes assuming a query matches exactly one row | `references/correctness/cardinality.md`                                                                                               |
 | Catches/throws errors, maps errors to HTTP statuses  | `references/correctness/exception-handling.md`                                                                                             |
 | Creates promises, futures, tasks, or publishers | `references/correctness/discarded-async.md` |
 | Loads related data inside a loop over a collection   | `references/operability/nplus1.md`                                                                                                         |
@@ -72,5 +73,5 @@ the rest.
 
 ---
 
-Source: [audit-skills](https://github.com/danygiguere/audit-skills) v0.1.0 —
+Source: [audit-skills](https://github.com/danygiguere/audit-skills) v0.2.0 —
 compare with the repo's `VERSION` file to check for updates.

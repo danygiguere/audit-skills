@@ -1,10 +1,10 @@
 # audit-skills
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version: v0.1.0](https://img.shields.io/badge/version-v0.1.0-blue)](https://github.com/danygiguere/audit-skills/tags)
+[![Version: v0.2.0](https://img.shields.io/badge/version-v0.2.0-blue)](https://github.com/danygiguere/audit-skills/tags)
 [![Validate](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
-![Audits: 29](https://img.shields.io/badge/audits-29-success)
+![Audits: 30](https://img.shields.io/badge/audits-30-success)
 ![Works with: Claude Code · Copilot · Cursor · Codex](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Copilot%20·%20Cursor%20·%20Codex-informational)
 
 Language- and framework-agnostic audit checklists for AI coding agents —
@@ -17,9 +17,9 @@ or an Express API — the agent supplies the framework-specific translation.
 
 ## What's inside
 
-- `AGENTS.md` — a one-page digest of all 29 invariants; copy its content
+- `AGENTS.md` — a one-page digest of all 30 invariants; copy its content
   into your project's `AGENTS.md` so every agent has it in context.
-- `.agents/skills/audit/` — the router skill, with all 29 checklists and
+- `.agents/skills/audit/` — the router skill, with all 30 checklists and
   remediation patterns bundled under `references/` (four categories: access
   & data security, input/API, correctness, operability).
 - `.agents/skills/audit-*` — thin per-topic wrapper skills so each checklist
@@ -76,6 +76,7 @@ every matching checklist below. Each topic is also individually invocable
 | [`/audit-state-management`](.agents/skills/audit/references/correctness/state-management.md)     | Race conditions — check-then-act on shared state without locks, atomic primitives, or constraints                    |
 | [`/audit-exception-handling`](.agents/skills/audit/references/correctness/exception-handling.md) | Swallowed errors, blanket catches, lost causes, missing cleanup, and wrong HTTP statuses (404 vs 403, 401, 422, 409) |
 | [`/audit-discarded-async`](.agents/skills/audit/references/correctness/discarded-async.md) | Fire-and-forget bugs — promises, futures, or reactive publishers created but never awaited, returned, or composed; bare subscribe; cold writes that silently never run |
+| [`/audit-cardinality`](.agents/skills/audit/references/correctness/cardinality.md) | Operations assuming a query matches one row — UPDATE/DELETE on a non-unique column fanning out, findOne/.single() on non-unique fields, columns treated as unique without a DB constraint |
 
 ### Operability
 
@@ -113,7 +114,7 @@ cp -R /tmp/audit-skills/.agents your-project/
 
 ## Add to your AGENTS.md
 
-This repo's [`AGENTS.md`](AGENTS.md) is the one-page digest of all 29
+This repo's [`AGENTS.md`](AGENTS.md) is the one-page digest of all 30
 invariants. Copy its content into your project's `AGENTS.md` (append it if
 you already have one — never replace yours): merged there, it gives every
 agent ambient awareness of the invariants on every prompt; without it, the
