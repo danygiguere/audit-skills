@@ -55,6 +55,9 @@ matching file (map at the bottom) before doing an in-depth audit.
   out-of-order delivery.
 - **State management** — no check-then-act on shared state without a lock, atomic primitive, or database constraint
   backing it.
+- **Cardinality** — any operation that assumes a predicate matches exactly one row is backed by a uniqueness guarantee
+  (primary key or UNIQUE constraint); every UPDATE/DELETE is provably single-target or deliberately bounded, never
+  fanning out on a non-unique or missing WHERE clause.
 - **Exception handling** — errors are handled or propagated, never swallowed; catches are narrow, causes preserved,
   resources released; HTTP boundaries return the status the condition means (404/401/403/422/409, never 200-with-error).
 - **Discarded async work** — every promise, future, task, or publisher is awaited, returned, composed, or
@@ -105,6 +108,7 @@ relative to the `audit` skill's `references/` directory (by default
 | Handles payments, webhooks, retries, emails          | `correctness/idempotency.md`                                                                              |
 | Runs jobs, scheduled tasks, or queue consumers       | `correctness/background-work.md`                                                                          |
 | Shares mutable state, caches, counters               | `correctness/state-management.md`                                                                         |
+| Reads or writes assuming a query matches exactly one row | `correctness/cardinality.md`                                                                          |
 | Catches/throws errors, maps errors to HTTP statuses  | `correctness/exception-handling.md`                                                                       |
 | Creates promises, futures, tasks, or publishers     | `correctness/discarded-async.md`                                                                          |
 | Loads related data inside a loop over a collection   | `operability/nplus1.md`                                                                                   |
@@ -122,6 +126,6 @@ token-authenticated API). Verify every finding against surrounding code
 
 ---
 
-*From [audit-skills](https://github.com/danygiguere/audit-skills) v0.1.0 —
+*From [audit-skills](https://github.com/danygiguere/audit-skills) v0.2.0 —
 the digest and the audit skills are maintained there; compare with the
 repo's `VERSION` file to check whether your copy is outdated.*
