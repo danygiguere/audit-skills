@@ -1,6 +1,6 @@
 ---
 name: audit
-version: 0.2.1
+version: 0.2.2
 description: Full security, correctness, and operability audit of code. Use when reviewing a diff, endpoint, or feature for vulnerabilities or bugs without a specific topic in mind — security review, audit, code review for safety, "check this for issues".
 ---
 
