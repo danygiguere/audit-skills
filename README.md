@@ -15,6 +15,14 @@ Every checklist is written as **invariants and detection smells**, not
 framework APIs, so the same content audits a Rails app, a Spring service,
 or an Express API — the agent supplies the framework-specific translation.
 
+## Demo
+
+![/audit flags the IDOR, the SQL injection, and the writable is_admin field in a sample Flask handler, each with a severity and a fix](demo/audit-demo.gif)
+
+*`/audit` on a 20-line money handler — six bugs a static-analysis scanner
+can't see, because each takes reasoning about ownership, concurrency, and
+retries, not pattern-matching. Every one flagged, with severity and a fix.*
+
 ## What's inside
 
 - `AGENTS.md` — a one-page digest of all 30 invariants; copy its content
@@ -104,8 +112,7 @@ Copy the `.agents` folder into your project — that's the whole install
 (it's just markdown; nothing executes):
 
 ```bash
-git clone --depth 1 https://github.com/danygiguere/audit-skills /tmp/audit-skills
-cp -R /tmp/audit-skills/.agents your-project/
+git clone --depth 1 https://github.com/danygiguere/audit-skills /tmp/audit-skills && cp -R /tmp/audit-skills/.agents your-project/
 ```
 
 **Cursor** can also install directly from the repo link, and if you use the
