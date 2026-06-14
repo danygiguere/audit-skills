@@ -73,5 +73,5 @@ the rest.
 
 ---
 
-Source: [audit-skills](https://github.com/danygiguere/audit-skills) v0.2.1 —
+Source: [audit-skills](https://github.com/danygiguere/audit-skills) v0.2.2 —
 compare with the repo's `VERSION` file to check for updates.

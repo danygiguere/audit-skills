@@ -1,7 +1,7 @@
 # audit-skills
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version: v0.2.1](https://img.shields.io/badge/version-v0.2.1-blue)](https://github.com/danygiguere/audit-skills/tags)
+[![Version: v0.2.2](https://img.shields.io/badge/version-v0.2.2-blue)](https://github.com/danygiguere/audit-skills/tags)
 [![Validate](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
 ![Audits: 30](https://img.shields.io/badge/audits-30-success)
@@ -136,6 +136,32 @@ Bridge it with:
 mkdir -p .claude && ln -s ../.agents/skills .claude/skills
 echo '@AGENTS.md' > CLAUDE.md          # if you don't already have a CLAUDE.md
 ```
+
+## Alternative: bring your project here
+
+Instead of copying the skills into every project, you can clone
+`audit-skills` once and drop your projects inside the `projects/` folder —
+it is gitignored, so your code never shows up in `git status` and a
+`git pull` (or `git checkout vX.Y`) updates the skills without touching
+anything you put there.
+
+```bash
+git clone https://github.com/danygiguere/audit-skills
+# drop any project you want to audit inside projects/
+cp -R /path/to/myproject audit-skills/projects/myproject
+```
+
+Then audit from inside this repo:
+
+```
+/audit projects/myproject
+```
+
+To stay current: `git pull` — your projects are untouched.
+
+This is useful when you want to audit a repo you don't own or don't want
+to modify, or when you'd rather maintain one central copy of the skills
+instead of one per project.
 
 ## Use
 
