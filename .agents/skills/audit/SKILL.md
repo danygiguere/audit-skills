@@ -1,6 +1,6 @@
 ---
 name: audit
-version: 0.2.2
+version: 0.2.3
 description: Full security, correctness, and operability audit of code. Use when reviewing a diff, endpoint, or feature for vulnerabilities or bugs without a specific topic in mind — security review, audit, code review for safety, "check this for issues".
 ---
 
@@ -73,5 +73,5 @@ the rest.
 
 ---
 
-Source: [audit-skills](https://github.com/danygiguere/audit-skills) v0.2.2 —
+Source: [audit-skills](https://github.com/danygiguere/audit-skills) v0.2.3 —
 compare with the repo's `VERSION` file to check for updates.

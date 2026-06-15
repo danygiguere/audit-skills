@@ -1,7 +1,7 @@
 # audit-skills
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version: v0.2.2](https://img.shields.io/badge/version-v0.2.2-blue)](https://github.com/danygiguere/audit-skills/tags)
+[![Version: v0.2.3](https://img.shields.io/badge/version-v0.2.3-blue)](https://github.com/danygiguere/audit-skills/tags)
 [![Validate](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
 ![Audits: 30](https://img.shields.io/badge/audits-30-success)
