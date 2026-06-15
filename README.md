@@ -17,7 +17,7 @@ or an Express API — the agent supplies the framework-specific translation.
 
 ## Demo
 
-![/audit flags the IDOR, the SQL injection, and the writable is_admin field in a sample Flask handler, each with a severity and a fix](https://audit-skills-assets.s3.ca-central-1.amazonaws.com/demo/audit-demo.gif)
+![/audit flags the IDOR, the SQL injection, and the writable is_admin field in a sample Flask handler, each with a severity and a fix](https://audit-skills-assets.s3.ca-central-1.amazonaws.com/demo/audit-demo.gif?v=2)
 
 *`/audit` on a 20-line money handler — six bugs a static-analysis scanner
 can't see, because each takes reasoning about ownership, concurrency, and
