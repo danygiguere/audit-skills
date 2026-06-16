@@ -5,7 +5,3 @@
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
-
-# Local projects — drop your own codebases here; ignored so pulls stay clean
-/projects/*
-!/projects/.gitkeep

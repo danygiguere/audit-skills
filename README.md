@@ -277,32 +277,6 @@ mkdir -p .claude && ln -s ../.agents/skills .claude/skills
 echo '@AGENTS.md' > CLAUDE.md          # if you don't already have a CLAUDE.md
 ```
 
-## Alternative: bring your project here
-
-Instead of copying the skills into every project, you can clone
-`audit-skills` once and drop your projects inside the `projects/` folder —
-it is gitignored, so your code never shows up in `git status` and a
-`git pull` (or `git checkout vX.Y`) updates the skills without touching
-anything you put there.
-
-```bash
-git clone https://github.com/danygiguere/audit-skills
-# drop any project you want to audit inside projects/
-cp -R /path/to/myproject audit-skills/projects/myproject
-```
-
-Then audit from inside this repo:
-
-```
-/audit projects/myproject
-```
-
-To stay current: `git pull` — your projects are untouched.
-
-This is useful when you want to audit a repo you don't own or don't want
-to modify, or when you'd rather maintain one central copy of the skills
-instead of one per project.
-
 ## Use
 
 - **Automatic** — ask your agent to "review this endpoint" / "audit this
