@@ -15,6 +15,13 @@ Every checklist is written as **invariants and detection smells**, not
 framework APIs, so the same content audits a Rails app, a Spring service,
 or an Express API — the agent supplies the framework-specific translation.
 
+> **Works with any language or framework.** Each checklist names eight
+> common ecosystems in its concept glossary (Rails, Laravel, Django, Spring,
+> Node, Vapor, .NET, Go) — those are recognition shortcuts, **not** a
+> support list. The invariants and detection smells are framework-free, so
+> the audits apply equally to Phoenix, FastAPI, Ktor, or your in-house
+> stack: the agent supplies the translation.
+
 ## Demo
 
 ![/audit flags the IDOR, the SQL injection, and the writable is_admin field in a sample Flask handler, each with a severity and a fix](https://audit-skills-assets.s3.ca-central-1.amazonaws.com/demo/audit-demo.gif?v=2)
@@ -22,6 +29,146 @@ or an Express API — the agent supplies the framework-specific translation.
 *`/audit` on a 20-line money handler — six bugs a static-analysis scanner
 can't see, because each takes reasoning about ownership, concurrency, and
 retries, not pattern-matching. Every one flagged, with severity and a fix.*
+
+### Worked example
+
+Running `/audit` on a ~40-line Spring `OrderController` turns up **9
+findings** — 2 Critical, 5 High, 2 Low — spanning IDOR, mass assignment,
+price forgery, a stock race, a non-atomic charge, missing idempotency, and
+an N+1. None are pattern-matchable; each needs reasoning about ownership,
+concurrency, or retries.
+
+<details>
+<summary>The code under audit — <code>OrderController.java</code></summary>
+
+```java
+@RestController
+@RequestMapping("/api/orders")
+public class OrderController {
+
+    private final OrderRepository orders;
+    private final ProductRepository products;
+    private final PaymentGateway gateway;
+    private final CurrentUser currentUser;
+
+    public OrderController(OrderRepository orders, ProductRepository products,
+                           PaymentGateway gateway, CurrentUser currentUser) {
+        this.orders = orders;
+        this.products = products;
+        this.gateway = gateway;
+        this.currentUser = currentUser;
+    }
+
+    @GetMapping("/{orderId}")
+    public Order getOrder(@PathVariable Long orderId) {
+        return orders.findById(orderId).orElseThrow();
+    }
+
+    @GetMapping
+    public List<OrderView> listOrders() {
+        List<Order> mine = orders.findByUserId(currentUser.id());
+        List<OrderView> views = new ArrayList<>();
+        for (Order order : mine) {
+            List<String> names = new ArrayList<>();
+            for (OrderLine line : order.getLines()) {
+                Product p = products.findById(line.getProductId()).orElseThrow();
+                names.add(p.getName());
+            }
+            views.add(new OrderView(order.getId(), order.getTotal(), names));
+        }
+        return views;
+    }
+
+    @PostMapping("/checkout")
+    public Order checkout(@RequestBody Order order) {
+        BigDecimal total = BigDecimal.ZERO;
+        for (OrderLine line : order.getLines()) {
+            total = total.add(line.getUnitPrice().multiply(BigDecimal.valueOf(line.getQuantity())));
+        }
+        order.setTotal(total.subtract(order.getDiscount()));
+        order.setStatus("PAID");
+        return orders.save(order);
+    }
+
+    @PostMapping
+    public Order placeOrder(@RequestBody PlaceOrderRequest req) {
+        Product product = products.findById(req.productId()).orElseThrow();
+
+        if (product.getStock() >= req.quantity()) {
+            product.setStock(product.getStock() - req.quantity());
+            products.save(product);
+
+            BigDecimal amount = product.getPrice().multiply(BigDecimal.valueOf(req.quantity()));
+            gateway.charge(req.card(), amount);
+
+            Order order = new Order();
+            order.setUserId(currentUser.id());
+            order.setTotal(amount);
+            order.setStatus("PAID");
+            return orders.save(order);
+        }
+        throw new IllegalStateException("Out of stock");
+    }
+
+    @PostMapping("/{orderId}/pay")
+    public ResponseEntity<String> pay(@PathVariable Long orderId, @RequestBody CardDetails card) {
+        Order order = orders.findById(orderId).orElseThrow();
+        gateway.charge(card, order.getTotal());
+        order.setStatus("PAID");
+        orders.save(order);
+        return ResponseEntity.ok("charged");
+    }
+}
+```
+
+</details>
+
+<details>
+<summary>What <code>/audit</code> reported — 9 findings</summary>
+
+**Critical**
+
+**1. Mass assignment + price forgery + free "PAID" orders — `checkout` (lines 45–54)**
+`@RequestBody Order order` binds the whole entity, and the total is computed from **client-supplied** `unitPrice`, `quantity`, and `discount`. An attacker sends any `unitPrice`/`discount` they like — including values that make `total` zero or negative — then the handler stamps `status="PAID"` **without ever charging the gateway**. The bound `userId`/`id` also let the order be attributed to anyone (ownership repoint).
+*Invariant:* mass assignment (allowlist) + authorization. *Fix:* decode a DTO with only `{productId, quantity}`; compute price from `Product.getPrice()` server-side; set `userId = currentUser.id()`; never trust client price/discount/status.
+
+**2. IDOR — pay any order, charge against its total — `pay` (lines 76–83)**
+`orders.findById(orderId)` with no ownership check, then `gateway.charge(card, order.getTotal())` and `setStatus("PAID")`. Any authenticated user supplies any `orderId` and mutates another principal's order. `orderId` is a sequential `Long`, so targets are enumerable.
+*Invariant:* IDOR (write access to other principals' data). *Fix:* `orders.findByIdAndUserId(orderId, currentUser.id())`; treat absence as 404.
+
+**High**
+
+**3. IDOR — read any order — `getOrder` (lines 25–28)**
+`orders.findById(orderId).orElseThrow()` returns any order to any caller, no ownership scope. Sequential IDs make it enumerable; returns the raw `Order` entity (data over-exposure too).
+*Fix:* scope the lookup by `currentUser.id()`; return a view DTO, not the entity.
+
+**4. Lost update / oversold stock (check-then-act race) — `placeOrder` (lines 60–62)**
+`if (stock >= qty)` then `setStock(stock - qty)` then `save` — two concurrent requests both pass the check and oversell. No lock, version, or atomic decrement.
+*Invariant:* state management. *Fix:* atomic conditional update (`UPDATE products SET stock = stock - ? WHERE id = ? AND stock >= ?`, check rows affected) or `@Lock(PESSIMISTIC_WRITE)`.
+
+**5. Non-atomic stock + charge + order — `placeOrder` (lines 61–71)**
+Three steps with no transaction and an external call in the middle: stock saved → `gateway.charge` → order saved. If the charge throws, stock is already gone with no order; if `orders.save` fails after a successful charge, the customer is charged with no order.
+*Invariant:* atomicity. *Fix:* persist DB writes in one `@Transactional` unit; charge after commit (or with a compensating refund on failure).
+
+**6. Double charge on retry/double-submit (no idempotency) — `placeOrder` (line 65) and `pay` (line 79)**
+Both call `gateway.charge` with no idempotency key and no processed-state guard. A client retry, double-click, or proxy replay charges twice (and in `placeOrder`, decrements stock twice). `pay` also re-charges an already-`PAID` order — there's no `status != "PAID"` guard.
+*Invariant:* idempotency. *Fix:* pass a Stripe-style idempotency key; in `pay`, no-op (return 200) if already `PAID`.
+
+**7. Missing input validation enables negative amounts — `placeOrder` / `checkout`**
+No bounds on `quantity`. A negative `quantity` in `placeOrder` passes `stock >= qty`, *increases* stock (`stock - (−n)`), and charges a **negative** amount (effectively a refund to the attacker's card).
+*Invariant:* API contract & validation. *Fix:* `@Valid` with `@Positive` on quantity; reject non-positive amounts before charging.
+
+**Low**
+
+**8. `orElseThrow()` → 500 instead of 404 — lines 27, 37, 58, 78**
+A missing order/product raises `NoSuchElementException`, surfacing as a 500 rather than 404.
+*Invariant:* exception handling (status mapping). *Fix:* `orElseThrow(() -> new ResponseStatusException(NOT_FOUND))`.
+
+**9. N+1 query — `listOrders` (lines 34–39)**
+`products.findById` runs once per order line, inside a loop over the user's orders — N×M queries.
+*Invariant:* N+1. *Fix:* collect all `productId`s and `findAllById` once, or join in the repository query.
+
+</details>
 
 ## What's inside
 
@@ -40,13 +187,6 @@ retries, not pattern-matching. Every one flagged, with severity and a fix.*
 `/audit` runs the full audit — it identifies what the code does and applies
 every matching checklist below. Each topic is also individually invocable
 (click through to read the checklist itself).
-
-> **Works with any language or framework.** Each checklist names eight
-> common ecosystems in its concept glossary (Rails, Laravel, Django, Spring,
-> Node, Vapor, .NET, Go) — those are recognition shortcuts, **not** a
-> support list. The invariants and detection smells are framework-free, so
-> the audits apply equally to Phoenix, FastAPI, Ktor, or your in-house
-> stack: the agent supplies the translation.
 
 ### Access & data security
 
