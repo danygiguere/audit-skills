@@ -1,6 +1,6 @@
 ---
 name: audit
-version: 0.2.4
+version: 0.2.5
 description: Full security, correctness, and operability audit of code. Use when reviewing a diff, endpoint, or feature for vulnerabilities or bugs without a specific topic in mind — security review, audit, code review for safety, "check this for issues".
 ---
 
@@ -60,6 +60,7 @@ the rest.
 | Runs jobs, scheduled tasks, or queue consumers       | `references/correctness/background-work.md`                                                                                                |
 | Shares mutable state, caches, counters               | `references/correctness/state-management.md`                                                                                               |
 | Reads or writes assuming a query matches exactly one row | `references/correctness/cardinality.md`                                                                                               |
+| Computes money, totals, taxes, splits, or rounding   | `references/correctness/numeric-precision.md`                                                                                              |
 | Catches/throws errors, maps errors to HTTP statuses  | `references/correctness/exception-handling.md`                                                                                             |
 | Creates promises, futures, tasks, or publishers | `references/correctness/discarded-async.md` |
 | Loads related data inside a loop over a collection   | `references/operability/nplus1.md`                                                                                                         |
@@ -68,10 +69,11 @@ the rest.
 | Does work proportional to input size                 | `references/operability/resource-limits.md`                                                                                                |
 | Runs async/await, event-loop, or coroutine code      | `references/operability/blocking-io-async.md`                                                                                              |
 | Is meant to scale out / run as multiple replicas | `references/operability/statelessness.md` |
+| Caches values, responses, or computed results        | `references/operability/caching.md`                                                                                                        |
 | — Verifying candidate findings (step 4, always) | `references/methodology/verify.md` |
 | — Fixing confirmed findings                          | `references/remediation/authz-patterns.md`, `references/remediation/async-patterns.md`, `references/remediation/observability-patterns.md` |
 
 ---
 
-Source: [audit-skills](https://github.com/danygiguere/audit-skills) v0.2.4 —
+Source: [audit-skills](https://github.com/danygiguere/audit-skills) v0.2.5 —
 compare with the repo's `VERSION` file to check for updates.
