@@ -44,6 +44,11 @@ and dynamic requirements (sorting, filtering, search) push code through it.
 - A function that builds a query, command, or path from input and returns
   it instead of executing it — the sink lives in a caller; find the call
   sites before concluding it is safe.
+- Untrusted bytes handed to a native deserializer (`pickle.loads`, Java
+  `readObject`, PHP `unserialize`, .NET `BinaryFormatter`, Ruby `Marshal.load`,
+  `yaml.load` without a safe loader) — deserialization of attacker-controlled
+  data is a code-execution sink, so feed it only formats that cannot carry
+  object/gadget payloads (parse plain JSON into a typed struct instead).
 
 ## Concept glossary
 

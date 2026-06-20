@@ -43,6 +43,11 @@ the raw string downstream to be parsed *again* by something else.
   duplicate keys, or comments.
 - Validate-then-reparse: the gate parses the raw input, then passes the
   **raw input** on, and the consumer parses it again.
+- An XML/SVG/SOAP/Office-document parser left at defaults that still resolves
+  a `DOCTYPE` or external entity (`<!ENTITY … SYSTEM …>`) — the gate sees
+  well-formed XML while the parser reads a local file or internal URL (XXE);
+  disable DOCTYPE and external-entity resolution on the parser rather than
+  trying to filter the input.
 
 ## Concept glossary
 

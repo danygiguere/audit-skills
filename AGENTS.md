@@ -62,6 +62,8 @@ matching file (map at the bottom) before doing an in-depth audit.
   resources released; HTTP boundaries return the status the condition means (404/401/403/422/409, never 200-with-error).
 - **Discarded async work** — every promise, future, task, or publisher is awaited, returned, composed, or
   deliberately detached with error handling; a cold producer that is never subscribed silently never runs.
+- **Numeric & money precision** — money and exact quantities use decimal or integer minor units, never binary float;
+  rounding happens once with an explicit mode; division remainders, overflow, and unit/currency mismatches are handled.
 
 ### Operability
 
@@ -78,6 +80,8 @@ matching file (map at the bottom) before doing an in-depth audit.
   by indexes; integrity rules (NOT NULL, unique, checks) live in the schema, not only in app validation.
 - **Statelessness** — in replicated apps, state lives in process memory or local disk only if losing it is harmless
   and no peer replica needs it; sessions, counters, locks, uploads, and schedules live in shared stores.
+- **Caching** — cache keys include every dimension the value varies on (principal, tenant, locale); entries are
+  invalidated when their source changes; misses don't stampede the origin; per-user data never lands in a shared or CDN cache.
 
 ## Deep checklists — what to read when
 
@@ -109,6 +113,7 @@ relative to the `audit` skill's `references/` directory (by default
 | Runs jobs, scheduled tasks, or queue consumers       | `correctness/background-work.md`                                                                          |
 | Shares mutable state, caches, counters               | `correctness/state-management.md`                                                                         |
 | Reads or writes assuming a query matches exactly one row | `correctness/cardinality.md`                                                                          |
+| Computes money, totals, taxes, splits, or rounding   | `correctness/numeric-precision.md`                                                                        |
 | Catches/throws errors, maps errors to HTTP statuses  | `correctness/exception-handling.md`                                                                       |
 | Creates promises, futures, tasks, or publishers     | `correctness/discarded-async.md`                                                                          |
 | Loads related data inside a loop over a collection   | `operability/nplus1.md`                                                                                   |
@@ -117,6 +122,7 @@ relative to the `audit` skill's `references/` directory (by default
 | Does work proportional to input size                 | `operability/resource-limits.md`                                                                          |
 | Runs async/await, event-loop, or coroutine code      | `operability/blocking-io-async.md`                                                                        |
 | Is meant to scale out / run as multiple replicas    | `operability/statelessness.md`                                                                            |
+| Caches values, responses, or computed results        | `operability/caching.md`                                                                                  |
 | — Verifying candidate findings before reporting     | `methodology/verify.md`                                                                                   |
 | — Fixing confirmed findings                          | `remediation/authz-patterns.md`, `remediation/async-patterns.md`, `remediation/observability-patterns.md` |
 
@@ -126,6 +132,6 @@ token-authenticated API). Verify every finding against surrounding code
 
 ---
 
-*From [audit-skills](https://github.com/danygiguere/audit-skills) v0.2.4 —
+*From [audit-skills](https://github.com/danygiguere/audit-skills) v0.2.5 —
 the digest and the audit skills are maintained there; compare with the
 repo's `VERSION` file to check whether your copy is outdated.*
