@@ -1,6 +1,6 @@
 ---
 name: audit
-version: 0.2.5
+version: 0.3.0
 description: Full security, correctness, and operability audit of code. Use when reviewing a diff, endpoint, or feature for vulnerabilities or bugs without a specific topic in mind — security review, audit, code review for safety, "check this for issues".
 ---
 
@@ -49,6 +49,7 @@ the rest.
 | Changes state with cookie/session-based auth         | `references/access-data-security/csrf.md`                                                                                                  |
 | Binds request payloads onto models/entities          | `references/access-data-security/mass-assignment.md`                                                                                       |
 | Builds queries/commands/templates/paths from input   | `references/input-api-dependency/injection.md`                                                                                             |
+| Deserializes untrusted bytes (sessions, caches, queues, uploads) | `references/input-api-dependency/deserialization.md`                                                                            |
 | Configures CORS, headers, cookies, debug, env        | `references/input-api-dependency/config.md`                                                                                                |
 | Touches API keys, credentials, tokens                | `references/input-api-dependency/secrets.md`                                                                                               |
 | Validates (or should validate) request input         | `references/input-api-dependency/api-contract-validation.md`                                                                               |
@@ -61,6 +62,7 @@ the rest.
 | Shares mutable state, caches, counters               | `references/correctness/state-management.md`                                                                                               |
 | Reads or writes assuming a query matches exactly one row | `references/correctness/cardinality.md`                                                                                               |
 | Computes money, totals, taxes, splits, or rounding   | `references/correctness/numeric-precision.md`                                                                                              |
+| Stores or computes timestamps, durations, timeouts, expiry | `references/correctness/time-clock.md`                                                                                                |
 | Catches/throws errors, maps errors to HTTP statuses  | `references/correctness/exception-handling.md`                                                                                             |
 | Creates promises, futures, tasks, or publishers | `references/correctness/discarded-async.md` |
 | Loads related data inside a loop over a collection   | `references/operability/nplus1.md`                                                                                                         |
@@ -75,5 +77,5 @@ the rest.
 
 ---
 
-Source: [audit-skills](https://github.com/danygiguere/audit-skills) v0.2.5 —
+Source: [audit-skills](https://github.com/danygiguere/audit-skills) v0.3.0 —
 compare with the repo's `VERSION` file to check for updates.

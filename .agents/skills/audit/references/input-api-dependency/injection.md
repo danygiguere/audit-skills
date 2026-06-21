@@ -46,9 +46,8 @@ and dynamic requirements (sorting, filtering, search) push code through it.
   sites before concluding it is safe.
 - Untrusted bytes handed to a native deserializer (`pickle.loads`, Java
   `readObject`, PHP `unserialize`, .NET `BinaryFormatter`, Ruby `Marshal.load`,
-  `yaml.load` without a safe loader) — deserialization of attacker-controlled
-  data is a code-execution sink, so feed it only formats that cannot carry
-  object/gadget payloads (parse plain JSON into a typed struct instead).
+  `yaml.load` without a safe loader) — a code-execution sink in its own right;
+  see `deserialization.md` for the full checklist.
 
 ## Concept glossary
 

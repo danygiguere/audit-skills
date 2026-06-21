@@ -1,10 +1,10 @@
 # audit-skills
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version: v0.2.5](https://img.shields.io/badge/version-v0.2.5-blue)](https://github.com/danygiguere/audit-skills/tags)
+[![Version: v0.3.0](https://img.shields.io/badge/version-v0.3.0-blue)](https://github.com/danygiguere/audit-skills/tags)
 [![Validate](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
-![Audits: 32](https://img.shields.io/badge/audits-32-success)
+![Audits: 34](https://img.shields.io/badge/audits-34-success)
 ![Works with: Claude Code · Copilot · Cursor · Codex](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Copilot%20·%20Cursor%20·%20Codex-informational)
 
 Language- and framework-agnostic audit checklists for AI coding agents —
@@ -24,9 +24,9 @@ or an Express API — the agent supplies the framework-specific translation.
 
 ## What's inside
 
-- `AGENTS.md` — a one-page digest of all 32 invariants; copy its content
+- `AGENTS.md` — a one-page digest of all 34 invariants; copy its content
   into your project's `AGENTS.md` so every agent has it in context.
-- `.agents/skills/audit/` — the router skill, with all 32 checklists and
+- `.agents/skills/audit/` — the router skill, with all 34 checklists and
   remediation patterns bundled under `references/` (four categories: access
   & data security, input/API, correctness, operability).
 - `.agents/skills/audit-*` — thin per-topic wrapper skills so each checklist
@@ -59,6 +59,7 @@ every matching checklist below. Each topic is also individually invocable
 | Audit                                                                                                      | Checks for                                                                                                                    |
 |------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | [`/audit-injection`](.agents/skills/audit/references/input-api-dependency/injection.md)                    | SQL/NoSQL, command, template, and path injection — input concatenated into queries, shells, or templates                      |
+| [`/audit-deserialization`](.agents/skills/audit/references/input-api-dependency/deserialization.md)        | Untrusted bytes deserialized into objects — native deserializers, polymorphic JSON/XML typing, unsafe YAML, missing type allowlists, XXE |
 | [`/audit-config`](.agents/skills/audit/references/input-api-dependency/config.md)                          | Insecure configuration — debug in production, permissive CORS, missing security headers, cookie flags                         |
 | [`/audit-secrets`](.agents/skills/audit/references/input-api-dependency/secrets.md)                        | Hardcoded credentials, secrets in logs or version control, overly broad keys, no rotation path                                |
 | [`/audit-api-validation`](.agents/skills/audit/references/input-api-dependency/api-contract-validation.md) | Boundary validation — types, bounds, allowed fields, trusting client-computed values like prices or roles                     |
@@ -78,6 +79,7 @@ every matching checklist below. Each topic is also individually invocable
 | [`/audit-discarded-async`](.agents/skills/audit/references/correctness/discarded-async.md) | Fire-and-forget bugs — promises, futures, or reactive publishers created but never awaited, returned, or composed; bare subscribe; cold writes that silently never run |
 | [`/audit-cardinality`](.agents/skills/audit/references/correctness/cardinality.md) | Operations assuming a query matches one row — UPDATE/DELETE on a non-unique column fanning out, findOne/.single() on non-unique fields, columns treated as unique without a DB constraint |
 | [`/audit-numeric-precision`](.agents/skills/audit/references/correctness/numeric-precision.md) | Money in float, ad hoc rounding, integer overflow, division remainders that don't sum back, unit/currency mismatches carried only by variable name |
+| [`/audit-time-clock`](.agents/skills/audit/references/correctness/time-clock.md) | Naive vs aware datetimes, server-local now(), wall-clock for elapsed time or expiry, DST and calendar math, cross-zone comparisons |
 
 ### Operability
 
@@ -115,7 +117,7 @@ git clone --depth 1 https://github.com/danygiguere/audit-skills /tmp/audit-skill
 
 ## Add to your AGENTS.md
 
-This repo's [`AGENTS.md`](AGENTS.md) is the one-page digest of all 32
+This repo's [`AGENTS.md`](AGENTS.md) is the one-page digest of all 34
 invariants. Copy its content into your project's `AGENTS.md` (append it if
 you already have one — never replace yours): merged there, it gives every
 agent ambient awareness of the invariants on every prompt; without it, the

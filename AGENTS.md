@@ -44,6 +44,8 @@ matching file (map at the bottom) before doing an in-depth audit.
   targets count as destinations.
 - **Parser differentials** — a gate must interpret input exactly as its consumer does: anchored matches, exact-host
   allowlists, validate the parsed object and pass that object on — never validate raw input and re-parse it.
+- **Insecure deserialization** — untrusted bytes are never fed to a deserializer that can instantiate arbitrary types
+  or run code; parse data-only formats into known target types, or restrict to a type allowlist plus a verified signature.
 
 ### Correctness
 
@@ -64,6 +66,8 @@ matching file (map at the bottom) before doing an in-depth audit.
   deliberately detached with error handling; a cold producer that is never subscribed silently never runs.
 - **Numeric & money precision** — money and exact quantities use decimal or integer minor units, never binary float;
   rounding happens once with an explicit mode; division remainders, overflow, and unit/currency mismatches are handled.
+- **Time, timezone & clock** — instants are stored in UTC and localized only at display; durations and expiry read a
+  monotonic clock, not wall time; aware and naive values are never mixed, and calendar math respects DST and month length.
 
 ### Operability
 
@@ -102,6 +106,7 @@ relative to the `audit` skill's `references/` directory (by default
 | Changes state with cookie/session-based auth         | `access-data-security/csrf.md`                                                                            |
 | Binds request payloads onto models/entities          | `access-data-security/mass-assignment.md`                                                                 |
 | Builds queries/commands/templates/paths from input   | `input-api-dependency/injection.md`                                                                       |
+| Deserializes untrusted bytes (sessions, caches, queues, uploads) | `input-api-dependency/deserialization.md`                                                      |
 | Configures CORS, headers, cookies, debug, env        | `input-api-dependency/config.md`                                                                          |
 | Touches API keys, credentials, tokens                | `input-api-dependency/secrets.md`                                                                         |
 | Validates (or should validate) request input         | `input-api-dependency/api-contract-validation.md`                                                         |
@@ -114,6 +119,7 @@ relative to the `audit` skill's `references/` directory (by default
 | Shares mutable state, caches, counters               | `correctness/state-management.md`                                                                         |
 | Reads or writes assuming a query matches exactly one row | `correctness/cardinality.md`                                                                          |
 | Computes money, totals, taxes, splits, or rounding   | `correctness/numeric-precision.md`                                                                        |
+| Stores or computes timestamps, durations, timeouts, expiry | `correctness/time-clock.md`                                                                         |
 | Catches/throws errors, maps errors to HTTP statuses  | `correctness/exception-handling.md`                                                                       |
 | Creates promises, futures, tasks, or publishers     | `correctness/discarded-async.md`                                                                          |
 | Loads related data inside a loop over a collection   | `operability/nplus1.md`                                                                                   |
@@ -132,6 +138,6 @@ token-authenticated API). Verify every finding against surrounding code
 
 ---
 
-*From [audit-skills](https://github.com/danygiguere/audit-skills) v0.2.5 —
+*From [audit-skills](https://github.com/danygiguere/audit-skills) v0.3.0 —
 the digest and the audit skills are maintained there; compare with the
 repo's `VERSION` file to check whether your copy is outdated.*
