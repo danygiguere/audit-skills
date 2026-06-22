@@ -10,6 +10,9 @@
 Language- and framework-agnostic audit checklists for AI coding agents —
 security, correctness, and operability. Works with Claude Code, GitHub
 Copilot, Cursor, Codex CLI, OpenCode, and any agent that can read files.
+The `audit-*` skills are read-only: they instruct the agent to read code
+and report findings; they never write outside the working tree, run shell
+commands, or make network calls.
 
 Every checklist is written as **invariants and detection smells**, not
 framework APIs, so the same content audits a Rails app, a Spring service,
@@ -104,11 +107,7 @@ every matching checklist below. Each topic is also individually invocable
 
 ## Install
 
-Copy the `.agents` folder into your project. The `audit-*` skills are
-**read-only**: they instruct the agent to read code and report findings;
-they never write outside the working tree, run shell commands, or make
-network calls. (`audit-fix-*` skills write to the working tree — see
-[Security posture](#security-posture).)
+Copy the `.agents` folder into your project:
 
 ```bash
 git clone --depth 1 --branch v0.3.0 \
@@ -181,22 +180,6 @@ Either way, the flow is the same: **audit → confirmed findings → ask for the
 fix.** Fixes follow the same rules everywhere: the smallest change that
 restores the invariant, matching the surrounding code style, with a test
 demonstrating the fix — and never mixed with unrelated refactoring.
-
-## Security posture
-
-| Tier | Skills | Agent behaviour |
-|------|--------|-----------------|
-| Read-only | `audit-*` | Reads source files, reports findings. Never writes outside the working tree, never runs shell commands, never makes network calls. |
-| Write — working tree | `audit-fix-*` | Modifies source files in the current working tree only. Same network/shell prohibition as above. |
-
-**What every skill in this package never does:**
-- Write to identity files (`AGENTS.md`, `MEMORY.md`, `SOUL.md`, `.claude/CLAUDE.md`).
-  (The README instructs *you* to paste the digest into your `AGENTS.md`; the skill itself never touches it.)
-- Execute shell commands or spawn processes.
-- Make outbound network requests.
-
-The `audit-*` skills implement the weakest-sufficient permission tier: read
-code, reason about it, report.
 
 ## Versioning
 
