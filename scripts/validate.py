@@ -2,8 +2,9 @@
 """Package validator for audit-skills.
 
 Maintainer tooling only — NOT part of what users install. Consumers of this
-package copy the `.agents/` folder (pure markdown; nothing executes); this
-script exists so maintainers and CI can verify the package before a release.
+package copy the `.agents/` folder (read-only skills; nothing executes outside
+the working tree); this script exists so maintainers and CI can verify the
+package before a release.
 Requires only the Python standard library.
 
 Checks, from the repo root:
@@ -25,6 +26,8 @@ Checks, from the repo root:
   9. Remediation pointers are bidirectional: every checklist that cites a
      remediation playbook is named in that playbook's Scope, and every topic
      named in a Scope cites that playbook back.
+ 10. No skill markdown contains zero-width/bidi/control Unicode, suspicious
+     encoded blobs, or instructions writing to agent identity files.
 
 Run: python3 scripts/validate.py
 """
@@ -270,6 +273,48 @@ def check_version() -> str:
     return v
 
 
+# Zero-width, bidi, and control characters that can hide injected instructions.
+_ZW = re.compile(r"[\u200b\u200c\u200d\ufeff\u2060\u2028\u2029]")
+_BIDI = re.compile(r"[\u202a-\u202e\u2066-\u2069\u200e\u200f]")
+_CTRL = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
+# Base64 or hex blobs long enough to carry encoded payloads.
+_B64 = re.compile(r"[A-Za-z0-9+/]{200,}={0,2}")
+_HEX = re.compile(r"\b[0-9a-fA-F]{200,}\b")
+# Write verbs next to identity-file names on the same line.
+_IDENTITY = re.compile(r"(AGENTS\.md|MEMORY\.md|SOUL\.md|\.claude/CLAUDE\.md)")
+_WRITE_VERB = re.compile(r"\b(write|append|overwrite|echo|tee)\b", re.I)
+
+
+def check_metadata_smuggling() -> int:
+    """Scan all distributed skill markdown for hidden chars, encoded blobs,
+    and any instruction that writes to agent identity files."""
+    count = 0
+    for root, _, files in os.walk(BASE):
+        for f in files:
+            if not f.endswith(".md"):
+                continue
+            p = os.path.join(root, f)
+            count += 1
+            text = open(p, encoding="utf-8", errors="replace").read()
+            if _ZW.search(text):
+                problems.append(f"smuggling: {p}: zero-width Unicode character")
+            if _BIDI.search(text):
+                problems.append(f"smuggling: {p}: bidirectional Unicode character")
+            if _CTRL.search(text):
+                problems.append(f"smuggling: {p}: unexpected control character")
+            if _B64.search(text):
+                problems.append(f"smuggling: {p}: suspicious base64 blob (≥200 chars)")
+            if _HEX.search(text):
+                problems.append(f"smuggling: {p}: suspicious hex blob (≥200 chars)")
+            for line in text.splitlines():
+                if _IDENTITY.search(line) and _WRITE_VERB.search(line):
+                    problems.append(
+                        f"smuggling: {p}: possible identity-file write instruction")
+                    break
+    return count
+
+
+
 def main() -> int:
     skills = check_frontmatter()
     links = check_links()
@@ -280,8 +325,10 @@ def main() -> int:
     wrappers = check_wrapper_coverage()
     topics = check_counts()
     version = check_version()
+    smuggling_count = check_metadata_smuggling()
     print(f"version: {version}, topics: {topics}, skills: {skills}, "
-          f"wrappers: {wrappers}, links checked: {links}, noted files: {noted}")
+          f"wrappers: {wrappers}, links checked: {links}, noted files: {noted}, "
+          f"smuggling scan: {smuggling_count} files")
     if problems:
         for p in problems:
             print(f"  - {p}")
