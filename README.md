@@ -104,11 +104,16 @@ every matching checklist below. Each topic is also individually invocable
 
 ## Install
 
-Copy the `.agents` folder into your project — that's the whole install
-(it's just markdown; nothing executes):
+Copy the `.agents` folder into your project. The `audit-*` skills are
+**read-only**: they instruct the agent to read code and report findings;
+they never write outside the working tree, run shell commands, or make
+network calls. (`audit-fix-*` skills write to the working tree — see
+[Security posture](#security-posture).)
 
 ```bash
-git clone --depth 1 https://github.com/danygiguere/audit-skills /tmp/audit-skills && cp -R /tmp/audit-skills/.agents your-project/
+git clone --depth 1 --branch v0.3.0 \
+  https://github.com/danygiguere/audit-skills /tmp/audit-skills \
+  && cp -R /tmp/audit-skills/.agents your-project/
 ```
 
 **Cursor** can also install directly from the repo link, and if you use the
@@ -176,6 +181,22 @@ Either way, the flow is the same: **audit → confirmed findings → ask for the
 fix.** Fixes follow the same rules everywhere: the smallest change that
 restores the invariant, matching the surrounding code style, with a test
 demonstrating the fix — and never mixed with unrelated refactoring.
+
+## Security posture
+
+| Tier | Skills | Agent behaviour |
+|------|--------|-----------------|
+| Read-only | `audit-*` | Reads source files, reports findings. Never writes outside the working tree, never runs shell commands, never makes network calls. |
+| Write — working tree | `audit-fix-*` | Modifies source files in the current working tree only. Same network/shell prohibition as above. |
+
+**What every skill in this package never does:**
+- Write to identity files (`AGENTS.md`, `MEMORY.md`, `SOUL.md`, `.claude/CLAUDE.md`).
+  (The README instructs *you* to paste the digest into your `AGENTS.md`; the skill itself never touches it.)
+- Execute shell commands or spawn processes.
+- Make outbound network requests.
+
+The `audit-*` skills implement the weakest-sufficient permission tier: read
+code, reason about it, report.
 
 ## Versioning
 
