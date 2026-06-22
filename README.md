@@ -11,8 +11,7 @@ Language- and framework-agnostic audit checklists for AI coding agents —
 security, correctness, and operability. Works with Claude Code, GitHub
 Copilot, Cursor, Codex CLI, OpenCode, and any agent that can read files.
 The `audit-*` skills are read-only: they instruct the agent to read code
-and report findings; they never write outside the working tree, run shell
-commands, or make network calls.
+and report findings; they never run shell commands, or make network calls.
 
 Every checklist is written as **invariants and detection smells**, not
 framework APIs, so the same content audits a Rails app, a Spring service,
