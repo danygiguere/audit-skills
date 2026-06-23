@@ -9,6 +9,13 @@ identically in content and time whether or not the account exists. Reset and
 remember-me tokens are unpredictable, single-use, expiring, and stored
 hashed; failed attempts are rate-limited.
 
+## Does not apply when
+
+- Authentication, sessions, and credential storage are fully delegated to an
+  external provider (a managed auth service or OAuth/OIDC/SAML IdP) and the
+  application holds no sessions, passwords, or reset/remember-me tokens of its
+  own.
+
 ## Why it happens
 
 Session fixation survives because "log the user in" mutates the existing
