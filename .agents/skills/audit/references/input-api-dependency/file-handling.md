@@ -8,6 +8,13 @@ stay inside the intended root. Uploads are constrained by content-verified
 type, size limits, and a storage location that is outside the web root and
 never executable.
 
+## Does not apply when
+
+- The application never accepts, stores, processes, or serves files — all
+  input and output is structured data.
+- Every filesystem path is a server-defined constant or config value with no
+  input-influenced component (filename, extension, or directory).
+
 ## Why it happens
 
 Joining a base directory with a request parameter looks safe because the
