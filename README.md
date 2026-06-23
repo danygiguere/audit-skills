@@ -1,7 +1,7 @@
 # audit-skills
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version: v0.3.0](https://img.shields.io/badge/version-v0.3.0-blue)](https://github.com/danygiguere/audit-skills/tags)
+[![Version: v0.3.1](https://img.shields.io/badge/version-v0.3.1-blue)](https://github.com/danygiguere/audit-skills/tags)
 [![Validate](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
 ![Audits: 34](https://img.shields.io/badge/audits-34-success)
@@ -107,7 +107,7 @@ every matching checklist below. Each topic is also individually invocable
 Copy the `.agents` folder into your project:
 
 ```bash
-git clone --depth 1 --branch v0.3.0 \
+git clone --depth 1 --branch v0.3.1 \
   https://github.com/danygiguere/audit-skills /tmp/audit-skills \
   && cp -R /tmp/audit-skills/.agents your-project/
 ```
