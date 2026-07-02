@@ -9,6 +9,15 @@ or explicitly ignored, never silently bound to internal state. Values the
 server can derive (prices, totals, roles, ownership) are computed
 server-side, never accepted from the client.
 
+## Does not apply when
+
+- The value never crosses a trust boundary: server-generated, from
+  configuration written by operators, or from another service inside the
+  boundary over an authenticated channel.
+- Validation demonstrably happens at an earlier layer and the handler
+  receives the already validated, typed object — cite where, and confirm
+  the handler uses that object rather than re-reading the raw input.
+
 ## Why it happens
 
 The client already validates, so server-side checks feel redundant — until

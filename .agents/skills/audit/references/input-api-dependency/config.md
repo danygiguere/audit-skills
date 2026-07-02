@@ -8,6 +8,15 @@ cookies marked Secure/HttpOnly/SameSite, and no default or example
 credentials live. Anything permissive must be an explicit, justified
 production decision — never an inherited dev convenience.
 
+## Does not apply when
+
+- The permissive setting is provably confined to development or test
+  environments — gated by build/environment configuration that production
+  cannot inherit, not by a flag someone must remember to flip.
+- The permissiveness is the documented product decision for a genuinely
+  public, credential-less surface (e.g. wildcard CORS on an anonymous,
+  read-only API that sets no cookies).
+
 ## Why it happens
 
 Configuration is written once in development, where permissive settings

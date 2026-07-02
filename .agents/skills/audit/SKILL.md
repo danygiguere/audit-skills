@@ -13,7 +13,9 @@ rather than picking a scope yourself.
 
 1. **Identify** what the code under audit does. Trace the data flow: what
    inputs arrive, what is looked up, what is written, what is rendered or
-   returned, what runs async.
+   returned, what runs async. If the target is larger than a diff — a
+   module, service, or whole repo — load `references/methodology/scope.md`
+   first and follow its inventory, ranking, and budget procedure.
 2. **Load** only the checklist files matching that behavior, from the map
    below.
 3. **Check** each invariant in the loaded files against the code.
@@ -23,7 +25,8 @@ rather than picking a scope yourself.
    classes, decorators, callers), and when auditing a diff, anchor each
    finding to the lines that introduce or enable it. A candidate survives
    only if you cannot refute it with cited evidence.
-5. **Report** each finding with: severity, `file:line`, the violated
+5. **Report** each finding with: severity (assigned per
+   `references/methodology/severity.md`), `file:line`, the violated
    invariant, and a one-line fix direction. Say explicitly which checklists
    were applied and came back clean.
 6. **Fix only on request**: when the user asks for remediation, load the
@@ -41,6 +44,7 @@ the rest.
 |------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | Gates actions by role, permission, or ownership      | `references/access-data-security/authorization.md`                                                                                         |
 | Handles login, logout, reset, tokens, sessions       | `references/access-data-security/authn-session.md`                                                                                         |
+| Verifies JWTs, API keys, signed URLs, or webhook signatures | `references/access-data-security/token-validation.md` |
 | Fetches/mutates a resource by an ID from the request | `references/access-data-security/idor.md` + `references/access-data-security/authorization.md`                                             |
 | Serializes models, formats errors, writes logs       | `references/access-data-security/data-exposure.md`                                                                                         |
 | Hashes, encrypts, generates or compares secrets      | `references/access-data-security/crypto-data-protection.md`                                                                                |
@@ -56,6 +60,7 @@ the rest.
 | Accepts, stores, processes, or serves files          | `references/input-api-dependency/file-handling.md`                                                                                         |
 | Makes network requests to user-influenced URLs       | `references/input-api-dependency/ssrf.md`                                                                                                  |
 | Adds validators, regexes, allowlists, or parsing | `references/input-api-dependency/parser-differentials.md` |
+| Adds or updates packages, lockfiles, or registries | `references/input-api-dependency/dependencies.md` |
 | Writes to multiple tables/stores/systems at once     | `references/correctness/atomicity.md`                                                                                                      |
 | Handles payments, webhooks, retries, emails          | `references/correctness/idempotency.md`                                                                                                    |
 | Runs jobs, scheduled tasks, or queue consumers       | `references/correctness/background-work.md`                                                                                                |
@@ -72,7 +77,9 @@ the rest.
 | Runs async/await, event-loop, or coroutine code      | `references/operability/blocking-io-async.md`                                                                                              |
 | Is meant to scale out / run as multiple replicas | `references/operability/statelessness.md` |
 | Caches values, responses, or computed results        | `references/operability/caching.md`                                                                                                        |
+| — Scoping a target larger than a diff (step 1) | `references/methodology/scope.md` |
 | — Verifying candidate findings (step 4, always) | `references/methodology/verify.md` |
+| — Rating finding severity (step 5, always) | `references/methodology/severity.md` |
 | — Fixing confirmed findings                          | `references/remediation/authz-patterns.md`, `references/remediation/async-patterns.md`, `references/remediation/observability-patterns.md` |
 
 ---

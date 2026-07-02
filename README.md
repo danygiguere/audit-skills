@@ -4,7 +4,7 @@
 [![Version: v0.3.1](https://img.shields.io/badge/version-v0.3.1-blue)](https://github.com/danygiguere/audit-skills/tags)
 [![Validate](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
-![Audits: 34](https://img.shields.io/badge/audits-34-success)
+![Audits: 36](https://img.shields.io/badge/audits-36-success)
 ![Works with: Claude Code · Copilot · Cursor · Codex](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Copilot%20·%20Cursor%20·%20Codex-informational)
 
 Language- and framework-agnostic audit checklists for AI coding agents —
@@ -24,11 +24,12 @@ or an Express API — the agent supplies the framework-specific translation.
 
 ## What's inside
 
-- `AGENTS.md` — a one-page digest of all 34 invariants; copy its content
+- `AGENTS.md` — a one-page digest of all 36 invariants; copy its content
   into your project's `AGENTS.md` so every agent has it in context.
-- `.agents/skills/audit/` — the router skill, with all 34 checklists and
+- `.agents/skills/audit/` — the router skill, with all 36 checklists and
   remediation patterns bundled under `references/` (four categories: access
-  & data security, input/API, correctness, operability).
+  & data security, input/API, correctness, operability), plus shared
+  methodology files (scoping, adversarial verification, severity rubric).
 - `.agents/skills/audit-*` — thin per-topic wrapper skills so each checklist
   is individually invocable (`/audit-idor`, `/audit-injection`,
   `/audit-fix-authz`, …). Everything this package installs starts with
@@ -46,6 +47,7 @@ every matching checklist below. Each topic is also individually invocable
 |-------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | [`/audit-authorization`](.agents/skills/audit/references/access-data-security/authorization.md)       | Server-side permission checks at the point of action — privilege escalation, UI-only gating, checks on read but not on mutate |
 | [`/audit-authn-session`](.agents/skills/audit/references/access-data-security/authn-session.md)       | Login, logout, and reset flows — session fixation, account enumeration, token expiry and single-use, remember-me storage      |
+| [`/audit-token-validation`](.agents/skills/audit/references/access-data-security/token-validation.md) | Inbound credential verification — JWT decode-without-verify, alg confusion, missing exp/aud/iss, kid/JWKS pitfalls, webhook HMACs and replay windows |
 | [`/audit-idor`](.agents/skills/audit/references/access-data-security/idor.md)                         | Resources fetched or mutated by a request-supplied ID without verifying the requester may touch them                          |
 | [`/audit-data-exposure`](.agents/skills/audit/references/access-data-security/data-exposure.md)       | Over-exposed responses, errors, and logs — whole-model serialization, stack traces, PII                                       |
 | [`/audit-crypto`](.agents/skills/audit/references/access-data-security/crypto-data-protection.md)     | Password hashing, token randomness, constant-time comparison, homemade crypto, key handling                                   |
@@ -66,6 +68,7 @@ every matching checklist below. Each topic is also individually invocable
 | [`/audit-file-handling`](.agents/skills/audit/references/input-api-dependency/file-handling.md)            | Path traversal, unvalidated uploads, missing size limits, files served from the web root, zip-slip                            |
 | [`/audit-ssrf`](.agents/skills/audit/references/input-api-dependency/ssrf.md)                              | Server-side requests to user-influenced URLs — allowlists, private IP ranges, redirect re-validation; includes open redirects |
 | [`/audit-parser-differentials`](.agents/skills/audit/references/input-api-dependency/parser-differentials.md) | Inputs a validator accepts but the consumer reads differently — unanchored regexes, startswith allowlists, two URL parsers, validate-then-reparse |
+| [`/audit-dependencies`](.agents/skills/audit/references/input-api-dependency/dependencies.md) | Supply chain — unpinned versions, missing lockfile updates, install scripts, typosquats, dependency confusion, abandoned or vulnerable packages |
 
 ### Correctness
 
@@ -118,7 +121,7 @@ git clone --depth 1 --branch v0.3.1 \
 
 ## Add to your AGENTS.md
 
-This repo's [`AGENTS.md`](AGENTS.md) is the one-page digest of all 34
+This repo's [`AGENTS.md`](AGENTS.md) is the one-page digest of all 36
 invariants. Copy its content into your project's `AGENTS.md` (append it if
 you already have one — never replace yours): merged there, it gives every
 agent ambient awareness of the invariants on every prompt; without it, the

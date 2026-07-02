@@ -9,6 +9,14 @@ established library in an authenticated mode, with keys loaded from
 configuration, never from source. Data whose compromise is itself a breach
 is encrypted at rest. Nothing is hand-rolled from primitives.
 
+## Does not apply when
+
+- The hash or randomness serves no security purpose — cache keys,
+  checksums against accidental corruption, dedupe, shard selection,
+  jitter — and no attacker gains anything from predicting or colliding it.
+- The values compared are not secrets (IDs, enum states), so timing leaks
+  reveal nothing.
+
 ## Why it happens
 
 The general-purpose primitives are the discoverable ones — `md5`, `sha1`,

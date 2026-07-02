@@ -39,9 +39,10 @@ BASE = ".agents/skills"
 REFS = os.path.join(BASE, "audit", "references")
 ECOSYSTEMS = ["Rails", "Laravel", "Django", "Spring", "Node/Express",
               "Vapor", ".NET", "Go"]
-REQUIRED_SECTIONS = ["## Invariant", "## Why it happens",
-                     "## Detection smells", "## Concept glossary",
-                     "## Example", "## Severity guidance"]
+REQUIRED_SECTIONS = ["## Invariant", "## Does not apply when",
+                     "## Why it happens", "## Detection smells",
+                     "## Concept glossary", "## Example",
+                     "## Severity guidance"]
 problems: list[str] = []
 
 

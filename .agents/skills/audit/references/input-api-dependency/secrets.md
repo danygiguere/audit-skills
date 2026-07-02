@@ -8,6 +8,14 @@ privilege the consumer needs, and replaceable without a code change. They
 never appear in source, version-control history, logs, error reports, or
 code delivered to clients.
 
+## Does not apply when
+
+- The value is designed to be public despite looking like a credential —
+  publishable client keys, OAuth client IDs, public DSNs — and grants no
+  privilege beyond what an anonymous client already has.
+- The value is an obvious placeholder in docs, tests, or examples
+  (`changeme`, `test-key-123`) that no real system accepts.
+
 ## Why it happens
 
 Hardcoding a key is the fastest way to make an integration work, and the

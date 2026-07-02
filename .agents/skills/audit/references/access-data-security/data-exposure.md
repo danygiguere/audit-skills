@@ -7,6 +7,14 @@ explicitly intended for that consumer. Serialization is an allowlist
 decision made per endpoint and per audience; "the UI doesn't display it" is
 not a control, because the wire carries whatever the server sends.
 
+## Does not apply when
+
+- Every field of the object is genuinely public — the same data any
+  anonymous visitor may read — so there is nothing to over-expose.
+- The consumer is explicitly entitled to full detail (a user exporting
+  their own record, an admin surface designed for it) — though stack
+  traces and internal identifiers still stay out.
+
 ## Why it happens
 
 Serializers default to everything — returning the model object is one line,

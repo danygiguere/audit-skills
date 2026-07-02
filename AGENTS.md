@@ -13,6 +13,9 @@ matching file (map at the bottom) before doing an in-depth audit.
   not only in the UI or routing layer.
 - **Authentication & sessions** — sessions are regenerated on login and invalidated on logout; credential and reset
   flows do not reveal whether an account exists.
+- **Token & webhook validation** — stateless credentials (JWTs, API keys, signed URLs, webhook signatures) are
+  cryptographically verified before any claim is trusted: algorithm pinned, exp/aud/iss validated, webhook HMACs
+  computed over the raw body within a bounded timestamp window.
 - **IDOR** — any resource looked up by an identifier from the request is verified as owned by or visible to the current
   principal; a valid ID is not authorization.
 - **Data exposure** — responses, errors, and logs contain only fields explicitly intended for the consumer; never whole
@@ -46,6 +49,8 @@ matching file (map at the bottom) before doing an in-depth audit.
   allowlists, validate the parsed object and pass that object on — never validate raw input and re-parse it.
 - **Insecure deserialization** — untrusted bytes are never fed to a deserializer that can instantiate arbitrary types
   or run code; parse data-only formats into known target types, or restrict to a type allowlist plus a verified signature.
+- **Dependencies & supply chain** — every package is pinned through a committed lockfile, installed reproducibly,
+  and resolved from the intended registry; new packages and install scripts are reviewed as the arbitrary code they are.
 
 ### Correctness
 
@@ -98,6 +103,7 @@ relative to the `audit` skill's `references/` directory (by default
 |------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
 | Gates actions by role, permission, or ownership      | `access-data-security/authorization.md`                                                                   |
 | Handles login, logout, reset, tokens, sessions       | `access-data-security/authn-session.md`                                                                   |
+| Verifies JWTs, API keys, signed URLs, webhook signatures | `access-data-security/token-validation.md`                                                              |
 | Fetches/mutates a resource by an ID from the request | `access-data-security/idor.md` + `access-data-security/authorization.md`                                  |
 | Serializes models, formats errors, writes logs       | `access-data-security/data-exposure.md`                                                                   |
 | Hashes, encrypts, generates or compares secrets      | `access-data-security/crypto-data-protection.md`                                                          |
@@ -113,6 +119,7 @@ relative to the `audit` skill's `references/` directory (by default
 | Accepts, stores, processes, or serves files          | `input-api-dependency/file-handling.md`                                                                   |
 | Makes network requests to user-influenced URLs       | `input-api-dependency/ssrf.md`                                                                            |
 | Adds validators, regexes, allowlists, or parsing    | `input-api-dependency/parser-differentials.md`                                                            |
+| Adds or updates packages, lockfiles, or registries   | `input-api-dependency/dependencies.md`                                                                    |
 | Writes to multiple tables/stores/systems at once     | `correctness/atomicity.md`                                                                                |
 | Handles payments, webhooks, retries, emails          | `correctness/idempotency.md`                                                                              |
 | Runs jobs, scheduled tasks, or queue consumers       | `correctness/background-work.md`                                                                          |
@@ -129,7 +136,9 @@ relative to the `audit` skill's `references/` directory (by default
 | Runs async/await, event-loop, or coroutine code      | `operability/blocking-io-async.md`                                                                        |
 | Is meant to scale out / run as multiple replicas    | `operability/statelessness.md`                                                                            |
 | Caches values, responses, or computed results        | `operability/caching.md`                                                                                  |
+| — Scoping a target larger than a diff              | `methodology/scope.md`                                                                                    |
 | — Verifying candidate findings before reporting     | `methodology/verify.md`                                                                                   |
+| — Rating finding severity                           | `methodology/severity.md`                                                                                 |
 | — Fixing confirmed findings                          | `remediation/authz-patterns.md`, `remediation/async-patterns.md`, `remediation/observability-patterns.md` |
 
 Do not manufacture findings for topics that do not apply (e.g., CSRF on a
