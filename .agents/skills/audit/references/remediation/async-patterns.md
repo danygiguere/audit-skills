@@ -63,6 +63,13 @@ handler process(request):
 Trade-off: needs a retention policy for the key store, and the record must be
 written atomically with (or before) the side effect, never after.
 
+The key must derive from durable operation identity — the caller-supplied
+key, the event's external ID, or the business entity's id — never a value
+minted per request (fresh UUID, timestamp), which makes every re-run a "new"
+operation and dedups nothing. The same rule applies to keys forwarded to
+downstream providers (payment APIs): derive them from the same durable
+identity so a re-run converges on the provider's original side effect.
+
 ### 4. Unique constraint + UPSERT as race-proof dedupe
 
 **When to use:** "create if not exists" logic implemented as a read followed by

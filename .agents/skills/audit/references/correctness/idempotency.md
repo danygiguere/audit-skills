@@ -29,6 +29,11 @@ least once.
   stored event/delivery ID for "already seen".
 - A charge, refund, or transfer call to a payment provider with no
   idempotency key, inside a handler that can be retried.
+- A provider call whose idempotency key derives from a value minted per
+  request — a fresh UUID, a timestamp — rather than from durable operation
+  identity (an entity id, the caller's idempotency key). A retry or
+  crash-window re-run computes a *different* key, so the key dedups nothing
+  across executions; the call looks idempotent and isn't.
 - A counter or balance incremented (`+= amount`) by a handler that a retry
   or redelivery would re-execute.
 - A plain INSERT for a record that must be unique per external event, order,
