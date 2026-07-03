@@ -1,6 +1,6 @@
 ---
 name: audit
-version: 0.4.0
+version: 0.5.0
 description: Full security, correctness, and operability audit of code. Use when reviewing a diff, endpoint, or feature for vulnerabilities or bugs without a specific topic in mind — security review, audit, code review for safety, "check this for issues".
 ---
 
@@ -60,7 +60,6 @@ the rest.
 | Accepts, stores, processes, or serves files          | `references/input-api-dependency/file-handling.md`                                                                                         |
 | Makes network requests to user-influenced URLs       | `references/input-api-dependency/ssrf.md`                                                                                                  |
 | Adds validators, regexes, allowlists, or parsing | `references/input-api-dependency/parser-differentials.md` |
-| Adds or updates packages, lockfiles, or registries | `references/input-api-dependency/dependencies.md` |
 | Writes to multiple tables/stores/systems at once     | `references/correctness/atomicity.md`                                                                                                      |
 | Handles payments, webhooks, retries, emails          | `references/correctness/idempotency.md`                                                                                                    |
 | Runs jobs, scheduled tasks, or queue consumers       | `references/correctness/background-work.md`                                                                                                |
@@ -84,5 +83,5 @@ the rest.
 
 ---
 
-Source: [audit-skills](https://github.com/danygiguere/audit-skills) v0.4.0 —
+Source: [audit-skills](https://github.com/danygiguere/audit-skills) v0.5.0 —
 compare with the repo's `VERSION` file to check for updates.

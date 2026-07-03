@@ -1,10 +1,10 @@
 # audit-skills
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version: v0.4.0](https://img.shields.io/badge/version-v0.4.0-blue)](https://github.com/danygiguere/audit-skills/tags)
+[![Version: v0.5.0](https://img.shields.io/badge/version-v0.5.0-blue)](https://github.com/danygiguere/audit-skills/tags)
 [![Validate](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
-![Audits: 36](https://img.shields.io/badge/audits-36-success)
+![Audits: 35](https://img.shields.io/badge/audits-35-success)
 ![Works with: Claude Code · Copilot · Cursor · Codex](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Copilot%20·%20Cursor%20·%20Codex-informational)
 
 Language- and framework-agnostic audit checklists for AI coding agents —
@@ -24,9 +24,9 @@ or an Express API — the agent supplies the framework-specific translation.
 
 ## What's inside
 
-- `AGENTS.md` — a one-page digest of all 36 invariants; copy its content
+- `AGENTS.md` — a one-page digest of all 35 invariants; copy its content
   into your project's `AGENTS.md` so every agent has it in context.
-- `.agents/skills/audit/` — the router skill, with all 36 checklists and
+- `.agents/skills/audit/` — the router skill, with all 35 checklists and
   remediation patterns bundled under `references/` (four categories: access
   & data security, input/API, correctness, operability), plus shared
   methodology files (scoping, adversarial verification, severity rubric).
@@ -68,7 +68,6 @@ every matching checklist below. Each topic is also individually invocable
 | [`/audit-file-handling`](.agents/skills/audit/references/input-api-dependency/file-handling.md)            | Path traversal, unvalidated uploads, missing size limits, files served from the web root, zip-slip                            |
 | [`/audit-ssrf`](.agents/skills/audit/references/input-api-dependency/ssrf.md)                              | Server-side requests to user-influenced URLs — allowlists, private IP ranges, redirect re-validation; includes open redirects |
 | [`/audit-parser-differentials`](.agents/skills/audit/references/input-api-dependency/parser-differentials.md) | Inputs a validator accepts but the consumer reads differently — unanchored regexes, startswith allowlists, two URL parsers, validate-then-reparse |
-| [`/audit-dependencies`](.agents/skills/audit/references/input-api-dependency/dependencies.md) | Supply chain — unpinned versions, missing lockfile updates, install scripts, typosquats, dependency confusion, abandoned or vulnerable packages |
 
 ### Correctness
 
@@ -110,7 +109,7 @@ every matching checklist below. Each topic is also individually invocable
 Copy the `.agents` folder into your project:
 
 ```bash
-git clone --depth 1 --branch v0.4.0 \
+git clone --depth 1 --branch v0.5.0 \
   https://github.com/danygiguere/audit-skills /tmp/audit-skills \
   && cp -R /tmp/audit-skills/.agents your-project/
 ```
@@ -121,7 +120,7 @@ git clone --depth 1 --branch v0.4.0 \
 
 ## Add to your AGENTS.md
 
-This repo's [`AGENTS.md`](AGENTS.md) is the one-page digest of all 36
+This repo's [`AGENTS.md`](AGENTS.md) is the one-page digest of all 35
 invariants. Copy its content into your project's `AGENTS.md` (append it if
 you already have one — never replace yours): merged there, it gives every
 agent ambient awareness of the invariants on every prompt; without it, the
