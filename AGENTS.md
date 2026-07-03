@@ -49,8 +49,6 @@ matching file (map at the bottom) before doing an in-depth audit.
   allowlists, validate the parsed object and pass that object on — never validate raw input and re-parse it.
 - **Insecure deserialization** — untrusted bytes are never fed to a deserializer that can instantiate arbitrary types
   or run code; parse data-only formats into known target types, or restrict to a type allowlist plus a verified signature.
-- **Dependencies & supply chain** — every package is pinned through a committed lockfile, installed reproducibly,
-  and resolved from the intended registry; new packages and install scripts are reviewed as the arbitrary code they are.
 
 ### Correctness
 
@@ -119,7 +117,6 @@ relative to the `audit` skill's `references/` directory (by default
 | Accepts, stores, processes, or serves files          | `input-api-dependency/file-handling.md`                                                                   |
 | Makes network requests to user-influenced URLs       | `input-api-dependency/ssrf.md`                                                                            |
 | Adds validators, regexes, allowlists, or parsing    | `input-api-dependency/parser-differentials.md`                                                            |
-| Adds or updates packages, lockfiles, or registries   | `input-api-dependency/dependencies.md`                                                                    |
 | Writes to multiple tables/stores/systems at once     | `correctness/atomicity.md`                                                                                |
 | Handles payments, webhooks, retries, emails          | `correctness/idempotency.md`                                                                              |
 | Runs jobs, scheduled tasks, or queue consumers       | `correctness/background-work.md`                                                                          |

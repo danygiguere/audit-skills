@@ -60,7 +60,6 @@ the rest.
 | Accepts, stores, processes, or serves files          | `references/input-api-dependency/file-handling.md`                                                                                         |
 | Makes network requests to user-influenced URLs       | `references/input-api-dependency/ssrf.md`                                                                                                  |
 | Adds validators, regexes, allowlists, or parsing | `references/input-api-dependency/parser-differentials.md` |
-| Adds or updates packages, lockfiles, or registries | `references/input-api-dependency/dependencies.md` |
 | Writes to multiple tables/stores/systems at once     | `references/correctness/atomicity.md`                                                                                                      |
 | Handles payments, webhooks, retries, emails          | `references/correctness/idempotency.md`                                                                                                    |
 | Runs jobs, scheduled tasks, or queue consumers       | `references/correctness/background-work.md`                                                                                                |
