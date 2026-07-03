@@ -144,6 +144,6 @@ token-authenticated API). Verify every finding against surrounding code
 
 ---
 
-*From [audit-skills](https://github.com/danygiguere/audit-skills) v0.4.0 —
+*From [audit-skills](https://github.com/danygiguere/audit-skills) v0.5.0 —
 the digest and the audit skills are maintained there; compare with the
 repo's `VERSION` file to check whether your copy is outdated.*
