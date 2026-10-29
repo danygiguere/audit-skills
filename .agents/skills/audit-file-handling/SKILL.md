@@ -1,6 +1,7 @@
 ---
 name: audit-file-handling
 description: File upload/download safety checklist. Use when code accepts, stores, processes, or serves files — path traversal, type and size limits, storage location.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/input-api-dependency/file-handling.md` and apply its checklist to the code the

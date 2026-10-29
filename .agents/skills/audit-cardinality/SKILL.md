@@ -1,6 +1,7 @@
 ---
 name: audit-cardinality
 description: Query cardinality checklist. Use when an UPDATE or DELETE keys on a non-unique column (e.g. WHERE name = ?) and may hit the wrong rows, when findOne/.single()/.first() runs on a non-unique field, or when a column is treated as unique in app code without a database UNIQUE constraint.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/correctness/cardinality.md` and apply its checklist to the code the

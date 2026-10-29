@@ -1,6 +1,7 @@
 ---
 name: audit-fix-async
 description: Remediation patterns for correctness findings. Use after a confirmed atomicity, idempotency, or background-work issue — transactions, idempotency keys, outbox.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/remediation/async-patterns.md` and apply its patterns to fix the

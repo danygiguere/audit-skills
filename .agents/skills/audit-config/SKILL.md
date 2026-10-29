@@ -1,6 +1,7 @@
 ---
 name: audit-config
 description: Insecure-configuration checklist. Use when reviewing app config, CORS, security headers, debug flags, cookies, or environment-specific settings.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/input-api-dependency/config.md` and apply its checklist to the code the

@@ -1,6 +1,7 @@
 ---
 name: audit-migration-safety
 description: Zero-downtime migration checklist. Use when reviewing database migrations or schema changes — locks, backfills, destructive changes, rollback plans.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/operability/migration-safety.md` and apply its checklist to the code the

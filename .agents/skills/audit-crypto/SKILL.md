@@ -1,6 +1,7 @@
 ---
 name: audit-crypto
 description: Cryptography and data-protection checklist. Use when code hashes passwords, encrypts data, generates tokens or randomness, or compares secrets.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/access-data-security/crypto-data-protection.md` and apply its checklist to the code the

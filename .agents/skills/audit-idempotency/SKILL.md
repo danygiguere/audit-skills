@@ -1,6 +1,7 @@
 ---
 name: audit-idempotency
 description: Safe-retry and duplicate-delivery checklist. Use when reviewing payments, webhooks, queue consumers, emails, or any handler that may execute twice.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/correctness/idempotency.md` and apply its checklist to the code the
