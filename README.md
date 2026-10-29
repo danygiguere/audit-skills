@@ -1,7 +1,7 @@
 # audit-skills
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version: v0.5.0](https://img.shields.io/badge/version-v0.5.0-blue)](https://github.com/danygiguere/audit-skills/tags)
+[![Latest tag](https://img.shields.io/github/v/tag/danygiguere/audit-skills)](https://github.com/danygiguere/audit-skills/tags)
 [![Validate](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
 ![Audits: 35](https://img.shields.io/badge/audits-35-success)
@@ -32,7 +32,9 @@ or an Express API — the agent supplies the framework-specific translation.
   methodology files (scoping, adversarial verification, severity rubric).
 - `.agents/skills/audit-*` — thin per-topic wrapper skills so each checklist
   is individually invocable (`/audit-idor`, `/audit-injection`,
-  `/audit-fix-authz`, …). Everything this package installs starts with
+  `/audit-fix-authz`, …). They are command-only
+  (`disable-model-invocation: true`): `audit` is the one auto-triggered
+  entry point, which keeps 38 descriptions out of every session's context. Everything this package installs starts with
   `audit`, so it stays grouped among your other skills.
 
 ## The audits
@@ -106,17 +108,22 @@ every matching checklist below. Each topic is also individually invocable
 
 ## Install
 
-Copy the `.agents` folder into your project:
+Clone this repo once, next to your projects, and symlink each skill into
+your project's skills folder. Nothing is copied, so updating the clone
+updates every linked project.
 
 ```bash
-git clone --depth 1 --branch v0.5.0 \
-  https://github.com/danygiguere/audit-skills /tmp/audit-skills \
-  && cp -R /tmp/audit-skills/.agents your-project/
+git clone https://github.com/danygiguere/audit-skills ~/WebDevelopment/audit-skills
+cd your-project && mkdir -p .agents/skills
+for s in ~/WebDevelopment/audit-skills/.agents/skills/audit*; do
+  ln -s "$s" .agents/skills/
+done
 ```
 
-**Cursor** can also install directly from the repo link, and if you use the
-[skills CLI](https://github.com/vercel-labs/skills):
-`npx skills add danygiguere/audit-skills --all`.
+Link every `audit*` folder: the topic skills read their checklists from the
+`audit` skill's `references/`. If you commit the links, prefer relative ones
+(e.g. `../../../audit-skills/.agents/skills/audit`) so they resolve on any
+machine with the same folder layout.
 
 ## Add to your AGENTS.md
 
@@ -124,8 +131,8 @@ This repo's [`AGENTS.md`](AGENTS.md) is the one-page digest of all 35
 invariants. Copy its content into your project's `AGENTS.md` (append it if
 you already have one — never replace yours): merged there, it gives every
 agent ambient awareness of the invariants on every prompt; without it, the
-skills only activate when triggered. Its routing table points at the
-installed skills folder.
+skills only activate when triggered. It holds only the invariants; the
+topic-to-checklist map lives in the `audit` skill, loaded when an audit runs.
 
 **Claude Code note:** Claude Code does not yet read `.agents/skills/`
 ([anthropics/claude-code#31005](https://github.com/anthropics/claude-code/issues/31005)).
@@ -139,7 +146,8 @@ echo '@AGENTS.md' > CLAUDE.md          # if you don't already have a CLAUDE.md
 ## Use
 
 - **Automatic** — ask your agent to "review this endpoint" / "audit this
-  diff"; the skills trigger on their descriptions.
+  diff"; `audit` triggers on its description and loads the matching
+  checklists. The per-topic and fix skills only run by command.
 - **By command** — `/audit` for a full audit, or per topic:
   `/audit-idor`, `/audit-injection`, `/audit-atomicity`, … All of them
   audit your current diff by default; name a file, folder, or branch to
@@ -180,16 +188,12 @@ fix.** Fixes follow the same rules everywhere: the smallest change that
 restores the invariant, matching the surrounding code style, with a test
 demonstrating the fix — and never mixed with unrelated refactoring.
 
-## Versioning
+## Updating
 
-The canonical version lives in [`VERSION`](VERSION). It is stamped into the
-two artifacts that travel into your project: the `audit` skill (a `version:`
-field in its frontmatter plus a source footer) and the `AGENTS.md` digest
-(footer). Installed copies therefore always say what version they are and
-where they come from — compare your stamp against this repo's `VERSION` to
-know whether you're outdated. (No need to copy `VERSION` into your
-project — the stamps travel with the artifacts.) Your agent can do it for you: "check whether
-my audit-skills are up to date" gives it everything it needs.
+Releases are [git tags](https://github.com/danygiguere/audit-skills/tags).
+Run `git pull` in your clone (or `git checkout <tag>` to pin a release);
+every linked project picks up the change. The digest in your `AGENTS.md` is
+a copy — re-paste it when a release changes `AGENTS.md`.
 
 ## License
 

@@ -1,6 +1,7 @@
 ---
 name: audit-background-work
 description: Background job and queue checklist. Use when reviewing async jobs, scheduled tasks, or consumers — retries, poison messages, ordering, timeouts.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/correctness/background-work.md` and apply its checklist to the code the

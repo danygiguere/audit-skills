@@ -1,6 +1,7 @@
 ---
 name: audit-idor
 description: Insecure direct object reference checklist. Use when code fetches or mutates a resource using an ID, slug, UUID, or filename taken from the request.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/access-data-security/idor.md` and apply its checklist to the code the

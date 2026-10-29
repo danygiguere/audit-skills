@@ -1,6 +1,7 @@
 ---
 name: audit-secrets
 description: Secrets-handling checklist. Use when reviewing code or config touching API keys, credentials, or tokens — hardcoding, logging, committing, rotation.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/input-api-dependency/secrets.md` and apply its checklist to the code the

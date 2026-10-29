@@ -1,6 +1,7 @@
 ---
 name: audit-authn-session
 description: Authentication and session audit checklist. Use when reviewing login, logout, password reset, token issuance, session expiry, or remember-me flows.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/access-data-security/authn-session.md` and apply its checklist to the code the

@@ -1,6 +1,7 @@
 ---
 name: audit-injection
 description: Injection audit checklist (SQL, NoSQL, command, template, path). Use when queries, shell commands, templates, or paths are built from user input.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/input-api-dependency/injection.md` and apply its checklist to the code the

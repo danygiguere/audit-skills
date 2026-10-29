@@ -9,11 +9,12 @@ Requires only the Python standard library.
 
 Checks, from the repo root:
   1. Every SKILL.md has valid frontmatter (name matches folder, spec name
-     format, spec length limits).
+     format, spec length limits); wrappers are command-only and the router
+     stays model-invocable.
   2. Every relative markdown link in the skills tree resolves.
-  3. Routing tables stay in sync: the router's "What to load", the AGENTS.md
-     "Deep checklists" table, the README catalog, and the files on disk all
-     describe the same set of knowledge files.
+  3. Routing tables stay in sync: the router's "What to load", the README
+     catalog, and the files on disk all describe the same set of knowledge
+     files.
   4. Every checklist carries the "recognition vocabulary" glossary note.
   5. Every checklist follows the template (required sections) and every
      glossary table covers all eight ecosystems.
@@ -21,12 +22,10 @@ Checks, from the repo root:
      AND every knowledge file has a wrapper.
   7. README counts (badge, invariants, checklists) match the topic count,
      and the AGENTS.md digest has one invariant bullet per topic.
-  8. VERSION is semver and every version stamp anywhere in the repo
-     (vX.Y.Z mentions, `version:` frontmatter fields) matches it.
-  9. Remediation pointers are bidirectional: every checklist that cites a
+  8. Remediation pointers are bidirectional: every checklist that cites a
      remediation playbook is named in that playbook's Scope, and every topic
      named in a Scope cites that playbook back.
- 10. No skill markdown contains zero-width/bidi/control Unicode, suspicious
+  9. No skill markdown contains zero-width/bidi/control Unicode, suspicious
      encoded blobs, or instructions writing to agent identity files.
 
 Run: python3 scripts/validate.py
@@ -82,6 +81,11 @@ def check_frontmatter() -> int:
             problems.append(f"{sk}: name exceeds 64 chars")
         if len(desc.group(1).strip()) > 1024:
             problems.append(f"{sk}: description exceeds 1024 chars")
+        manual = re.search(r"^disable-model-invocation: true$", fm, re.M)
+        if d.startswith("audit-") and not manual:
+            problems.append(f"{sk}: wrapper must set disable-model-invocation: true")
+        if d == "audit" and manual:
+            problems.append(f"{sk}: router must stay model-invocable")
     return count
 
 
@@ -114,7 +118,6 @@ def check_table_sync() -> None:
     }
     router_src = open(os.path.join(BASE, "audit", "SKILL.md")).read()
     router = set(re.findall(r"`references/([\w./-]+\.md)`", router_src))
-    agents = set(re.findall(r"`([\w-]+/[\w.-]+\.md)`", open("AGENTS.md").read()))
     readme = set(re.findall(
         r"\]\(\.agents/skills/audit/references/([\w./-]+\.md)\)",
         open("README.md").read()))
@@ -126,7 +129,6 @@ def check_table_sync() -> None:
             problems.append(f"table sync: {missing} in {label_b} but not {label_a}")
 
     diff("disk", disk, "router table", router)
-    diff("router table", router, "AGENTS.md table", agents)
     expected_readme = {p for p in router if not p.startswith("methodology/")}
     diff("router (minus methodology)", expected_readme, "README catalog", readme)
 
@@ -191,7 +193,7 @@ def check_counts() -> int:
         if not m or int(m.group(1)) != topics:
             problems.append(f"counts: README 'all N {label}' != {topics}")
     agents = open("AGENTS.md").read()
-    section = agents.split("## Invariants")[1].split("## Deep checklists")[0]
+    section = agents.split("## Invariants")[1]
     bullets = len(re.findall(r"^- \*\*", section, re.M))
     if bullets != topics:
         problems.append(f"counts: AGENTS.md has {bullets} invariant bullets, "
@@ -247,33 +249,6 @@ def check_remediation_scope() -> None:
                                 f"{rel} does not cite {pb}")
 
 
-def check_version() -> str:
-    """VERSION is canonical; every stamp anywhere in the repo must match it."""
-    v = open("VERSION").read().strip()
-    if not re.fullmatch(r"\d+\.\d+\.\d+", v):
-        problems.append(f"version: VERSION '{v}' is not X.Y.Z semver")
-    stamps = 0
-    for root, dirs, files in os.walk("."):
-        dirs[:] = [d for d in dirs if d not in (".git", ".idea", ".vscode")]
-        for f in files:
-            if not f.endswith(".md"):
-                continue
-            p = os.path.join(root, f)
-            text = open(p).read()
-            for hit in re.findall(r"\bv(\d+\.\d+\.\d+)\b", text):
-                stamps += 1
-                if hit != v:
-                    problems.append(f"version: {p} stamps v{hit}, VERSION is {v}")
-            for hit in re.findall(r"^version: (.+)$", text, re.M):
-                stamps += 1
-                if hit.strip() != v:
-                    problems.append(f"version: {p} frontmatter '{hit.strip()}', "
-                                    f"VERSION is {v}")
-    if stamps == 0:
-        problems.append("version: no stamps found anywhere — footers missing?")
-    return v
-
-
 # Zero-width, bidi, and control characters that can hide injected instructions.
 _ZW = re.compile(r"[\u200b\u200c\u200d\ufeff\u2060\u2028\u2029]")
 _BIDI = re.compile(r"[\u202a-\u202e\u2066-\u2069\u200e\u200f]")
@@ -325,9 +300,8 @@ def main() -> int:
     check_remediation_scope()
     wrappers = check_wrapper_coverage()
     topics = check_counts()
-    version = check_version()
     smuggling_count = check_metadata_smuggling()
-    print(f"version: {version}, topics: {topics}, skills: {skills}, "
+    print(f"topics: {topics}, skills: {skills}, "
           f"wrappers: {wrappers}, links checked: {links}, noted files: {noted}, "
           f"smuggling scan: {smuggling_count} files")
     if problems:

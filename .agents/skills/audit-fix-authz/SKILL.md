@@ -1,6 +1,7 @@
 ---
 name: audit-fix-authz
 description: Remediation patterns for authorization findings. Use after an audit confirms an authz or IDOR issue and the user asks for a fix — policy checks, ownership scoping.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/remediation/authz-patterns.md` and apply its patterns to fix the

@@ -1,6 +1,7 @@
 ---
 name: audit-api-validation
 description: Input validation and API contract checklist. Use when reviewing request validation, DTOs, public endpoints, types, bounds, or unknown-field handling.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/input-api-dependency/api-contract-validation.md` and apply its checklist to the code the

@@ -1,6 +1,7 @@
 ---
 name: audit-authorization
 description: Access-control audit checklist. Use when reviewing endpoints or handlers that gate actions by role, permission, or ownership, or when checking for privilege escalation.
+disable-model-invocation: true
 ---
 
 Read `../audit/references/access-data-security/authorization.md` and apply its checklist to the code the

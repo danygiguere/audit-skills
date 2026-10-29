@@ -1,9 +1,8 @@
 # Engineering audit digest
 
 Apply the invariants below to all code you review, audit, or generate.
-Detailed per-topic checklists live in the installed `audit` skill under
-`references/` — by default `.agents/skills/audit/references/`. Read the
-matching file (map at the bottom) before doing an in-depth audit.
+For an in-depth audit, use the `audit` skill (`/audit`): it maps each topic
+to its detailed checklist under `references/`.
 
 ## Invariants (always apply)
 
@@ -90,60 +89,12 @@ matching file (map at the bottom) before doing an in-depth audit.
 - **Caching** — cache keys include every dimension the value varies on (principal, tenant, locale); entries are
   invalidated when their source changes; misses don't stampede the origin; per-user data never lands in a shared or CDN cache.
 
-## Deep checklists — what to read when
-
-Read only the files matching what the code under audit does. Paths are
-relative to the `audit` skill's `references/` directory (by default
-`.agents/skills/audit/references/`); if a path does not resolve, locate the
-`audit` skill folder in your skills directory and resolve from there:
-
-| The code…                                            | Read                                                                                                      |
-|------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| Gates actions by role, permission, or ownership      | `access-data-security/authorization.md`                                                                   |
-| Handles login, logout, reset, tokens, sessions       | `access-data-security/authn-session.md`                                                                   |
-| Verifies JWTs, API keys, signed URLs, webhook signatures | `access-data-security/token-validation.md`                                                              |
-| Fetches/mutates a resource by an ID from the request | `access-data-security/idor.md` + `access-data-security/authorization.md`                                  |
-| Serializes models, formats errors, writes logs       | `access-data-security/data-exposure.md`                                                                   |
-| Hashes, encrypts, generates or compares secrets      | `access-data-security/crypto-data-protection.md`                                                          |
-| Renders user data into HTML/JS/URLs/headers/emails   | `access-data-security/output-encoding.md`                                                                 |
-| Touches data or caches in a multi-tenant app         | `access-data-security/tenant-isolation.md`                                                                |
-| Changes state with cookie/session-based auth         | `access-data-security/csrf.md`                                                                            |
-| Binds request payloads onto models/entities          | `access-data-security/mass-assignment.md`                                                                 |
-| Builds queries/commands/templates/paths from input   | `input-api-dependency/injection.md`                                                                       |
-| Deserializes untrusted bytes (sessions, caches, queues, uploads) | `input-api-dependency/deserialization.md`                                                      |
-| Configures CORS, headers, cookies, debug, env        | `input-api-dependency/config.md`                                                                          |
-| Touches API keys, credentials, tokens                | `input-api-dependency/secrets.md`                                                                         |
-| Validates (or should validate) request input         | `input-api-dependency/api-contract-validation.md`                                                         |
-| Accepts, stores, processes, or serves files          | `input-api-dependency/file-handling.md`                                                                   |
-| Makes network requests to user-influenced URLs       | `input-api-dependency/ssrf.md`                                                                            |
-| Adds validators, regexes, allowlists, or parsing    | `input-api-dependency/parser-differentials.md`                                                            |
-| Writes to multiple tables/stores/systems at once     | `correctness/atomicity.md`                                                                                |
-| Handles payments, webhooks, retries, emails          | `correctness/idempotency.md`                                                                              |
-| Runs jobs, scheduled tasks, or queue consumers       | `correctness/background-work.md`                                                                          |
-| Shares mutable state, caches, counters               | `correctness/state-management.md`                                                                         |
-| Reads or writes assuming a query matches exactly one row | `correctness/cardinality.md`                                                                          |
-| Computes money, totals, taxes, splits, or rounding   | `correctness/numeric-precision.md`                                                                        |
-| Stores or computes timestamps, durations, timeouts, expiry | `correctness/time-clock.md`                                                                         |
-| Catches/throws errors, maps errors to HTTP statuses  | `correctness/exception-handling.md`                                                                       |
-| Creates promises, futures, tasks, or publishers     | `correctness/discarded-async.md`                                                                          |
-| Loads related data inside a loop over a collection   | `operability/nplus1.md`                                                                                   |
-| Adds endpoints/jobs, handles errors                  | `operability/observability.md`                                                                            |
-| Changes database schema                              | `operability/migration-safety.md` + `operability/schema-design.md`                                        |
-| Does work proportional to input size                 | `operability/resource-limits.md`                                                                          |
-| Runs async/await, event-loop, or coroutine code      | `operability/blocking-io-async.md`                                                                        |
-| Is meant to scale out / run as multiple replicas    | `operability/statelessness.md`                                                                            |
-| Caches values, responses, or computed results        | `operability/caching.md`                                                                                  |
-| — Scoping a target larger than a diff              | `methodology/scope.md`                                                                                    |
-| — Verifying candidate findings before reporting     | `methodology/verify.md`                                                                                   |
-| — Rating finding severity                           | `methodology/severity.md`                                                                                 |
-| — Fixing confirmed findings                          | `remediation/authz-patterns.md`, `remediation/async-patterns.md`, `remediation/observability-patterns.md` |
-
 Do not manufacture findings for topics that do not apply (e.g., CSRF on a
 token-authenticated API). Verify every finding against surrounding code
 (middleware, base classes, callers) before reporting it.
 
 ---
 
-*From [audit-skills](https://github.com/danygiguere/audit-skills) v0.5.0 —
-the digest and the audit skills are maintained there; compare with the
-repo's `VERSION` file to check whether your copy is outdated.*
+*From [audit-skills](https://github.com/danygiguere/audit-skills) — the
+digest and the audit skills are maintained there; check its tags for newer
+releases.*
