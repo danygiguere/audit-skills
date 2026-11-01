@@ -34,6 +34,15 @@ single client can exhaust a shared resource.
 - A loop over a user-supplied collection (array of IDs, bulk-create items,
   CSV rows) with no count limit before the loop starts — each element costs
   a query, a job, or an outbound call.
+- A statement whose parameter count grows with data or input — `WHERE id
+  IN (…)` built from a collected ID list, a multi-row `INSERT … VALUES`, a
+  bulk upsert — with no chunking or array parameter. Databases cap this
+  hard (PostgreSQL 65,535 bind parameters, SQL Server 2,100, Oracle 1,000
+  items per `IN` list, SQLite 999 before 3.32), so the query works in dev
+  and fails outright once the list crosses the limit; well below it, huge
+  lists still parse slowly and flood the plan cache with one entry per
+  list length. Lists derived from a previous query (backfills, exports,
+  N+1 fixes) are the usual culprit, since no caller-facing cap applies.
 - A regex applied to user input where the pattern has nested or overlapping
   quantifiers (catastrophic backtracking), or where the pattern itself
   comes from the user.
@@ -86,6 +95,9 @@ handler export_orders(request):
     if request.upload.size > MAX_UPLOAD: respond 413
     stream  = file.open_stream(request.upload)           # chunked, not buffered
     if length(request.body.ids) > MAX_BATCH: respond 422
+    for chunk in chunks(order_ids, 1000):                # bounded IN list —
+        db.query("... WHERE id IN (?)", chunk)           # or one array param:
+                                                         # WHERE id = ANY(?)
     rate_limiter.check(request.principal, "export")      # bound repetition
 ```
 
@@ -102,6 +114,9 @@ handler export_orders(request):
   authentication findings).
 - **Low** — a cap exists but is generous, or the bound lives only in
   infrastructure config the application does not control.
+- **Medium** — an `IN` list or bulk statement whose size grows with stored
+  data and has no chunking: a hard failure, not a slowdown, on the day the
+  data crosses the database's parameter limit.
 - Amplification raises severity: if each input element fans out to further
   work (a job, an outbound call, a write per element), rate one level
   higher than the same shape doing constant work per element.
