@@ -1,7 +1,6 @@
 ---
 name: audit-fix-observability
 description: Remediation patterns for observability gaps. Use when adding logging, metrics, or tracing after an audit finds blind spots.
-disable-model-invocation: true
 ---
 
 Read `../audit/references/remediation/observability-patterns.md` and apply its patterns to fix the

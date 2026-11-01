@@ -1,7 +1,6 @@
 ---
 name: audit-output-encoding
 description: Output encoding and XSS checklist. Use when user-controlled data is rendered into HTML, JavaScript, CSS, URLs, headers, or emails.
-disable-model-invocation: true
 ---
 
 Read `../audit/references/access-data-security/output-encoding.md` and apply its checklist to the code the

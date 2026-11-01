@@ -1,7 +1,6 @@
 ---
 name: audit-caching
 description: Caching correctness checklist. Use when reviewing caches — keys missing a user/tenant dimension, stale data after writes, cache stampede, cached errors, or per-user responses landing in a shared or CDN cache.
-disable-model-invocation: true
 ---
 
 Read `../audit/references/operability/caching.md` and apply its checklist to the code the

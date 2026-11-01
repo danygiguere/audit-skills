@@ -79,7 +79,7 @@ to its detailed checklist under `references/`.
 - **Migration safety** — schema changes deploy without downtime: no long locks, destructive changes split across
   releases, rollback considered.
 - **Resource limits** — all work driven by input size is bounded: pagination, body and upload caps, rate limits, no
-  catastrophic regex.
+  catastrophic regex; `IN` lists and bulk statements built from growing data are chunked or passed as one array parameter.
 - **Blocking I/O in async code** — code on a cooperative scheduler (event loop, coroutines, reactor) never blocks: no
   sync I/O, sleeps, or CPU-heavy work on the loop; blocking work is offloaded and outbound calls have timeouts.
 - **Schema design** — relationships enforced by real foreign keys with deliberate ON DELETE; hot query paths backed

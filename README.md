@@ -32,10 +32,9 @@ or an Express API — the agent supplies the framework-specific translation.
   methodology files (scoping, adversarial verification, severity rubric).
 - `.agents/skills/audit-*` — thin per-topic wrapper skills so each checklist
   is individually invocable (`/audit-idor`, `/audit-injection`,
-  `/audit-fix-authz`, …). They are command-only
-  (`disable-model-invocation: true`): `audit` is the one auto-triggered
-  entry point, which keeps 38 descriptions out of every session's context. Everything this package installs starts with
-  `audit`, so it stays grouped among your other skills.
+  `/audit-fix-authz`, …). Like `audit`, they also trigger automatically
+  when a request matches their description. Everything this package installs
+  starts with `audit`, so it stays grouped among your other skills.
 
 ## The audits
 
@@ -147,7 +146,8 @@ echo '@AGENTS.md' > CLAUDE.md          # if you don't already have a CLAUDE.md
 
 - **Automatic** — ask your agent to "review this endpoint" / "audit this
   diff"; `audit` triggers on its description and loads the matching
-  checklists. The per-topic and fix skills only run by command.
+  checklists. A narrower request ("check this loop for N+1 queries") can
+  trigger the matching per-topic or fix skill directly.
 - **By command** — `/audit` for a full audit, or per topic:
   `/audit-idor`, `/audit-injection`, `/audit-atomicity`, … All of them
   audit your current diff by default; name a file, folder, or branch to

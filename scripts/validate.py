@@ -9,8 +9,7 @@ Requires only the Python standard library.
 
 Checks, from the repo root:
   1. Every SKILL.md has valid frontmatter (name matches folder, spec name
-     format, spec length limits); wrappers are command-only and the router
-     stays model-invocable.
+     format, spec length limits); every skill stays model-invocable.
   2. Every relative markdown link in the skills tree resolves.
   3. Routing tables stay in sync: the router's "What to load", the README
      catalog, and the files on disk all describe the same set of knowledge
@@ -81,11 +80,8 @@ def check_frontmatter() -> int:
             problems.append(f"{sk}: name exceeds 64 chars")
         if len(desc.group(1).strip()) > 1024:
             problems.append(f"{sk}: description exceeds 1024 chars")
-        manual = re.search(r"^disable-model-invocation: true$", fm, re.M)
-        if d.startswith("audit-") and not manual:
-            problems.append(f"{sk}: wrapper must set disable-model-invocation: true")
-        if d == "audit" and manual:
-            problems.append(f"{sk}: router must stay model-invocable")
+        if re.search(r"^disable-model-invocation:", fm, re.M):
+            problems.append(f"{sk}: skills must stay model-invocable")
     return count
 
 

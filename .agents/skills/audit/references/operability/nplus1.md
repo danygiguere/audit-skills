@@ -92,6 +92,14 @@ for user in users:                                          # no queries
 The same fix shape applies to remote calls: collect the IDs, issue one batch
 request, then iterate over the in-memory result.
 
+This fix is only safe while the ID list is bounded. When the parent set is
+not (no `LIMIT`, a backfill, an export), the `IN` list grows with the data
+and eventually exceeds the database's bind-parameter limit — the N+1 is
+replaced by a query that fails outright. Pass the IDs as a single array
+parameter where the database supports it (`WHERE user_id = ANY(?)` on
+PostgreSQL), or chunk them into fixed-size batches; see
+`resource-limits.md`.
+
 ## Severity guidance
 
 - **High** — the loop runs on a hot path (list endpoints, dashboards,
