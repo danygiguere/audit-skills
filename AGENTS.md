@@ -80,6 +80,9 @@ to its detailed checklist under `references/`.
   releases, rollback considered.
 - **Resource limits** — all work driven by input size is bounded: pagination, body and upload caps, rate limits, no
   catastrophic regex; `IN` lists and bulk statements built from growing data are chunked or passed as one array parameter.
+- **Algorithmic complexity** — in-memory work over growing collections uses a structure that fits the access
+  pattern: hash map or set for exact lookups and joins, sorted data with binary search for ranges; no linear scan
+  inside a loop, no hidden quadratic copies; binary search runs only on data sorted by the same comparator.
 - **Blocking I/O in async code** — code on a cooperative scheduler (event loop, coroutines, reactor) never blocks: no
   sync I/O, sleeps, or CPU-heavy work on the loop; blocking work is offloaded and outbound calls have timeouts.
 - **Schema design** — relationships enforced by real foreign keys with deliberate ON DELETE; hot query paths backed

@@ -72,6 +72,7 @@ the rest.
 | Adds endpoints/jobs, handles errors                  | `references/operability/observability.md`                                                                                                  |
 | Changes database schema                              | `references/operability/migration-safety.md` + `references/operability/schema-design.md`                                                                                               |
 | Does work proportional to input or data size (incl. `IN` lists, bulk statements) | `references/operability/resource-limits.md`                                                                                                |
+| Searches, joins, dedupes, or sorts collections in memory | `references/operability/algorithmic-complexity.md` |
 | Runs async/await, event-loop, or coroutine code      | `references/operability/blocking-io-async.md`                                                                                              |
 | Is meant to scale out / run as multiple replicas | `references/operability/statelessness.md` |
 | Caches values, responses, or computed results        | `references/operability/caching.md`                                                                                                        |
