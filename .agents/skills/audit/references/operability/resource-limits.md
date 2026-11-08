@@ -43,6 +43,14 @@ single client can exhaust a shared resource.
   lists still parse slowly and flood the plan cache with one entry per
   list length. Lists derived from a previous query (backfills, exports,
   N+1 fixes) are the usual culprit, since no caller-facing cap applies.
+- A chunk size set to the raw database limit. Except for Oracle's per-list
+  cap, these limits count every bind parameter in the statement, not just
+  the `IN` list: `UPDATE t SET name = ? WHERE tenant_id = ? AND id IN (…)`
+  chunked at 2,100 still fails on SQL Server, because the batch carries two
+  more parameters (some drivers also reserve one or two of their own). The
+  safe batch is the limit minus the statement's other parameters, divided
+  by the parameters per item: a multi-row `INSERT` uses rows × columns, so
+  a 1,000-row batch of 3 columns needs 3,000 parameters.
 - A regex applied to user input where the pattern has nested or overlapping
   quantifiers (catastrophic backtracking), or where the pattern itself
   comes from the user.

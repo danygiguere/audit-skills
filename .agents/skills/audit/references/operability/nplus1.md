@@ -97,8 +97,8 @@ not (no `LIMIT`, a backfill, an export), the `IN` list grows with the data
 and eventually exceeds the database's bind-parameter limit — the N+1 is
 replaced by a query that fails outright. Pass the IDs as a single array
 parameter where the database supports it (`WHERE user_id = ANY(?)` on
-PostgreSQL), or chunk them into fixed-size batches; see
-`resource-limits.md`.
+PostgreSQL), or chunk them into fixed-size batches sized below the limit
+minus the statement's other parameters; see `resource-limits.md`.
 
 ## Severity guidance
 

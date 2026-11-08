@@ -14,6 +14,10 @@ results, or measurably slow queries.
 - The concern is style: naming conventions, singular/plural tables, column
   order, normalization-level preferences, UUID-vs-integer primary keys.
   These are never findings, regardless of taste.
+- A key-value/meta table stores attributes that are genuinely open-ended
+  (defined by users or plugins at runtime) and the code never filters,
+  sorts, joins, or relies on uniqueness by them — the shape is the
+  extension point, not a smell.
 - The concern is how a schema change *deploys* (locks, backfills, rollback)
   — that is `migration-safety.md`. This file audits what the schema *says*.
 
@@ -46,6 +50,16 @@ auto-index foreign-key columns; MySQL/InnoDB does.
   mixed charsets/collations across joined columns.
 - A table with no primary key; duplicate or shadowed indexes; indexing
   nearly every column of a write-heavy table.
+- A key-value (entity-attribute-value) table — `(entity_id, key, value)`,
+  like WordPress `wp_postmeta`/`wp_options` — holding attributes the
+  application itself knows by name: code reads a hardcoded key
+  (`get_meta('price')`), filters or sorts on a value, or treats a value as
+  a reference to another row. Each such attribute loses its type, NOT NULL,
+  CHECK, and FK; numeric comparisons need a `CAST` that defeats the index;
+  each filter adds a self-join. Without `UNIQUE (entity_id, key)`, a
+  "single" value can silently become two rows and reads return whichever
+  comes first. Known attributes belong in typed columns; truly open-ended,
+  unqueried attributes belong in a validated JSON/JSONB column.
 
 ## Verification note
 
@@ -106,7 +120,11 @@ migration create_comments:
   Money stored in float/double.
 - **Medium** — missing index on a confirmed hot path (EXPLAIN or evident
   scale); `ON DELETE` defaulted where the wrong behavior corrupts or
-  mass-deletes; required-but-nullable columns.
+  mass-deletes; required-but-nullable columns. A key-value table holding
+  known attributes that the code filters or sorts on, or that must be
+  single-valued with no `UNIQUE (entity_id, key)`; raise to **High** when
+  a value is an untyped reference to another row (no FK, orphans
+  inevitable) or holds money.
 - **Low** — duplicate or shadowed indexes; over-indexing; any "likely
   missing index" not yet verified against real data.
 - Existing corrupted data (orphans already present) raises the related
