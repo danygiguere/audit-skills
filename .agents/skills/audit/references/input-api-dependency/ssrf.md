@@ -13,6 +13,11 @@ position is a privilege; user input must not steer it.
 
 - The URL is entirely server-defined (constants, config) with no
   input-influenced component — host, path, or query.
+- The destination host is exact-matched (https pinned) against an
+  operator-configured allowlist of external third-party hosts and redirects
+  are not followed. The caller choosing the path, query, or port on such a
+  host is not a finding; if the allowlist itself contains an internal or
+  privileged host, report that as an allowlist-content issue.
 
 ## Why it happens
 
