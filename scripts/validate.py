@@ -26,6 +26,9 @@ Checks, from the repo root:
      named in a Scope cites that playbook back.
   9. No skill markdown contains zero-width/bidi/control Unicode, suspicious
      encoded blobs, or instructions writing to agent identity files.
+ 10. Every wrapper body matches its template exactly (whitespace aside):
+     one wording for the topic wrappers, one for the audit-fix-* wrappers,
+     differing only in the knowledge file they point at.
 
 Run: python3 scripts/validate.py
 """
@@ -176,6 +179,55 @@ def check_wrapper_coverage() -> int:
     return wrappers
 
 
+_METH = "../audit/references/methodology"
+AUDIT_WRAPPER_TEMPLATE = (
+    "Read `{ref}` and apply its checklist to the code the user specified "
+    "(or the current diff if none was given). If the target is larger than "
+    "a diff — a module, service, or whole repo — follow "
+    f"`{_METH}/scope.md` first. Verify each candidate with "
+    f"`{_METH}/verify.md` before reporting. Report surviving findings with "
+    "`file:line` references and a severity assigned per "
+    f"`{_METH}/severity.md`; if nothing survives, say the checklist came "
+    "back clean. Report only — do not change code unless the user asks for "
+    "a fix."
+)
+FIX_WRAPPER_TEMPLATE = (
+    "Read `{ref}` and apply its patterns to fix the confirmed findings the "
+    "user referenced. Make the smallest change that restores the invariant, "
+    "and keep style consistent with the surrounding code."
+)
+
+
+def check_wrapper_template() -> None:
+    """Wrapper bodies are generated-by-convention; keep them from drifting.
+    Topic wrappers must point at a checklist, fix wrappers at a playbook."""
+    for d in sorted(os.listdir(BASE)):
+        if not d.startswith("audit-"):
+            continue
+        sk = os.path.join(BASE, d, "SKILL.md")
+        if not os.path.isfile(sk):
+            continue
+        text = open(sk, encoding="utf-8").read()
+        m = re.match(r"---\n.*?\n---\n(.*)", text, re.S)
+        if not m:
+            continue  # reported by check_frontmatter
+        body = " ".join(m.group(1).split())
+        is_fix = d.startswith("audit-fix-")
+        ref = re.match(r"Read `(\.\./audit/references/([\w./-]+\.md))`", body)
+        if not ref:
+            problems.append(f"wrapper template: {sk}: body does not start "
+                            f"with a knowledge-file reference")
+            continue
+        if ref.group(2).startswith("remediation/") != is_fix:
+            problems.append(f"wrapper template: {sk}: "
+                            f"{'fix' if is_fix else 'topic'} wrapper points "
+                            f"at the wrong kind of file ({ref.group(2)})")
+        template = FIX_WRAPPER_TEMPLATE if is_fix else AUDIT_WRAPPER_TEMPLATE
+        if body != template.format(ref=ref.group(1)):
+            problems.append(f"wrapper template: {sk}: body differs from the "
+                            f"{'fix' if is_fix else 'topic'} wrapper template")
+
+
 def check_counts() -> int:
     """README numbers and digest bullets must equal the topic count."""
     topics = len({t for t in topic_files() if not t.startswith("remediation/")})
@@ -295,6 +347,7 @@ def main() -> int:
     check_templates()
     check_remediation_scope()
     wrappers = check_wrapper_coverage()
+    check_wrapper_template()
     topics = check_counts()
     smuggling_count = check_metadata_smuggling()
     print(f"topics: {topics}, skills: {skills}, "

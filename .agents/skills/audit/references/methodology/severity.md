@@ -18,7 +18,7 @@ checklist equals a High from another.
   operability defect that causes an outage under realistic load or a
   correctness bug that silently corrupts data over time.
 - **Medium** — bounded blast radius: metadata or existence leaks,
-  self-inflicted-only harm, a missing defense-in-depth layer whose primary
+  self-inflicted-only integrity or availability damage, a missing defense-in-depth layer whose primary
   control exists, correctness bugs whose damage is visible and recoverable.
 - **Low** — hygiene with no current path to harm: works today but fragile
   against likely change; hardening notes. Report briefly; never pad a
@@ -34,7 +34,11 @@ checklist equals a High from another.
    - Requires privileges that already imply the impact (an admin harming
      what admins administer): **cap at Medium** — likely a non-finding;
      re-run the attacker/victim test in `verify.md`.
-   - Attacker == victim (harms only the requester): **cap at Medium**.
+   - Attacker == victim (harms only the requester): a *security* finding
+     of this shape is not rated at all — `verify.md` step 1 refutes it.
+     What reaches this rubric is the correctness/operability analog
+     (damage to the requester's own data or availability): **cap at
+     Medium**.
    - Test/dev/example scope with no production data or credentials: **cap
      at Low**.
    - Easy discovery (sequential IDs, error messages that guide, a public

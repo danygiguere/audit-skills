@@ -28,8 +28,13 @@ rather than picking a scope yourself.
    `references/methodology/severity.md`), `file:line`, the violated
    invariant, and a one-line fix direction. Say explicitly which checklists
    were applied and came back clean.
-6. **Fix only on request**: when the user asks for remediation, load the
-   matching `references/remediation/` file and apply its patterns.
+6. **Fix only on request**: never change code during an audit. When the
+   user asks for remediation, check the finding's checklist: if it ends
+   with a `## Remediation` section, load the playbook it names under
+   `references/remediation/` and choose among its patterns; otherwise
+   apply the fixed shape from the checklist's `## Example` section. Either
+   way, make the smallest change that restores the invariant, match the
+   surrounding code's conventions, and add a test demonstrating the fix.
 
 Do not manufacture findings for topics that don't apply (e.g., CSRF on a
 token-authenticated API, tenant isolation in a single-tenant app).

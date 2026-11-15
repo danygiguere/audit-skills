@@ -19,7 +19,8 @@ without cited evidence is not a refutation.
    user or tenant's input harms *other* users, shared infrastructure, or
    server-side resources. (For correctness/operability findings the analog:
    name the trigger and the damage — and keep findings where the damage is
-   to data integrity or availability, whoever triggered it.)
+   to data integrity or availability, whoever triggered it; when only the
+   requester is harmed, `severity.md` caps the finding at Medium.)
 2. **Hunt for an existing mitigation** the investigation may have missed:
    middleware, base classes, decorators, framework defaults, schema
    validation, a sanitizer between source and sink. Cite where it lives.
