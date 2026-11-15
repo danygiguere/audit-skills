@@ -4,7 +4,7 @@
 [![Latest tag](https://img.shields.io/github/v/tag/danygiguere/audit-skills)](https://github.com/danygiguere/audit-skills/tags)
 [![Validate](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
-![Audits: 36](https://img.shields.io/badge/audits-36-success)
+![Audits: 37](https://img.shields.io/badge/audits-37-success)
 ![Works with: Claude Code · Copilot · Cursor · Codex](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Copilot%20·%20Cursor%20·%20Codex-informational)
 
 Language- and framework-agnostic audit checklists for AI coding agents —
@@ -24,9 +24,9 @@ or an Express API — the agent supplies the framework-specific translation.
 
 ## What's inside
 
-- `AGENTS.md` — a one-page digest of all 36 invariants; copy its content
+- `AGENTS.md` — a one-page digest of all 37 invariants; copy its content
   into your project's `AGENTS.md` so every agent has it in context.
-- `.agents/skills/audit/` — the router skill, with all 36 checklists and
+- `.agents/skills/audit/` — the router skill, with all 37 checklists and
   remediation patterns bundled under `references/` (four categories: access
   & data security, input/API, correctness, operability), plus shared
   methodology files (scoping, adversarial verification, severity rubric).
@@ -44,59 +44,60 @@ every matching checklist below. Each topic is also individually invocable
 
 ### Access & data security
 
-| Audit                                                                                                 | Checks for                                                                                                                    |
-|-------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| [`/audit-authorization`](.agents/skills/audit/references/access-data-security/authorization.md)       | Server-side permission checks at the point of action — privilege escalation, UI-only gating, checks on read but not on mutate |
-| [`/audit-authn-session`](.agents/skills/audit/references/access-data-security/authn-session.md)       | Login, logout, and reset flows — session fixation, account enumeration, token expiry and single-use, remember-me storage      |
+| Audit                                                                                                 | Checks for                                                                                                                                           |
+|-------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`/audit-authorization`](.agents/skills/audit/references/access-data-security/authorization.md)       | Server-side permission checks at the point of action — privilege escalation, UI-only gating, checks on read but not on mutate                        |
+| [`/audit-authn-session`](.agents/skills/audit/references/access-data-security/authn-session.md)       | Login, logout, and reset flows — session fixation, account enumeration, token expiry and single-use, remember-me storage                             |
 | [`/audit-token-validation`](.agents/skills/audit/references/access-data-security/token-validation.md) | Inbound credential verification — JWT decode-without-verify, alg confusion, missing exp/aud/iss, kid/JWKS pitfalls, webhook HMACs and replay windows |
-| [`/audit-idor`](.agents/skills/audit/references/access-data-security/idor.md)                         | Resources fetched or mutated by a request-supplied ID without verifying the requester may touch them                          |
-| [`/audit-data-exposure`](.agents/skills/audit/references/access-data-security/data-exposure.md)       | Over-exposed responses, errors, and logs — whole-model serialization, stack traces, PII                                       |
-| [`/audit-crypto`](.agents/skills/audit/references/access-data-security/crypto-data-protection.md)     | Password hashing, token randomness, constant-time comparison, homemade crypto, key handling                                   |
-| [`/audit-output-encoding`](.agents/skills/audit/references/access-data-security/output-encoding.md)   | XSS — user data rendered into HTML, JS, CSS, URLs, headers, or emails without context-appropriate encoding                    |
-| [`/audit-tenant-isolation`](.agents/skills/audit/references/access-data-security/tenant-isolation.md) | Cross-tenant leakage — unscoped queries, tenant-less cache keys, background jobs crossing tenants                             |
-| [`/audit-csrf`](.agents/skills/audit/references/access-data-security/csrf.md)                         | State-changing endpoints on cookie/session auth without CSRF token or origin verification                                     |
-| [`/audit-mass-assignment`](.agents/skills/audit/references/access-data-security/mass-assignment.md)   | Request payloads bound wholesale onto models — writable role/owner/balance fields, denylists instead of allowlists            |
+| [`/audit-idor`](.agents/skills/audit/references/access-data-security/idor.md)                         | Resources fetched or mutated by a request-supplied ID without verifying the requester may touch them                                                 |
+| [`/audit-data-exposure`](.agents/skills/audit/references/access-data-security/data-exposure.md)       | Over-exposed responses, errors, and logs — whole-model serialization, stack traces, PII                                                              |
+| [`/audit-crypto`](.agents/skills/audit/references/access-data-security/crypto-data-protection.md)     | Password hashing, token randomness, constant-time comparison, homemade crypto, key handling                                                          |
+| [`/audit-output-encoding`](.agents/skills/audit/references/access-data-security/output-encoding.md)   | XSS — user data rendered into HTML, JS, CSS, URLs, headers, or emails without context-appropriate encoding                                           |
+| [`/audit-tenant-isolation`](.agents/skills/audit/references/access-data-security/tenant-isolation.md) | Cross-tenant leakage — unscoped queries, tenant-less cache keys, background jobs crossing tenants                                                    |
+| [`/audit-csrf`](.agents/skills/audit/references/access-data-security/csrf.md)                         | State-changing endpoints on cookie/session auth without CSRF token or origin verification                                                            |
+| [`/audit-mass-assignment`](.agents/skills/audit/references/access-data-security/mass-assignment.md)   | Request payloads bound wholesale onto models — writable role/owner/balance fields, denylists instead of allowlists                                   |
 
-### Input & API
+### Input, API & dependencies
 
-| Audit                                                                                                      | Checks for                                                                                                                    |
-|------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| [`/audit-injection`](.agents/skills/audit/references/input-api-dependency/injection.md)                    | SQL/NoSQL, command, template, and path injection — input concatenated into queries, shells, or templates                      |
-| [`/audit-deserialization`](.agents/skills/audit/references/input-api-dependency/deserialization.md)        | Untrusted bytes deserialized into objects — native deserializers, polymorphic JSON/XML typing, unsafe YAML, missing type allowlists, XXE |
-| [`/audit-config`](.agents/skills/audit/references/input-api-dependency/config.md)                          | Insecure configuration — debug in production, permissive CORS, missing security headers, cookie flags                         |
-| [`/audit-secrets`](.agents/skills/audit/references/input-api-dependency/secrets.md)                        | Hardcoded credentials, secrets in logs or version control, overly broad keys, no rotation path                                |
-| [`/audit-api-validation`](.agents/skills/audit/references/input-api-dependency/api-contract-validation.md) | Boundary validation — types, bounds, allowed fields, trusting client-computed values like prices or roles                     |
-| [`/audit-file-handling`](.agents/skills/audit/references/input-api-dependency/file-handling.md)            | Path traversal, unvalidated uploads, missing size limits, files served from the web root, zip-slip                            |
-| [`/audit-ssrf`](.agents/skills/audit/references/input-api-dependency/ssrf.md)                              | Server-side requests to user-influenced URLs — allowlists, private IP ranges, redirect re-validation; includes open redirects |
-| [`/audit-parser-differentials`](.agents/skills/audit/references/input-api-dependency/parser-differentials.md) | Inputs a validator accepts but the consumer reads differently — unanchored regexes, startswith allowlists, two URL parsers, validate-then-reparse |
+| Audit                                                                                                         | Checks for                                                                                                                                                                                     |
+|---------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`/audit-injection`](.agents/skills/audit/references/input-api-dependency/injection.md)                       | SQL/NoSQL, command, template, and path injection — input concatenated into queries, shells, or templates                                                                                       |
+| [`/audit-deserialization`](.agents/skills/audit/references/input-api-dependency/deserialization.md)           | Untrusted bytes deserialized into objects — native deserializers, polymorphic JSON/XML typing, unsafe YAML, missing type allowlists, XXE                                                       |
+| [`/audit-config`](.agents/skills/audit/references/input-api-dependency/config.md)                             | Insecure configuration — debug in production, permissive CORS, missing security headers, cookie flags                                                                                          |
+| [`/audit-secrets`](.agents/skills/audit/references/input-api-dependency/secrets.md)                           | Hardcoded credentials, secrets in logs or version control, overly broad keys, no rotation path                                                                                                 |
+| [`/audit-api-validation`](.agents/skills/audit/references/input-api-dependency/api-contract-validation.md)    | Boundary validation — types, bounds, allowed fields, trusting client-computed values like prices or roles                                                                                      |
+| [`/audit-file-handling`](.agents/skills/audit/references/input-api-dependency/file-handling.md)               | Path traversal, unvalidated uploads, missing size limits, files served from the web root, zip-slip                                                                                             |
+| [`/audit-ssrf`](.agents/skills/audit/references/input-api-dependency/ssrf.md)                                 | Server-side requests to user-influenced URLs — allowlists, private IP ranges, redirect re-validation; includes open redirects                                                                  |
+| [`/audit-parser-differentials`](.agents/skills/audit/references/input-api-dependency/parser-differentials.md) | Inputs a validator accepts but the consumer reads differently — unanchored regexes, startswith allowlists, two URL parsers, validate-then-reparse                                              |
+| [`/audit-dependencies`](.agents/skills/audit/references/input-api-dependency/dependencies.md)                 | Third-party code and supply chain — missing or bypassed lockfiles, mutable versions and tags, typosquats, dependency confusion, unpinned CI actions and base images, known-vulnerable packages |
 
 ### Correctness
 
-| Audit                                                                                            | Checks for                                                                                                           |
-|--------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| [`/audit-atomicity`](.agents/skills/audit/references/correctness/atomicity.md)                   | Multi-store writes without a transaction — partial state surviving failures                                          |
-| [`/audit-idempotency`](.agents/skills/audit/references/correctness/idempotency.md)               | Handlers that misbehave when run twice — webhooks, payments, queue redelivery, double submits                        |
-| [`/audit-background-work`](.agents/skills/audit/references/correctness/background-work.md)       | Jobs and consumers — unbounded retries, poison messages, missing timeouts, duplicate or out-of-order delivery        |
-| [`/audit-state-management`](.agents/skills/audit/references/correctness/state-management.md)     | Race conditions — check-then-act on shared state without locks, atomic primitives, or constraints                    |
-| [`/audit-exception-handling`](.agents/skills/audit/references/correctness/exception-handling.md) | Swallowed errors, blanket catches, lost causes, missing cleanup, and wrong HTTP statuses (404 vs 403, 401, 422, 409) |
-| [`/audit-discarded-async`](.agents/skills/audit/references/correctness/discarded-async.md) | Fire-and-forget bugs — promises, futures, or reactive publishers created but never awaited, returned, or composed; bare subscribe; cold writes that silently never run |
-| [`/audit-cardinality`](.agents/skills/audit/references/correctness/cardinality.md) | Operations assuming a query matches one row — UPDATE/DELETE on a non-unique column fanning out, findOne/.single() on non-unique fields, columns treated as unique without a DB constraint |
-| [`/audit-numeric-precision`](.agents/skills/audit/references/correctness/numeric-precision.md) | Money in float, ad hoc rounding, integer overflow, division remainders that don't sum back, unit/currency mismatches carried only by variable name |
-| [`/audit-time-clock`](.agents/skills/audit/references/correctness/time-clock.md) | Naive vs aware datetimes, server-local now(), wall-clock for elapsed time or expiry, DST and calendar math, cross-zone comparisons |
+| Audit                                                                                            | Checks for                                                                                                                                                                                |
+|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`/audit-atomicity`](.agents/skills/audit/references/correctness/atomicity.md)                   | Multi-store writes without a transaction — partial state surviving failures                                                                                                               |
+| [`/audit-idempotency`](.agents/skills/audit/references/correctness/idempotency.md)               | Handlers that misbehave when run twice — webhooks, payments, queue redelivery, double submits                                                                                             |
+| [`/audit-background-work`](.agents/skills/audit/references/correctness/background-work.md)       | Jobs and consumers — unbounded retries, poison messages, missing timeouts, duplicate or out-of-order delivery                                                                             |
+| [`/audit-state-management`](.agents/skills/audit/references/correctness/state-management.md)     | Race conditions — check-then-act on shared state without locks, atomic primitives, or constraints                                                                                         |
+| [`/audit-exception-handling`](.agents/skills/audit/references/correctness/exception-handling.md) | Swallowed errors, blanket catches, lost causes, missing cleanup, and wrong HTTP statuses (404 vs 403, 401, 422, 409)                                                                      |
+| [`/audit-discarded-async`](.agents/skills/audit/references/correctness/discarded-async.md)       | Fire-and-forget bugs — promises, futures, or reactive publishers created but never awaited, returned, or composed; bare subscribe; cold writes that silently never run                    |
+| [`/audit-cardinality`](.agents/skills/audit/references/correctness/cardinality.md)               | Operations assuming a query matches one row — UPDATE/DELETE on a non-unique column fanning out, findOne/.single() on non-unique fields, columns treated as unique without a DB constraint |
+| [`/audit-numeric-precision`](.agents/skills/audit/references/correctness/numeric-precision.md)   | Money in float, ad hoc rounding, integer overflow, division remainders that don't sum back, unit/currency mismatches carried only by variable name                                        |
+| [`/audit-time-clock`](.agents/skills/audit/references/correctness/time-clock.md)                 | Naive vs aware datetimes, server-local now(), wall-clock for elapsed time or expiry, DST and calendar math, cross-zone comparisons                                                        |
 
 ### Operability
 
-| Audit                                                                                          | Checks for                                                                                                |
-|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| [`/audit-nplus1`](.agents/skills/audit/references/operability/nplus1.md)                       | Queries — or HTTP/cache calls — made inside loops over collections                                        |
-| [`/audit-observability`](.agents/skills/audit/references/operability/observability.md)         | Silent failures — swallowed errors, logs without identifiers, no metric or alert path                     |
-| [`/audit-migration-safety`](.agents/skills/audit/references/operability/migration-safety.md)   | Schema changes that lock tables, destructive changes without expand-contract, unbatched backfills         |
-| [`/audit-resource-limits`](.agents/skills/audit/references/operability/resource-limits.md)     | Unbounded work from input — missing pagination, size caps, rate limits, catastrophic regex                |
+| Audit                                                                                                    | Checks for                                                                                                                                                                |
+|----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`/audit-nplus1`](.agents/skills/audit/references/operability/nplus1.md)                                 | Queries — or HTTP/cache calls — made inside loops over collections                                                                                                        |
+| [`/audit-observability`](.agents/skills/audit/references/operability/observability.md)                   | Silent failures — swallowed errors, logs without identifiers, no metric or alert path                                                                                     |
+| [`/audit-migration-safety`](.agents/skills/audit/references/operability/migration-safety.md)             | Schema changes that lock tables, destructive changes without expand-contract, unbatched backfills                                                                         |
+| [`/audit-resource-limits`](.agents/skills/audit/references/operability/resource-limits.md)               | Unbounded work from input — missing pagination, size caps, rate limits, catastrophic regex                                                                                |
 | [`/audit-algorithmic-complexity`](.agents/skills/audit/references/operability/algorithmic-complexity.md) | In-memory data-structure misuse — linear lookups in loops instead of a hash map or set, hidden O(n²) copies, binary search on unsorted data, broken hash keys or equality |
-| [`/audit-blocking-io-async`](.agents/skills/audit/references/operability/blocking-io-async.md) | Blocking calls on event loops or coroutines, CPU work on the scheduler, sync-over-async, missing timeouts |
-| [`/audit-schema-design`](.agents/skills/audit/references/operability/schema-design.md) | Missing indexes on FK columns and hot paths, ORM-only relationships without real foreign keys, defaulted ON DELETE, integrity rules only in app code, float money |
-| [`/audit-statelessness`](.agents/skills/audit/references/operability/statelessness.md) | State that breaks with a second replica or a deploy — in-memory sessions and counters, static mutable state, local-disk uploads, process-local locks and schedulers |
-| [`/audit-caching`](.agents/skills/audit/references/operability/caching.md) | Cache keys missing a user/tenant dimension, stale data after writes, stampede on a hot key, cached errors, per-user responses in a shared or CDN cache |
+| [`/audit-blocking-io-async`](.agents/skills/audit/references/operability/blocking-io-async.md)           | Blocking calls on event loops or coroutines, CPU work on the scheduler, sync-over-async, missing timeouts                                                                 |
+| [`/audit-schema-design`](.agents/skills/audit/references/operability/schema-design.md)                   | Missing indexes on FK columns and hot paths, ORM-only relationships without real foreign keys, defaulted ON DELETE, integrity rules only in app code, float money         |
+| [`/audit-statelessness`](.agents/skills/audit/references/operability/statelessness.md)                   | State that breaks with a second replica or a deploy — in-memory sessions and counters, static mutable state, local-disk uploads, process-local locks and schedulers       |
+| [`/audit-caching`](.agents/skills/audit/references/operability/caching.md)                               | Cache keys missing a user/tenant dimension, stale data after writes, stampede on a hot key, cached errors, per-user responses in a shared or CDN cache                    |
 
 ### Fixes
 
@@ -195,6 +196,28 @@ Releases are [git tags](https://github.com/danygiguere/audit-skills/tags).
 Run `git pull` in your clone (or `git checkout <tag>` to pin a release);
 every linked project picks up the change. The digest in your `AGENTS.md` is
 a copy — re-paste it when a release changes `AGENTS.md`.
+
+## Contributing a checklist
+
+A new topic touches six places; `python3 scripts/validate.py` fails until
+they agree:
+
+1. The checklist itself, under the matching category in
+   `.agents/skills/audit/references/`, with the standard sections
+   (Invariant, Does not apply when, Why it happens, Detection smells,
+   Concept glossary covering all eight ecosystems, Example, Severity
+   guidance). Copy an existing checklist as the template.
+2. A wrapper skill `.agents/skills/audit-<topic>/SKILL.md` — frontmatter
+   plus the wrapper body, whose exact wording is defined by
+   `AUDIT_WRAPPER_TEMPLATE` in `scripts/validate.py`.
+3. A row in the "What to load" table of `.agents/skills/audit/SKILL.md`.
+4. A row in the catalog table of this README.
+5. The three topic counts in this README (badge, digest, checklists).
+6. One invariant bullet in `AGENTS.md`.
+
+If the topic's fix is an architectural choice rather than one mechanical
+change, add a `## Remediation` section pointing at a playbook under
+`references/remediation/` and name the checklist in that playbook's Scope.
 
 ## License
 

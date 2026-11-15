@@ -44,6 +44,10 @@ and dynamic requirements (sorting, filtering, search) push code through it.
 - A function that builds a query, command, or path from input and returns
   it instead of executing it — the sink lives in a caller; find the call
   sites before concluding it is safe.
+- Input written into a log line, response header, redirect target, or
+  email header without stripping CR/LF — an embedded newline forges log
+  entries or splits the header block (log injection, header/CRLF
+  injection).
 - Untrusted bytes handed to a native deserializer (`pickle.loads`, Java
   `readObject`, PHP `unserialize`, .NET `BinaryFormatter`, Ruby `Marshal.load`,
   `yaml.load` without a safe loader) — a code-execution sink in its own right;

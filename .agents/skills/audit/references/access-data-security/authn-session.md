@@ -39,6 +39,10 @@ incident.
   fast path is a timing oracle for account existence.
 - No lockout, counter, or rate limit on failed login or reset attempts
   (needed both per-account and per-source).
+- A second factor that can be skipped: the session is treated as fully
+  authenticated after the password step, a recovery, reset, or alternate
+  login path (API token, SSO callback, remember-me) bypasses the factor,
+  or one-time codes have no attempt limit, expiry, or single-use check.
 - Reset tokens that never expire, survive use or a completed password
   change, sit in the database in plaintext, or derive from predictable input
   (timestamp, user ID, sequential value).

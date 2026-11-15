@@ -60,6 +60,14 @@ single client can exhaust a shared resource.
 - Expensive or authentication endpoints — login, password reset, report
   generation, exports, anything that fans out — with no rate limit, letting
   one client repeat the expensive thing arbitrarily fast.
+- A query language or batch endpoint where one request can ask for
+  unbounded work: GraphQL with no depth, complexity, or alias limit and
+  no cap on batched operations; a JSON batch or multi-get endpoint with
+  no item limit — per-request rate limits count it as a single call.
+- A pooled resource (database connection, HTTP client slot, worker
+  thread) held across slow work — an outbound call, a sleep, a large
+  render — or acquired with no wait timeout: a few slow requests drain
+  the pool and every other request queues behind them.
 - A cap guarding the wrong point: size checked after the payload is fully
   buffered, a per-iteration timeout where the total is unbounded, or limit
   arithmetic that can underflow or overflow — the cap exists, the peak
