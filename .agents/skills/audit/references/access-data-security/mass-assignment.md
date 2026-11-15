@@ -36,6 +36,11 @@ someone crafts a request by hand.
   role, owner/tenant foreign keys, balances, verification flags.
 - Nested or relation parameters bound through the parent (the payload can
   create or repoint associated records the endpoint never intended).
+- A recursive merge, deep-assign, or path-based setter (`set(obj,
+  "a.b.c", value)`) fed request data without rejecting keys such as
+  `__proto__`, `constructor`, or `prototype` — in prototype-based
+  languages the payload writes onto every object, not just the target
+  (prototype pollution).
 - A sensitive column added to a model whose binding sites were written long
   before it existed and never revisited.
 

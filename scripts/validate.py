@@ -2,9 +2,9 @@
 """Package validator for audit-skills.
 
 Maintainer tooling only — NOT part of what users install. Consumers of this
-package copy the `.agents/` folder (read-only skills; nothing executes outside
-the working tree); this script exists so maintainers and CI can verify the
-package before a release.
+package symlink the skill folders under `.agents/skills/` into their projects
+(read-only markdown; nothing executes); this script exists so maintainers and
+CI can verify the package before a release.
 Requires only the Python standard library.
 
 Checks, from the repo root:

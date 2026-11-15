@@ -35,8 +35,11 @@ work.
   request's Origin header back — especially combined with allowing
   credentials, which turns "any site can read responses as the victim".
 - No middleware or server layer setting security headers
-  (content-security-policy, frame blocking, content-type-nosniff,
+  (content-security-policy, content-type-nosniff,
   strict-transport-security) anywhere in the stack.
+- State-changing or authenticated pages that any origin may frame — no
+  `frame-ancestors` directive (or legacy `X-Frame-Options`), so a hostile
+  page can overlay them and harvest clicks (clickjacking).
 - Session or auth cookies created without Secure, HttpOnly, or SameSite
   attributes; remember-me and CSRF cookies are the usual stragglers.
 - Default accounts, example API keys, placeholder passwords, or seed-data

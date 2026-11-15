@@ -48,6 +48,9 @@ to its detailed checklist under `references/`.
   allowlists, validate the parsed object and pass that object on — never validate raw input and re-parse it.
 - **Insecure deserialization** — untrusted bytes are never fed to a deserializer that can instantiate arbitrary types
   or run code; parse data-only formats into known target types, or restrict to a type allowlist plus a verified signature.
+- **Dependencies & supply chain** — third-party code is installed from a committed lockfile with verified hashes, from
+  the intended registry; CI actions, base images, and downloaded scripts are pinned to immutable references; versions
+  with known vulnerabilities on a reachable path are not shipped.
 
 ### Correctness
 
