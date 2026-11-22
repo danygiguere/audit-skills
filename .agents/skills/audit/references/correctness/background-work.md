@@ -31,7 +31,9 @@ retry delay.
   instead of an ID — the job acts on data that changed between enqueue and
   execution, or between retries.
 - An HTTP call, database query, or lock acquisition inside a job with no
-  timeout — one hung dependency stalls the worker pool.
+  timeout — one hung dependency stalls the worker pool. Retries and
+  fallbacks on the request path, outside the queue's own policy, are
+  `../operability/downstream-failure.md`.
 - Handler logic that breaks if the same message arrives twice (increments,
   plain INSERTs, "send email then mark sent" ordered wrong).
 - Logic that assumes job B runs after job A because it was enqueued later —

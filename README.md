@@ -4,7 +4,7 @@
 [![Latest tag](https://img.shields.io/github/v/tag/danygiguere/audit-skills)](https://github.com/danygiguere/audit-skills/tags)
 [![Validate](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/danygiguere/audit-skills/actions/workflows/validate.yml)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-8A2BE2)
-![Audits: 37](https://img.shields.io/badge/audits-37-success)
+![Audits: 38](https://img.shields.io/badge/audits-38-success)
 ![Works with: Claude Code · Copilot · Cursor · Codex](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Copilot%20·%20Cursor%20·%20Codex-informational)
 
 Language- and framework-agnostic audit checklists for AI coding agents —
@@ -24,9 +24,9 @@ or an Express API — the agent supplies the framework-specific translation.
 
 ## What's inside
 
-- `AGENTS.md` — a one-page digest of all 37 invariants; copy its content
+- `AGENTS.md` — a one-page digest of all 38 invariants; copy its content
   into your project's `AGENTS.md` so every agent has it in context.
-- `.agents/skills/audit/` — the router skill, with all 37 checklists and
+- `.agents/skills/audit/` — the router skill, with all 38 checklists and
   remediation patterns bundled under `references/` (four categories: access
   & data security, input/API, correctness, operability), plus shared
   methodology files (scoping, adversarial verification, severity rubric).
@@ -95,6 +95,7 @@ every matching checklist below. Each topic is also individually invocable
 | [`/audit-resource-limits`](.agents/skills/audit/references/operability/resource-limits.md)               | Unbounded work from input — missing pagination, size caps, rate limits, catastrophic regex                                                                                |
 | [`/audit-algorithmic-complexity`](.agents/skills/audit/references/operability/algorithmic-complexity.md) | In-memory data-structure misuse — linear lookups in loops instead of a hash map or set, hidden O(n²) copies, binary search on unsorted data, broken hash keys or equality |
 | [`/audit-blocking-io-async`](.agents/skills/audit/references/operability/blocking-io-async.md)           | Blocking calls on event loops or coroutines, CPU work on the scheduler, sync-over-async, missing timeouts                                                                 |
+| [`/audit-downstream-failure`](.agents/skills/audit/references/operability/downstream-failure.md)         | Slow or failing remote dependencies — missing or over-budget timeouts, unsafe or stacked retries, security checks that fail open, optional calls failing critical flows   |
 | [`/audit-schema-design`](.agents/skills/audit/references/operability/schema-design.md)                   | Missing indexes on FK columns and hot paths, ORM-only relationships without real foreign keys, defaulted ON DELETE, integrity rules only in app code, float money         |
 | [`/audit-statelessness`](.agents/skills/audit/references/operability/statelessness.md)                   | State that breaks with a second replica or a deploy — in-memory sessions and counters, static mutable state, local-disk uploads, process-local locks and schedulers       |
 | [`/audit-caching`](.agents/skills/audit/references/operability/caching.md)                               | Cache keys missing a user/tenant dimension, stale data after writes, stampede on a hot key, cached errors, per-user responses in a shared or CDN cache                    |
@@ -128,7 +129,7 @@ machine with the same folder layout.
 
 ## Add to your AGENTS.md
 
-This repo's [`AGENTS.md`](AGENTS.md) is the one-page digest of all 36
+This repo's [`AGENTS.md`](AGENTS.md) is the one-page digest of all 38
 invariants. Copy its content into your project's `AGENTS.md` (append it if
 you already have one — never replace yours): merged there, it gives every
 agent ambient awareness of the invariants on every prompt; without it, the

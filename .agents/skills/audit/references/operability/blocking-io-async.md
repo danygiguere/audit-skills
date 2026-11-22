@@ -40,7 +40,8 @@ blocked loop — the stall only appears under concurrency.
   for its result from scheduler-managed code — latency at best, deadlock at
   worst.
 - On thread-per-request runtimes: outbound HTTP/DB calls with no timeout —
-  the pool-exhaustion equivalent of blocking the loop.
+  the pool-exhaustion equivalent of blocking the loop. Missing timeouts are
+  owned by `downstream-failure.md`; report them there, once.
 
 ## Concept glossary
 
