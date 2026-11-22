@@ -88,6 +88,9 @@ to its detailed checklist under `references/`.
   inside a loop, no hidden quadratic copies; binary search runs only on data sorted by the same comparator.
 - **Blocking I/O in async code** — code on a cooperative scheduler (event loop, coroutines, reactor) never blocks: no
   sync I/O, sleeps, or CPU-heavy work on the loop; blocking work is offloaded and outbound calls have timeouts.
+- **Downstream failure** — remote calls have timeouts that fit inside the caller's deadline; retries are bounded,
+  jittered, and limited to idempotent operations and retryable errors; security decisions fail closed; optional
+  dependencies degrade without failing the request; an error is never treated as an empty answer.
 - **Schema design** — relationships enforced by real foreign keys with deliberate ON DELETE; hot query paths backed
   by indexes; integrity rules (NOT NULL, unique, checks) live in the schema, not only in app validation.
 - **Statelessness** — in replicated apps, state lives in process memory or local disk only if losing it is harmless
